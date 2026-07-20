@@ -1,0 +1,418 @@
+{"timestamp": "2026-07-20T08:56:28.325961", "level": "INFO", "logger": "database", "message": "Pool de connexions PostgreSQL initialisé", "module": "database", "function": "__init__", "line": 44}
+{"timestamp": "2026-07-20T08:56:28.505843", "level": "INFO", "logger": "main", "message": "Pipeline d'avis clients démarrée", "module": "app", "function": "main", "line": 64}
+{"timestamp": "2026-07-20T08:56:28.505940", "level": "INFO", "logger": "main", "message": "Exécution du pipeline", "module": "app", "function": "main", "line": 76}
+{"timestamp": "2026-07-20T08:56:28.506049", "level": "INFO", "logger": "pipeline", "message": "Démarrage du pipeline", "module": "pipeline", "function": "run", "line": 53}
+{"timestamp": "2026-07-20T08:56:28.514775", "level": "INFO", "logger": "database", "message": "Schéma de base de données créé/vérifié", "module": "database", "function": "create_tables", "line": 132}
+{"timestamp": "2026-07-20T08:56:28.519851", "level": "INFO", "logger": "database", "message": "Run cea4c78f-ad34-47bf-b9db-367972325e29 démarrée", "module": "database", "function": "start_run", "line": 157}
+{"timestamp": "2026-07-20T08:56:28.520008", "level": "INFO", "logger": "pipeline", "message": "Scrapers activés : ['trustpilot', 'playstore', 'appstore', 'googlemaps', 'rss_feed']", "module": "pipeline", "function": "run", "line": 74}
+{"timestamp": "2026-07-20T08:56:28.520139", "level": "INFO", "logger": "scraper.trustpilot", "message": "Démarrage de trustpilot", "module": "scraper_base", "function": "run", "line": 90}
+{"timestamp": "2026-07-20T08:56:28.521093", "level": "INFO", "logger": "scraper.trustpilot", "message": "Tentative 1/3", "module": "scheduler", "function": "execute_with_retry", "line": 70}
+{"timestamp": "2026-07-20T08:56:28.521963", "level": "DEBUG", "logger": "asyncio", "message": "Using proactor: IocpProactor", "module": "proactor_events", "function": "__init__", "line": 631}
+{"timestamp": "2026-07-20T08:56:29.102112", "level": "INFO", "logger": "scraper.trustpilot", "message": "Chargement de l'état de session depuis data\\state\\_tp_state.json", "module": "trustpilot", "function": "collect", "line": 67}
+{"timestamp": "2026-07-20T08:56:29.413191", "level": "INFO", "logger": "scraper.trustpilot", "message": "Scraping Moov Africa Benin (moov-africa.bj)", "module": "trustpilot", "function": "collect", "line": 82}
+{"timestamp": "2026-07-20T08:56:29.486535", "level": "INFO", "logger": "scraper.trustpilot", "message": "Navigation vers https://www.trustpilot.com/review/moov-africa.bj", "module": "trustpilot", "function": "_scrape_company", "line": 121}
+{"timestamp": "2026-07-20T08:56:34.492464", "level": "DEBUG", "logger": "scraper.trustpilot", "message": "Scraping page 1", "module": "trustpilot", "function": "_scrape_company", "line": 141}
+{"timestamp": "2026-07-20T08:56:34.492620", "level": "DEBUG", "logger": "scraper.trustpilot", "message": "Requête API : https://www.trustpilot.com/_next/data/businessunitprofile-consumersite-2.7302.0/en/review/moov-africa.bj.json?page=1", "module": "trustpilot", "function": "_fetch_reviews_page", "line": 218}
+{"timestamp": "2026-07-20T08:56:34.794568", "level": "INFO", "logger": "scraper.trustpilot", "message": "Fin du scraping (page 1 vide)", "module": "trustpilot", "function": "_scrape_company", "line": 149}
+{"timestamp": "2026-07-20T08:56:34.794650", "level": "INFO", "logger": "scraper.trustpilot", "message": "0 avis parsés pour Moov Africa Benin", "module": "trustpilot", "function": "_scrape_company", "line": 161}
+{"timestamp": "2026-07-20T08:56:36.810477", "level": "INFO", "logger": "scraper.trustpilot", "message": "Scraping Moov Africa Burkina (moov-africa.bf)", "module": "trustpilot", "function": "collect", "line": 82}
+{"timestamp": "2026-07-20T08:56:36.876777", "level": "INFO", "logger": "scraper.trustpilot", "message": "Navigation vers https://www.trustpilot.com/review/moov-africa.bf", "module": "trustpilot", "function": "_scrape_company", "line": 121}
+{"timestamp": "2026-07-20T08:56:40.606539", "level": "DEBUG", "logger": "scraper.trustpilot", "message": "Scraping page 1", "module": "trustpilot", "function": "_scrape_company", "line": 141}
+{"timestamp": "2026-07-20T08:56:40.606901", "level": "DEBUG", "logger": "scraper.trustpilot", "message": "Requête API : https://www.trustpilot.com/_next/data/businessunitprofile-consumersite-2.7302.0/en/review/moov-africa.bf.json?page=1", "module": "trustpilot", "function": "_fetch_reviews_page", "line": 218}
+{"timestamp": "2026-07-20T08:56:40.925219", "level": "INFO", "logger": "scraper.trustpilot", "message": "Fin du scraping (page 1 vide)", "module": "trustpilot", "function": "_scrape_company", "line": 149}
+{"timestamp": "2026-07-20T08:56:40.925477", "level": "INFO", "logger": "scraper.trustpilot", "message": "0 avis parsés pour Moov Africa Burkina", "module": "trustpilot", "function": "_scrape_company", "line": 161}
+{"timestamp": "2026-07-20T08:56:42.949626", "level": "INFO", "logger": "scraper.trustpilot", "message": "Scraping Moov Africa Mali (moov-africa.ml)", "module": "trustpilot", "function": "collect", "line": 82}
+{"timestamp": "2026-07-20T08:56:43.017299", "level": "INFO", "logger": "scraper.trustpilot", "message": "Navigation vers https://www.trustpilot.com/review/moov-africa.ml", "module": "trustpilot", "function": "_scrape_company", "line": 121}
+{"timestamp": "2026-07-20T08:56:47.165971", "level": "DEBUG", "logger": "scraper.trustpilot", "message": "Scraping page 1", "module": "trustpilot", "function": "_scrape_company", "line": 141}
+{"timestamp": "2026-07-20T08:56:47.166105", "level": "DEBUG", "logger": "scraper.trustpilot", "message": "Requête API : https://www.trustpilot.com/_next/data/businessunitprofile-consumersite-2.7302.0/en/review/moov-africa.ml.json?page=1", "module": "trustpilot", "function": "_fetch_reviews_page", "line": 218}
+{"timestamp": "2026-07-20T08:56:47.462789", "level": "INFO", "logger": "scraper.trustpilot", "message": "Fin du scraping (page 1 vide)", "module": "trustpilot", "function": "_scrape_company", "line": 149}
+{"timestamp": "2026-07-20T08:56:47.462920", "level": "INFO", "logger": "scraper.trustpilot", "message": "0 avis parsés pour Moov Africa Mali", "module": "trustpilot", "function": "_scrape_company", "line": 161}
+{"timestamp": "2026-07-20T08:56:49.488091", "level": "INFO", "logger": "scraper.trustpilot", "message": "Scraping Moov Africa Centrafrique (moov-africa.cf)", "module": "trustpilot", "function": "collect", "line": 82}
+{"timestamp": "2026-07-20T08:56:49.571342", "level": "INFO", "logger": "scraper.trustpilot", "message": "Navigation vers https://www.trustpilot.com/review/moov-africa.cf", "module": "trustpilot", "function": "_scrape_company", "line": 121}
+{"timestamp": "2026-07-20T08:56:53.542918", "level": "DEBUG", "logger": "scraper.trustpilot", "message": "Scraping page 1", "module": "trustpilot", "function": "_scrape_company", "line": 141}
+{"timestamp": "2026-07-20T08:56:53.543048", "level": "DEBUG", "logger": "scraper.trustpilot", "message": "Requête API : https://www.trustpilot.com/_next/data/businessunitprofile-consumersite-2.7302.0/en/review/moov-africa.cf.json?page=1", "module": "trustpilot", "function": "_fetch_reviews_page", "line": 218}
+{"timestamp": "2026-07-20T08:56:53.787602", "level": "INFO", "logger": "scraper.trustpilot", "message": "Fin du scraping (page 1 vide)", "module": "trustpilot", "function": "_scrape_company", "line": 149}
+{"timestamp": "2026-07-20T08:56:53.787795", "level": "INFO", "logger": "scraper.trustpilot", "message": "0 avis parsés pour Moov Africa Centrafrique", "module": "trustpilot", "function": "_scrape_company", "line": 161}
+{"timestamp": "2026-07-20T08:56:56.025287", "level": "INFO", "logger": "scraper.trustpilot", "message": "État de session sauvegardé dans data\\state\\_tp_state.json", "module": "trustpilot", "function": "collect", "line": 96}
+{"timestamp": "2026-07-20T08:56:56.208699", "level": "INFO", "logger": "scraper.trustpilot", "message": "Tentative 1 réussie", "module": "scheduler", "function": "execute_with_retry", "line": 75}
+{"timestamp": "2026-07-20T08:56:56.209043", "level": "WARNING", "logger": "scraper.trustpilot", "message": "Aucun avis collecté par trustpilot", "module": "scraper_base", "function": "run", "line": 100}
+{"timestamp": "2026-07-20T08:56:56.209410", "level": "WARNING", "logger": "monitoring", "message": "[WARNING] trustpilot : zéro avis", "module": "monitoring", "function": "send_alerts", "line": 133}
+{"timestamp": "2026-07-20T08:56:56.209540", "level": "INFO", "logger": "scraper.playstore", "message": "Démarrage de playstore", "module": "scraper_base", "function": "run", "line": 90}
+{"timestamp": "2026-07-20T08:56:56.209618", "level": "INFO", "logger": "scraper.playstore", "message": "Tentative 1/3", "module": "scheduler", "function": "execute_with_retry", "line": 70}
+{"timestamp": "2026-07-20T08:56:56.209999", "level": "INFO", "logger": "scraper.playstore", "message": "Scraping Moov Africa Benin", "module": "playstore", "function": "collect", "line": 41}
+{"timestamp": "2026-07-20T08:56:56.210076", "level": "DEBUG", "logger": "scraper.playstore", "message": "Tentative store BJ", "module": "playstore", "function": "_try_fetch", "line": 92}
+{"timestamp": "2026-07-20T08:56:56.911458", "level": "INFO", "logger": "scraper.playstore", "message": "✓ 52 avis trouvés (store BJ)", "module": "playstore", "function": "_try_fetch", "line": 107}
+{"timestamp": "2026-07-20T08:56:57.912689", "level": "INFO", "logger": "scraper.playstore", "message": "Scraping Moov Africa Burkina", "module": "playstore", "function": "collect", "line": 41}
+{"timestamp": "2026-07-20T08:56:57.912852", "level": "DEBUG", "logger": "scraper.playstore", "message": "Tentative store BF", "module": "playstore", "function": "_try_fetch", "line": 92}
+{"timestamp": "2026-07-20T08:56:58.423790", "level": "INFO", "logger": "scraper.playstore", "message": "✓ 3 avis trouvés (store BF)", "module": "playstore", "function": "_try_fetch", "line": 107}
+{"timestamp": "2026-07-20T08:56:59.424722", "level": "INFO", "logger": "scraper.playstore", "message": "Scraping Moov Africa Mali", "module": "playstore", "function": "collect", "line": 41}
+{"timestamp": "2026-07-20T08:56:59.424913", "level": "DEBUG", "logger": "scraper.playstore", "message": "Tentative store ML", "module": "playstore", "function": "_try_fetch", "line": 92}
+{"timestamp": "2026-07-20T08:56:59.845096", "level": "DEBUG", "logger": "scraper.playstore", "message": "Tentative global", "module": "playstore", "function": "_try_fetch", "line": 92}
+{"timestamp": "2026-07-20T08:57:00.262063", "level": "DEBUG", "logger": "scraper.playstore", "message": "Tentative fr ML", "module": "playstore", "function": "_try_fetch", "line": 92}
+{"timestamp": "2026-07-20T08:57:00.862236", "level": "INFO", "logger": "scraper.playstore", "message": "✓ 39 avis trouvés (fr ML)", "module": "playstore", "function": "_try_fetch", "line": 107}
+{"timestamp": "2026-07-20T08:57:01.864320", "level": "INFO", "logger": "scraper.playstore", "message": "Tentative 1 réussie", "module": "scheduler", "function": "execute_with_retry", "line": 75}
+{"timestamp": "2026-07-20T08:57:01.864564", "level": "INFO", "logger": "scraper.playstore", "message": "94 avis bruts collectés", "module": "scraper_base", "function": "run", "line": 105}
+{"timestamp": "2026-07-20T08:57:01.865140", "level": "INFO", "logger": "scraper.playstore", "message": "94 avis valides après validation", "module": "scraper_base", "function": "run", "line": 118}
+{"timestamp": "2026-07-20T08:57:01.871989", "level": "INFO", "logger": "database", "message": "Batch insertion terminée", "module": "database", "function": "batch_insert_reviews", "line": 277}
+{"timestamp": "2026-07-20T08:57:01.879833", "level": "INFO", "logger": "scraper.playstore", "message": "playstore terminé avec succès", "module": "scraper_base", "function": "run", "line": 140}
+{"timestamp": "2026-07-20T08:57:01.880012", "level": "WARNING", "logger": "monitoring", "message": "[WARNING] playstore : zéro avis", "module": "monitoring", "function": "send_alerts", "line": 133}
+{"timestamp": "2026-07-20T08:57:01.880194", "level": "INFO", "logger": "scraper.appstore", "message": "Démarrage de appstore", "module": "scraper_base", "function": "run", "line": 90}
+{"timestamp": "2026-07-20T08:57:01.880314", "level": "INFO", "logger": "scraper.appstore", "message": "Tentative 1/3", "module": "scheduler", "function": "execute_with_retry", "line": 70}
+{"timestamp": "2026-07-20T08:57:01.881533", "level": "INFO", "logger": "scraper.appstore", "message": "Scraping Moov Africa Benin", "module": "appstore", "function": "collect", "line": 52}
+{"timestamp": "2026-07-20T08:57:01.881643", "level": "DEBUG", "logger": "scraper.appstore", "message": "Tentative store BJ", "module": "appstore", "function": "_try_fetch_reviews", "line": 104}
+{"timestamp": "2026-07-20T08:57:02.595202", "level": "DEBUG", "logger": "scraper.appstore", "message": "Fin du scraping page 1 (aucun avis)", "module": "appstore", "function": "_try_fetch_reviews", "line": 133}
+{"timestamp": "2026-07-20T08:57:02.595341", "level": "INFO", "logger": "scraper.appstore", "message": "Aucun avis sur bj, essai fallback FR", "module": "appstore", "function": "_fetch_app_reviews", "line": 79}
+{"timestamp": "2026-07-20T08:57:02.595435", "level": "DEBUG", "logger": "scraper.appstore", "message": "Tentative store FR (fallback)", "module": "appstore", "function": "_try_fetch_reviews", "line": 104}
+{"timestamp": "2026-07-20T08:57:03.225186", "level": "DEBUG", "logger": "scraper.appstore", "message": "Fin du scraping page 1 (aucun avis)", "module": "appstore", "function": "_try_fetch_reviews", "line": 133}
+{"timestamp": "2026-07-20T08:57:03.225361", "level": "WARNING", "logger": "scraper.appstore", "message": "Aucun avis trouvé pour Moov Africa Benin", "module": "appstore", "function": "_fetch_app_reviews", "line": 89}
+{"timestamp": "2026-07-20T08:57:04.225798", "level": "INFO", "logger": "scraper.appstore", "message": "Scraping Moov Africa Burkina", "module": "appstore", "function": "collect", "line": 52}
+{"timestamp": "2026-07-20T08:57:04.225958", "level": "DEBUG", "logger": "scraper.appstore", "message": "Tentative store BF", "module": "appstore", "function": "_try_fetch_reviews", "line": 104}
+{"timestamp": "2026-07-20T08:57:04.815363", "level": "DEBUG", "logger": "scraper.appstore", "message": "Fin du scraping page 1 (aucun avis)", "module": "appstore", "function": "_try_fetch_reviews", "line": 133}
+{"timestamp": "2026-07-20T08:57:04.815527", "level": "INFO", "logger": "scraper.appstore", "message": "Aucun avis sur bf, essai fallback FR", "module": "appstore", "function": "_fetch_app_reviews", "line": 79}
+{"timestamp": "2026-07-20T08:57:04.815618", "level": "DEBUG", "logger": "scraper.appstore", "message": "Tentative store FR (fallback)", "module": "appstore", "function": "_try_fetch_reviews", "line": 104}
+{"timestamp": "2026-07-20T08:57:05.169141", "level": "DEBUG", "logger": "scraper.appstore", "message": "Fin du scraping page 1 (aucun avis)", "module": "appstore", "function": "_try_fetch_reviews", "line": 133}
+{"timestamp": "2026-07-20T08:57:05.169267", "level": "WARNING", "logger": "scraper.appstore", "message": "Aucun avis trouvé pour Moov Africa Burkina", "module": "appstore", "function": "_fetch_app_reviews", "line": 89}
+{"timestamp": "2026-07-20T08:57:06.169840", "level": "INFO", "logger": "scraper.appstore", "message": "Scraping Moov Africa Mali", "module": "appstore", "function": "collect", "line": 52}
+{"timestamp": "2026-07-20T08:57:06.169975", "level": "DEBUG", "logger": "scraper.appstore", "message": "Tentative store ML", "module": "appstore", "function": "_try_fetch_reviews", "line": 104}
+{"timestamp": "2026-07-20T08:57:06.754133", "level": "DEBUG", "logger": "scraper.appstore", "message": "Fin du scraping page 1 (aucun avis)", "module": "appstore", "function": "_try_fetch_reviews", "line": 133}
+{"timestamp": "2026-07-20T08:57:06.754320", "level": "INFO", "logger": "scraper.appstore", "message": "Aucun avis sur ml, essai fallback FR", "module": "appstore", "function": "_fetch_app_reviews", "line": 79}
+{"timestamp": "2026-07-20T08:57:06.754414", "level": "DEBUG", "logger": "scraper.appstore", "message": "Tentative store FR (fallback)", "module": "appstore", "function": "_try_fetch_reviews", "line": 104}
+{"timestamp": "2026-07-20T08:57:07.527163", "level": "DEBUG", "logger": "scraper.appstore", "message": "Fin du scraping page 1 (aucun avis)", "module": "appstore", "function": "_try_fetch_reviews", "line": 133}
+{"timestamp": "2026-07-20T08:57:07.527334", "level": "WARNING", "logger": "scraper.appstore", "message": "Aucun avis trouvé pour Moov Africa Mali", "module": "appstore", "function": "_fetch_app_reviews", "line": 89}
+{"timestamp": "2026-07-20T08:57:08.528228", "level": "INFO", "logger": "scraper.appstore", "message": "Scraping Moov Africa Centrafrique", "module": "appstore", "function": "collect", "line": 52}
+{"timestamp": "2026-07-20T08:57:08.528397", "level": "DEBUG", "logger": "scraper.appstore", "message": "Tentative store CF", "module": "appstore", "function": "_try_fetch_reviews", "line": 104}
+{"timestamp": "2026-07-20T08:57:09.421394", "level": "DEBUG", "logger": "scraper.appstore", "message": "Fin du scraping page 1 (aucun avis)", "module": "appstore", "function": "_try_fetch_reviews", "line": 133}
+{"timestamp": "2026-07-20T08:57:09.421672", "level": "INFO", "logger": "scraper.appstore", "message": "Aucun avis sur cf, essai fallback FR", "module": "appstore", "function": "_fetch_app_reviews", "line": 79}
+{"timestamp": "2026-07-20T08:57:09.421782", "level": "DEBUG", "logger": "scraper.appstore", "message": "Tentative store FR (fallback)", "module": "appstore", "function": "_try_fetch_reviews", "line": 104}
+{"timestamp": "2026-07-20T08:57:10.085396", "level": "DEBUG", "logger": "scraper.appstore", "message": "Fin du scraping page 1 (aucun avis)", "module": "appstore", "function": "_try_fetch_reviews", "line": 133}
+{"timestamp": "2026-07-20T08:57:10.085555", "level": "WARNING", "logger": "scraper.appstore", "message": "Aucun avis trouvé pour Moov Africa Centrafrique", "module": "appstore", "function": "_fetch_app_reviews", "line": 89}
+{"timestamp": "2026-07-20T08:57:11.086636", "level": "INFO", "logger": "scraper.appstore", "message": "Tentative 1 réussie", "module": "scheduler", "function": "execute_with_retry", "line": 75}
+{"timestamp": "2026-07-20T08:57:11.087226", "level": "WARNING", "logger": "scraper.appstore", "message": "Aucun avis collecté par appstore", "module": "scraper_base", "function": "run", "line": 100}
+{"timestamp": "2026-07-20T08:57:11.087696", "level": "WARNING", "logger": "monitoring", "message": "[WARNING] appstore : zéro avis", "module": "monitoring", "function": "send_alerts", "line": 133}
+{"timestamp": "2026-07-20T08:57:11.087999", "level": "INFO", "logger": "scraper.googlemaps", "message": "Démarrage de googlemaps", "module": "scraper_base", "function": "run", "line": 90}
+{"timestamp": "2026-07-20T08:57:11.088165", "level": "INFO", "logger": "scraper.googlemaps", "message": "Tentative 1/3", "module": "scheduler", "function": "execute_with_retry", "line": 70}
+{"timestamp": "2026-07-20T08:57:11.089100", "level": "DEBUG", "logger": "asyncio", "message": "Using proactor: IocpProactor", "module": "proactor_events", "function": "__init__", "line": 631}
+{"timestamp": "2026-07-20T08:57:11.685937", "level": "INFO", "logger": "scraper.googlemaps", "message": "Scraping Moov Africa Benin", "module": "google_maps", "function": "collect", "line": 82}
+{"timestamp": "2026-07-20T08:57:11.797977", "level": "DEBUG", "logger": "scraper.googlemaps", "message": "Recherche : Agence Moov Africa Cotonou Bénin", "module": "google_maps", "function": "_open_place", "line": 137}
+{"timestamp": "2026-07-20T08:57:22.826021", "level": "DEBUG", "logger": "scraper.googlemaps", "message": "Ouverture onglet Reviews", "module": "google_maps", "function": "_open_reviews_tab", "line": 191}
+{"timestamp": "2026-07-20T08:58:22.841246", "level": "ERROR", "logger": "scraper.googlemaps", "message": "Erreur ouverture Reviews : Locator.wait_for: Timeout 60000ms exceeded.\nCall log:\n  - waiting for locator(\"button[role=\\\"tab\\\"]\").filter(has_text=re.compile(r\"Reviews|Avis\", re.IGNORECASE)) to be visible\n", "module": "google_maps", "function": "_open_reviews_tab", "line": 207}
+{"timestamp": "2026-07-20T08:58:22.841417", "level": "WARNING", "logger": "scraper.googlemaps", "message": "Impossible d'ouvrir l'onglet Reviews", "module": "google_maps", "function": "_scrape_location", "line": 116}
+{"timestamp": "2026-07-20T08:58:27.857298", "level": "INFO", "logger": "scraper.googlemaps", "message": "Scraping Moov Africa Burkina", "module": "google_maps", "function": "collect", "line": 82}
+{"timestamp": "2026-07-20T08:58:27.928836", "level": "DEBUG", "logger": "scraper.googlemaps", "message": "Recherche : Moov Africa Siège Ouagadougou Burkina Faso", "module": "google_maps", "function": "_open_place", "line": 137}
+{"timestamp": "2026-07-20T08:58:33.367702", "level": "DEBUG", "logger": "scraper.googlemaps", "message": "Ouverture onglet Reviews", "module": "google_maps", "function": "_open_reviews_tab", "line": 191}
+{"timestamp": "2026-07-20T08:59:33.375518", "level": "ERROR", "logger": "scraper.googlemaps", "message": "Erreur ouverture Reviews : Locator.wait_for: Timeout 60000ms exceeded.\nCall log:\n  - waiting for locator(\"button[role=\\\"tab\\\"]\").filter(has_text=re.compile(r\"Reviews|Avis\", re.IGNORECASE)) to be visible\n", "module": "google_maps", "function": "_open_reviews_tab", "line": 207}
+{"timestamp": "2026-07-20T08:59:33.375810", "level": "WARNING", "logger": "scraper.googlemaps", "message": "Impossible d'ouvrir l'onglet Reviews", "module": "google_maps", "function": "_scrape_location", "line": 116}
+{"timestamp": "2026-07-20T08:59:38.398016", "level": "INFO", "logger": "scraper.googlemaps", "message": "Scraping Moov Africa Mali", "module": "google_maps", "function": "collect", "line": 82}
+{"timestamp": "2026-07-20T08:59:38.477131", "level": "DEBUG", "logger": "scraper.googlemaps", "message": "Recherche : Agence Moov Africa Bamako Mali", "module": "google_maps", "function": "_open_place", "line": 137}
+{"timestamp": "2026-07-20T08:59:44.218204", "level": "DEBUG", "logger": "scraper.googlemaps", "message": "Ouverture onglet Reviews", "module": "google_maps", "function": "_open_reviews_tab", "line": 191}
+{"timestamp": "2026-07-20T09:00:11.098338", "level": "WARNING", "logger": "scraper.googlemaps", "message": "Tentative 1 échouée, retry dans 1.0s", "module": "scheduler", "function": "execute_with_retry", "line": 99}
+{"timestamp": "2026-07-20T09:00:12.099578", "level": "INFO", "logger": "scraper.googlemaps", "message": "Tentative 2/3", "module": "scheduler", "function": "execute_with_retry", "line": 70}
+{"timestamp": "2026-07-20T09:00:44.223659", "level": "ERROR", "logger": "scraper.googlemaps", "message": "Erreur ouverture Reviews : Locator.wait_for: Timeout 60000ms exceeded.\nCall log:\n  - waiting for locator(\"button[role=\\\"tab\\\"]\").filter(has_text=re.compile(r\"Reviews|Avis\", re.IGNORECASE)) to be visible\n", "module": "google_maps", "function": "_open_reviews_tab", "line": 207}
+{"timestamp": "2026-07-20T09:00:44.224150", "level": "WARNING", "logger": "scraper.googlemaps", "message": "Impossible d'ouvrir l'onglet Reviews", "module": "google_maps", "function": "_scrape_location", "line": 116}
+{"timestamp": "2026-07-20T09:00:49.420304", "level": "ERROR", "logger": "scraper.googlemaps", "message": "Erreur Playwright : It looks like you are using Playwright Sync API inside the asyncio loop.\nPlease use the Async API instead.", "module": "google_maps", "function": "collect", "line": 96}
+{"timestamp": "2026-07-20T09:00:49.422714", "level": "WARNING", "logger": "scraper.googlemaps", "message": "Tentative 2 échouée, retry dans 2.0s", "module": "scheduler", "function": "execute_with_retry", "line": 99}
+{"timestamp": "2026-07-20T09:00:51.423558", "level": "INFO", "logger": "scraper.googlemaps", "message": "Tentative 3/3", "module": "scheduler", "function": "execute_with_retry", "line": 70}
+{"timestamp": "2026-07-20T09:00:51.423891", "level": "ERROR", "logger": "scraper.googlemaps", "message": "Erreur Playwright : It looks like you are using Playwright Sync API inside the asyncio loop.\nPlease use the Async API instead.", "module": "google_maps", "function": "collect", "line": 96}
+{"timestamp": "2026-07-20T09:00:51.427041", "level": "ERROR", "logger": "scraper.googlemaps", "message": "Tous les retries échoués après 3 tentatives", "module": "scheduler", "function": "execute_with_retry", "line": 84}
+{"timestamp": "2026-07-20T09:00:51.455530", "level": "ERROR", "logger": "scraper.googlemaps", "message": "Erreur dans googlemaps : It looks like you are using Playwright Sync API inside the asyncio loop.\nPlease use the Async API instead.", "module": "scraper_base", "function": "run", "line": 150, "exception": "Traceback (most recent call last):\n  File \"D:\\analyse_de_sentiment\\scraper_base.py\", line 93, in run\n    reviews = execute_with_retry(\n        func=self.collect,\n        retry_config=self.retry_config,\n        logger=self.logger,\n    )\n  File \"D:\\analyse_de_sentiment\\scheduler.py\", line 74, in execute_with_retry\n    result = future.result(timeout=retry_config.timeout)\n  File \"C:\\Users\\ILHAM\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\concurrent\\futures\\_base.py\", line 456, in result\n    return self.__get_result()\n           ~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\ILHAM\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\concurrent\\futures\\_base.py\", line 401, in __get_result\n    raise self._exception\n  File \"C:\\Users\\ILHAM\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\concurrent\\futures\\thread.py\", line 59, in run\n    result = self.fn(*self.args, **self.kwargs)\n  File \"D:\\analyse_de_sentiment\\scrapers\\google_maps.py\", line 61, in collect\n    playwright = sync_playwright().start()\n  File \"D:\\analyse_de_sentiment\\venv\\Lib\\site-packages\\playwright\\sync_api\\_context_manager.py\", line 84, in start\n    return self.__enter__()\n           ~~~~~~~~~~~~~~^^\n  File \"D:\\analyse_de_sentiment\\venv\\Lib\\site-packages\\playwright\\sync_api\\_context_manager.py\", line 47, in __enter__\n                raise Error(\n    ...<2 lines>...\n                )\nplaywright._impl._errors.Error: It looks like you are using Playwright Sync API inside the asyncio loop.\nPlease use the Async API instead."}
+{"timestamp": "2026-07-20T09:00:51.456952", "level": "ERROR", "logger": "monitoring", "message": "[ERROR] Scraper googlemaps échouée", "module": "monitoring", "function": "send_alerts", "line": 133}
+{"timestamp": "2026-07-20T09:00:51.457124", "level": "INFO", "logger": "scraper.rss_feed", "message": "Démarrage de rss_feed", "module": "scraper_base", "function": "run", "line": 90}
+{"timestamp": "2026-07-20T09:00:51.457232", "level": "INFO", "logger": "scraper.rss_feed", "message": "Tentative 1/3", "module": "scheduler", "function": "execute_with_retry", "line": 70}
+{"timestamp": "2026-07-20T09:00:51.457790", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Senegal panne", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:00:53.175677", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 25 articles trouvés : Orange Senegal panne", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:00:53.175797", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Senegal reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:00:54.534876", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 75 articles trouvés : Orange Senegal reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:00:54.535008", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Senegal service", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:00:56.312280", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 77 articles trouvés : Orange Senegal service", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:00:56.312435", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Senegal prix", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:00:57.851726", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 75 articles trouvés : Orange Senegal prix", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:00:57.851941", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Senegal recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:00:58.987285", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 24 articles trouvés : Orange Senegal recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:00:58.987452", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Senegal connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:00.355356", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 76 articles trouvés : Orange Senegal connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:00.355506", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Senegal 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:01.374621", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 77 articles trouvés : Orange Senegal 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:01.374770", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Senegal 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:02.491034", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 78 articles trouvés : Orange Senegal 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:02.491195", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Senegal internet", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:03.854851", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 100 articles trouvés : Orange Senegal internet", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:03.855090", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Senegal données", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:05.270275", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 80 articles trouvés : Orange Senegal données", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:05.270451", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Cote d'Ivoire panne", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:06.311704", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 50 articles trouvés : Orange Cote d'Ivoire panne", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:06.311896", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Cote d'Ivoire reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:07.320402", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 92 articles trouvés : Orange Cote d'Ivoire reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:07.320556", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Cote d'Ivoire service", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:08.356385", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 100 articles trouvés : Orange Cote d'Ivoire service", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:08.356592", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Cote d'Ivoire prix", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:09.604986", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 100 articles trouvés : Orange Cote d'Ivoire prix", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:09.605186", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Cote d'Ivoire recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:10.441599", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 51 articles trouvés : Orange Cote d'Ivoire recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:10.441762", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Cote d'Ivoire connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:11.588145", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 76 articles trouvés : Orange Cote d'Ivoire connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:11.588302", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Cote d'Ivoire 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:12.562048", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 61 articles trouvés : Orange Cote d'Ivoire 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:12.562188", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Cote d'Ivoire 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:13.293751", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 58 articles trouvés : Orange Cote d'Ivoire 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:13.293883", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Cote d'Ivoire internet", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:14.457950", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 100 articles trouvés : Orange Cote d'Ivoire internet", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:14.458120", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Cote d'Ivoire données", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:15.504276", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 75 articles trouvés : Orange Cote d'Ivoire données", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:15.504445", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Cameroun panne", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:16.155722", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 32 articles trouvés : Orange Cameroun panne", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:16.155926", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Cameroun reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:17.318200", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 93 articles trouvés : Orange Cameroun reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:17.318430", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Cameroun service", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:18.318010", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 100 articles trouvés : Orange Cameroun service", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:18.318213", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Cameroun prix", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:19.137300", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 73 articles trouvés : Orange Cameroun prix", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:19.137436", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Cameroun recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:19.961925", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 45 articles trouvés : Orange Cameroun recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:19.962052", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Cameroun connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:21.044876", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 77 articles trouvés : Orange Cameroun connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:21.045079", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Cameroun 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:21.851045", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 46 articles trouvés : Orange Cameroun 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:21.851172", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Cameroun 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:22.706720", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 47 articles trouvés : Orange Cameroun 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:22.706908", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Cameroun internet", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:23.686060", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 84 articles trouvés : Orange Cameroun internet", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:23.686231", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Orange Cameroun données", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:24.666551", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 80 articles trouvés : Orange Cameroun données", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:24.666719", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Nigeria panne", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:25.525429", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 13 articles trouvés : MTN Nigeria panne", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:25.525712", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Nigeria reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:26.515433", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 51 articles trouvés : MTN Nigeria reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:26.515570", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Nigeria service", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:27.575029", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 53 articles trouvés : MTN Nigeria service", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:27.575169", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Nigeria prix", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:28.421661", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 51 articles trouvés : MTN Nigeria prix", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:28.421791", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Nigeria recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:29.151832", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 16 articles trouvés : MTN Nigeria recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:29.151977", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Nigeria connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:30.050805", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 49 articles trouvés : MTN Nigeria connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:30.050934", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Nigeria 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:30.967085", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 50 articles trouvés : MTN Nigeria 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:30.967231", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Nigeria 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:31.867733", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 50 articles trouvés : MTN Nigeria 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:31.867854", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Nigeria internet", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:32.835004", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 49 articles trouvés : MTN Nigeria internet", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:32.835309", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Nigeria données", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:33.841559", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 49 articles trouvés : MTN Nigeria données", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:33.841693", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Ghana panne", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:34.695741", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 12 articles trouvés : MTN Ghana panne", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:34.695905", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Ghana reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:35.529719", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 52 articles trouvés : MTN Ghana reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:35.529959", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Ghana service", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:36.370636", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 52 articles trouvés : MTN Ghana service", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:36.370791", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Ghana prix", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:37.277900", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 34 articles trouvés : MTN Ghana prix", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:37.278041", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Ghana recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:37.933405", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 3 articles trouvés : MTN Ghana recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:37.933546", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Ghana connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:38.717150", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 25 articles trouvés : MTN Ghana connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:38.717312", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Ghana 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:39.386264", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 21 articles trouvés : MTN Ghana 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:39.386401", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Ghana 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:40.075581", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 26 articles trouvés : MTN Ghana 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:40.075699", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Ghana internet", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:41.049321", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 45 articles trouvés : MTN Ghana internet", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:41.049508", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Ghana données", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:41.766632", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 51 articles trouvés : MTN Ghana données", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:41.766764", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Cote d'Ivoire panne", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:42.656886", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 36 articles trouvés : MTN Cote d'Ivoire panne", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:42.657026", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Cote d'Ivoire reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:43.604922", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 51 articles trouvés : MTN Cote d'Ivoire reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:43.605051", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Cote d'Ivoire service", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:44.583388", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 100 articles trouvés : MTN Cote d'Ivoire service", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:44.583566", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Cote d'Ivoire prix", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:45.602001", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 50 articles trouvés : MTN Cote d'Ivoire prix", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:45.602152", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Cote d'Ivoire recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:46.438066", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 49 articles trouvés : MTN Cote d'Ivoire recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:46.438247", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Cote d'Ivoire connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:47.204296", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 48 articles trouvés : MTN Cote d'Ivoire connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:47.204489", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Cote d'Ivoire 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:48.061215", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 40 articles trouvés : MTN Cote d'Ivoire 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:48.061337", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Cote d'Ivoire 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:49.052086", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 45 articles trouvés : MTN Cote d'Ivoire 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:49.052276", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Cote d'Ivoire internet", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:50.003887", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 57 articles trouvés : MTN Cote d'Ivoire internet", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:50.004089", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : MTN Cote d'Ivoire données", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:50.815140", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 53 articles trouvés : MTN Cote d'Ivoire données", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:50.815282", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Africa panne", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:51.816737", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 39 articles trouvés : Airtel Africa panne", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:51.816850", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Africa reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:52.715448", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 53 articles trouvés : Airtel Africa reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:52.715577", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Africa service", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:53.470338", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 63 articles trouvés : Airtel Africa service", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:53.470467", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Africa prix", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:54.493572", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 48 articles trouvés : Airtel Africa prix", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:54.493713", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Africa recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:55.245692", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 41 articles trouvés : Airtel Africa recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:55.245987", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Africa connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:56.030318", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 45 articles trouvés : Airtel Africa connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:56.030444", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Africa 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:56.884658", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 45 articles trouvés : Airtel Africa 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:56.884821", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Africa 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:57.658910", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 37 articles trouvés : Airtel Africa 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:57.659043", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Africa internet", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:58.526765", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 51 articles trouvés : Airtel Africa internet", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:58.526907", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Africa données", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:01:59.446658", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 52 articles trouvés : Airtel Africa données", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:01:59.446787", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Gabon panne", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:00.222055", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 20 articles trouvés : Airtel Gabon panne", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:00.222161", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Gabon reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:01.063833", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 50 articles trouvés : Airtel Gabon reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:01.063961", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Gabon service", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:02.014058", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 60 articles trouvés : Airtel Gabon service", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:02.014239", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Gabon prix", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:02.746507", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 49 articles trouvés : Airtel Gabon prix", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:02.746665", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Gabon recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:03.623857", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 10 articles trouvés : Airtel Gabon recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:03.624005", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Gabon connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:04.452533", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 50 articles trouvés : Airtel Gabon connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:04.452749", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Gabon 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:05.577928", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 49 articles trouvés : Airtel Gabon 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:05.578279", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Gabon 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:06.253607", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 35 articles trouvés : Airtel Gabon 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:06.253719", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Gabon internet", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:07.148348", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 56 articles trouvés : Airtel Gabon internet", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:07.148493", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Gabon données", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:07.931745", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 49 articles trouvés : Airtel Gabon données", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:07.931874", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Congo panne", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:08.960250", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 11 articles trouvés : Airtel Congo panne", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:08.960363", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Congo reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:09.759440", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 48 articles trouvés : Airtel Congo reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:09.759647", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Congo service", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:10.692805", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 59 articles trouvés : Airtel Congo service", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:10.692961", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Congo prix", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:11.633590", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 48 articles trouvés : Airtel Congo prix", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:11.633833", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Congo recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:12.298739", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 13 articles trouvés : Airtel Congo recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:12.298916", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Congo connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:13.264871", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 54 articles trouvés : Airtel Congo connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:13.265093", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Congo 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:14.031445", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 45 articles trouvés : Airtel Congo 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:14.031622", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Congo 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:14.789716", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 28 articles trouvés : Airtel Congo 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:14.789833", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Congo internet", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:15.804028", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 46 articles trouvés : Airtel Congo internet", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:15.804177", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Airtel Congo données", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:16.593613", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 51 articles trouvés : Airtel Congo données", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:16.593784", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Moov Africa panne", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:17.438354", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 42 articles trouvés : Moov Africa panne", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:17.438538", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Moov Africa reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:18.432242", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 100 articles trouvés : Moov Africa reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:18.432421", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Moov Africa service", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:19.403091", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 100 articles trouvés : Moov Africa service", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:19.403373", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Moov Africa prix", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:20.559720", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 86 articles trouvés : Moov Africa prix", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:20.559899", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Moov Africa recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:21.368563", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 25 articles trouvés : Moov Africa recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:21.368690", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Moov Africa connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:22.164795", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 50 articles trouvés : Moov Africa connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:22.164923", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Moov Africa 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:22.940505", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 52 articles trouvés : Moov Africa 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:22.940641", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Moov Africa 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:23.765967", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 44 articles trouvés : Moov Africa 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:23.766089", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Moov Africa internet", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:24.669582", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 100 articles trouvés : Moov Africa internet", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:24.669747", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Moov Africa données", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:25.684055", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 50 articles trouvés : Moov Africa données", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:25.684195", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Moov Cote d'Ivoire panne", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:26.550794", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 33 articles trouvés : Moov Cote d'Ivoire panne", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:26.550922", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Moov Cote d'Ivoire reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:27.397769", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 43 articles trouvés : Moov Cote d'Ivoire reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:27.397910", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Moov Cote d'Ivoire service", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:28.198804", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 90 articles trouvés : Moov Cote d'Ivoire service", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:28.198977", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Moov Cote d'Ivoire prix", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:29.036409", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 36 articles trouvés : Moov Cote d'Ivoire prix", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:29.036525", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Moov Cote d'Ivoire recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:29.841262", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 48 articles trouvés : Moov Cote d'Ivoire recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:29.841507", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Moov Cote d'Ivoire connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:30.671407", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 43 articles trouvés : Moov Cote d'Ivoire connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:30.671544", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Moov Cote d'Ivoire 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:31.461294", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 47 articles trouvés : Moov Cote d'Ivoire 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:31.461503", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Moov Cote d'Ivoire 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:32.504414", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 26 articles trouvés : Moov Cote d'Ivoire 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:32.504536", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Moov Cote d'Ivoire internet", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:33.271982", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 70 articles trouvés : Moov Cote d'Ivoire internet", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:33.272176", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Moov Cote d'Ivoire données", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:33.975864", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 39 articles trouvés : Moov Cote d'Ivoire données", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:33.976027", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Vodacom RDC panne", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:34.655187", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 26 articles trouvés : Vodacom RDC panne", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:34.655391", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Vodacom RDC reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:35.596821", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 46 articles trouvés : Vodacom RDC reseau", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:35.597082", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Vodacom RDC service", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:36.433161", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 48 articles trouvés : Vodacom RDC service", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:36.433314", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Vodacom RDC prix", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:37.472253", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 47 articles trouvés : Vodacom RDC prix", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:37.472384", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Vodacom RDC recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:38.165265", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 6 articles trouvés : Vodacom RDC recharge", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:38.165432", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Vodacom RDC connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:39.138755", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 49 articles trouvés : Vodacom RDC connexion", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:39.138985", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Vodacom RDC 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:40.148267", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 37 articles trouvés : Vodacom RDC 4g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:40.148407", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Vodacom RDC 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:40.919212", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 19 articles trouvés : Vodacom RDC 5g", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:40.919363", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Vodacom RDC internet", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:41.854044", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 46 articles trouvés : Vodacom RDC internet", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:41.854218", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "Récupération RSS : Vodacom RDC données", "module": "rss_feed", "function": "_fetch_articles", "line": 78}
+{"timestamp": "2026-07-20T09:02:42.841923", "level": "DEBUG", "logger": "scraper.rss_feed", "message": "✓ 45 articles trouvés : Vodacom RDC données", "module": "rss_feed", "function": "_fetch_articles", "line": 134}
+{"timestamp": "2026-07-20T09:02:42.842081", "level": "INFO", "logger": "scraper.rss_feed", "message": "6206 articles collectés", "module": "rss_feed", "function": "collect", "line": 62}
+{"timestamp": "2026-07-20T09:02:42.842219", "level": "INFO", "logger": "scraper.rss_feed", "message": "Tentative 1 réussie", "module": "scheduler", "function": "execute_with_retry", "line": 75}
+{"timestamp": "2026-07-20T09:02:42.842424", "level": "INFO", "logger": "scraper.rss_feed", "message": "6206 avis bruts collectés", "module": "scraper_base", "function": "run", "line": 105}
+{"timestamp": "2026-07-20T09:02:42.843108", "level": "INFO", "logger": "scraper.rss_feed", "message": "6206 avis valides après validation", "module": "scraper_base", "function": "run", "line": 118}
+{"timestamp": "2026-07-20T09:02:45.833740", "level": "INFO", "logger": "database", "message": "Batch insertion terminée", "module": "database", "function": "batch_insert_reviews", "line": 277}
+{"timestamp": "2026-07-20T09:02:45.836721", "level": "INFO", "logger": "scraper.rss_feed", "message": "rss_feed terminé avec succès", "module": "scraper_base", "function": "run", "line": 140}
+{"timestamp": "2026-07-20T09:02:46.053188", "level": "INFO", "logger": "database", "message": "Run cea4c78f-ad34-47bf-b9db-367972325e29 terminée", "module": "database", "function": "end_run", "line": 196}
+{"timestamp": "2026-07-20T09:02:46.055102", "level": "WARNING", "logger": "monitoring", "message": "[WARNING] Taux de doublons élevé", "module": "monitoring", "function": "send_alerts", "line": 133}
+{"timestamp": "2026-07-20T09:02:46.055179", "level": "INFO", "logger": "pipeline", "message": "Pipeline terminée avec succès", "module": "pipeline", "function": "run", "line": 132}
+
+============================================================
+RÉSUMÉ DE L'EXÉCUTION
+============================================================
+Run ID : cea4c78f-ad34-47bf-b9db-367972325e29
+Status : success
+Total avis : 3518
+Doublons : 2782
+Erreurs : 0
+Durée : 377.32s
+============================================================
+
+
+[TRUSTPILOT]
+  Status: success
+  Insérés: 0
+  Doublons: 0
+  Erreurs: 0
+  Durée: 27.69s
+
+[PLAYSTORE]
+  Status: success
+  Insérés: 0
+  Doublons: 94
+  Erreurs: 0
+  Durée: 5.66s
+
+[APPSTORE]
+  Status: success
+  Insérés: 0
+  Doublons: 0
+  Erreurs: 0
+  Durée: 9.21s
+
+[GOOGLEMAPS]
+  Status: failed
+  Insérés: 0
+  Doublons: 0
+  Erreurs: 0
+  Durée: 220.37s
+  Erreur: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+
+[RSS_FEED]
+  Status: success
+  Insérés: 3518
+  Doublons: 2688
+  Erreurs: 0
+  Durée: 114.38s

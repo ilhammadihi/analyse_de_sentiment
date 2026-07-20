@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  # PostgreSQL avec volume persistant
+  postgres:
+    image: postgres:15-alpine
+    container_name: telecom_postgres
+    restart: unless-stopped
+    
+    environment:
+      POSTGRES_USER: telecom_user
+      POSTGRES_PASSWORD: telecom_password
+      POSTGRES_DB: telecom_db
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
+    
+    ports:
+      - "5432:5432"
+    
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d
+    
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U telecom_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    
+    networks:
+      - scraping_network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  scraping_network:
+    driver: bridge
