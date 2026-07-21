@@ -37,8 +37,10 @@ env/
 
 # Project specific
 data/logs/*.log
-data/state/_tp_state.json
+data/state/*.json
+run_output*.log
 .pytest_cache/
+.mypy_cache/
 .coverage
 htmlcov/
 
