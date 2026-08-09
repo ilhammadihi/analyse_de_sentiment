@@ -19,12 +19,21 @@ class SentimentEnum(str, Enum):
 
 
 class SourceEnum(str, Enum):
-    """Sources possibles."""
+    """Sources possibles.
+
+    Toute valeur ajoutée ici doit l'être AUSSI dans `dim_source` (migration),
+    sinon l'avis s'insère mais reste orphelin des dimensions : il disparaît de
+    toutes les vues du dashboard, sans erreur pour le signaler.
+    """
     TRUSTPILOT = "trustpilot"
     GOOGLE_PLAY = "google_play"
     APP_STORE = "app_store"
     GOOGLE_MAPS = "google_maps"
     RSS_FEED = "rss_feed"
+    HELLOPETER = "hellopeter"
+    GDELT = "gdelt"
+    PRESS_FEED = "press_feed"
+    REDDIT = "reddit"
 
 
 class Review(BaseModel):
@@ -43,6 +52,36 @@ class Review(BaseModel):
     author: Optional[str] = Field(None, max_length=255, description="Auteur de l'avis")
     likes: Optional[int] = Field(None, ge=0, description="Nombre de likes")
     verified: Optional[bool] = Field(None, description="Achat vérifié")
+
+    # --- Point de vente d'origine (migration 008) ---------------------------
+    # Renseignés par le seul collecteur Google Maps : les six autres sources
+    # n'ont aucune notion de lieu. Un avis d'application n'a pas d'agence.
+    target_id: Optional[str] = Field(
+        None, max_length=255,
+        description="Identifiant de la sous-cible (agence, application)"
+    )
+    target_name: Optional[str] = Field(
+        None, max_length=255, description="Nom lisible de la sous-cible"
+    )
+
+    # --- Sortie détaillée du moteur de sentiment (migration 004) -------------
+    # Renseignés par le pipeline lors de l'enrichissement, jamais par les
+    # collecteurs. Le label `sentiment` seul dit QUE ça va mal ; ces trois
+    # champs disent COMBIEN (score continu) et POURQUOI (termes déclenchés).
+    # Ils n'entrent pas dans le checksum de déduplication : ce sont des données
+    # dérivées du texte, pas du contenu collecté.
+    sentiment_score: Optional[float] = Field(
+        None, ge=-1, le=1, description="Score compound du sentiment, sur [-1, 1]"
+    )
+    pos_terms: list[str] = Field(
+        default_factory=list, description="Termes positifs déclenchés"
+    )
+    neg_terms: list[str] = Field(
+        default_factory=list, description="Termes négatifs déclenchés"
+    )
+    lexicon_version: Optional[int] = Field(
+        None, description="Version du lexique ayant produit score et termes"
+    )
 
     @field_validator("text", mode="before")
     @classmethod
@@ -77,8 +116,24 @@ class Review(BaseModel):
         return self
 
     def get_checksum(self) -> str:
-        """Hash SHA256 du contenu (déduplication)."""
+        """Hash SHA256 du contenu (déduplication).
+
+        Le LIEU entre dans le hash quand il est connu, et seulement alors.
+
+        Depuis que Google Maps visite plusieurs agences par filiale, deux
+        clients de deux boutiques différentes écrivant « Bon service » ne sont
+        plus le même avis. Sans le lieu dans le hash, le second serait écarté
+        comme doublon : plus on couvre d'agences, plus on perdrait d'avis
+        courts, et la densification se saborderait elle-même.
+
+        Le lieu est AJOUTÉ, jamais inséré au milieu. Une clé de la forme
+        `entreprise:source::texte` — avec un séparateur vide pour les sources
+        sans lieu — changerait le hash de TOUTES les lignes existantes, qui
+        seraient alors réinsérées en masse comme si elles étaient neuves.
+        """
         content = f"{self.company}:{self.source}:{self.text}"
+        if self.target_id:
+            content = f"{content}:{self.target_id}"
         return hashlib.sha256(content.encode()).hexdigest()
 
 
@@ -115,6 +170,22 @@ class PipelineRun(BaseModel):
     total_errors: int = 0
     error_message: Optional[str] = None
     scraper_results: dict[str, ScraperResult] = Field(default_factory=dict)
+
+    #: Durée au-delà de laquelle CE run est anormalement long, en secondes.
+    #:
+    #: Un seuil unique ne peut pas convenir : depuis que chaque collecteur a son
+    #: propre planificateur, un run porte une seule source, et les sources n'ont
+    #: rien de comparable. Google Maps met une dizaine d'heures pour une cadence
+    #: de vingt-quatre — il est dans son budget ; un flux RSS qui met dix
+    #: minutes pour une cadence de six heures ne l'est pas moins, mais le même
+    #: chiffre absolu classerait le premier en panne et laisserait passer le
+    #: second. Le budget retenu est la CADENCE de la source : la dépasser
+    #: signifie qu'elle ne rattrapera jamais son retard, ce qui est la seule
+    #: définition utile de « trop lent ».
+    #:
+    #: `None` = pas de budget connu (exécution manuelle) ; la règle retombe
+    #: alors sur son seuil historique.
+    budget_seconds: Optional[float] = None
 
     @computed_field
     @property
