@@ -16,6 +16,10 @@ RUN python -m playwright install chromium
 COPY reviews/ ./reviews/
 COPY migrations/ ./migrations/
 COPY tools/ ./tools/
+# Cibles de collecte (opérateurs/filiales/identifiants). Sans ce dossier,
+# collectors/targets.py ne trouve aucune cible et les collecteurs tournent
+# à vide sans erreur explicite.
+COPY config/ ./config/
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONPATH=/app

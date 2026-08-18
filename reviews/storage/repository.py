@@ -419,19 +419,32 @@ class AlertRepository:
     def __init__(self, db: Database):
         self.db = db
 
-    def insert(self, alert: Alert, notified: Optional[list[str]] = None) -> int:
+    def insert(
+        self,
+        alert: Alert,
+        notified: Optional[list[str]] = None,
+        telegram_message_id: Optional[int] = None,
+    ) -> int:
+        """Persiste une alerte. `telegram_message_id` la rend RETIRABLE.
+
+        Sans lui, un message parti à tort — sur des avis mal attribués, par
+        exemple — ne peut plus être effacé du groupe : l'API de suppression
+        exige un identifiant précis, et deviner ceux des messages voisins
+        reviendrait à supprimer la conversation des autres.
+        """
         with self.db.cursor() as cur:
             cur.execute(
                 """
                 INSERT INTO alerts
-                    (run_id, type, severity, title, message, company, source, notified, created_at)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    (run_id, type, severity, title, message, company, source,
+                     notified, telegram_message_id, created_at)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 RETURNING alert_id
                 """,
                 (alert.run_id, alert.type,
                  alert.severity.value if hasattr(alert.severity, "value") else alert.severity,
                  alert.title, alert.message, alert.company, alert.source,
-                 json.dumps(notified or []), alert.created_at),
+                 json.dumps(notified or []), telegram_message_id, alert.created_at),
             )
             return cur.fetchone()[0]
 
@@ -465,10 +478,25 @@ class AlertRepository:
         severity: Optional[str] = None,
         kind: Optional[str] = None,
         f: Optional[StatsFilter] = None,
+        max_age_days: Optional[int] = None,
     ) -> list[dict]:
         """Alertes récentes, filtrables par gravité, par nature et par périmètre.
 
         Args:
+            max_age_days: âge maximal d'une alerte, en jours, compté depuis
+                maintenant et INDÉPENDAMMENT de la fenêtre d'analyse du
+                dashboard.
+
+                Les deux bornes ne mesurent pas la même chose et ne doivent pas
+                être confondues. `f` dit sur quelle période on ANALYSE ; ce
+                paramètre dit à partir de quand une alerte cesse de décrire le
+                présent. Un pic de mécontentement est calculé sur une fenêtre de
+                sept jours : passé ce délai, la fenêtre qu'il décrivait ne
+                recouvre plus du tout aujourd'hui, et le laisser à l'écran fait
+                lire comme actuel un incident entièrement révolu.
+
+                Sans cette borne, l'écran empile indéfiniment — mesuré, il
+                affichait encore un pic du 27 juillet le 10 août.
             f: périmètre du dashboard. Le fil d'alertes obéit au MÊME filtre que
                 le reste des écrans : consulter le Mali et lire une alerte sur la
                 Zambie contredit la promesse d'un périmètre unique, et fait
@@ -498,6 +526,14 @@ class AlertRepository:
             scope_sql, scope_params = f.for_alerts().where(cols=ALERTS)
             clauses.append(scope_sql.removeprefix("WHERE "))
             params.extend(scope_params)
+
+        if max_age_days is not None:
+            # Seuil calculé en Python plutôt qu'en SQL : `now()` côté serveur
+            # PostgreSQL et l'heure de l'API peuvent diverger, et une borne de
+            # fraîcheur qui glisse d'un fuseau ferait apparaître ou disparaître
+            # des alertes sans que rien ne l'explique.
+            clauses.append("a.created_at >= %s")
+            params.append(datetime.now(timezone.utc) - timedelta(days=max_age_days))
 
         if severity:
             clauses.append("a.severity = %s")

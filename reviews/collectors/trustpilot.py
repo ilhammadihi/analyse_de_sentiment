@@ -13,6 +13,7 @@ import re
 
 from playwright.sync_api import sync_playwright, Page, Browser
 from reviews.collectors.base import BaseCollector
+from reviews.collectors.targets import trustpilot_companies
 from reviews.domain.models import Review, SourceEnum
 from reviews.config import get_settings
 
@@ -22,6 +23,13 @@ from reviews.processing.resilience import RetryConfig
 logger = logging.getLogger(__name__)
 
 
+class BusinessUnitNotFound(Exception):
+    """Aucune fiche Trustpilot pour ce domaine (HTTP 404).
+
+    Distinct d'une panne : la fiche n'existe pas, il n'y a rien à collecter.
+    """
+
+
 class TrustpilotScraper(BaseCollector):
     """Scraper pour Trustpilot."""
 
@@ -29,13 +37,22 @@ class TrustpilotScraper(BaseCollector):
     # timeout par thread worker (voir scheduler.execute_with_retry).
     USES_THREAD_TIMEOUT = False
 
-    # Configuration des domaines à scraper
-    COMPANIES = [
-        {"domain": "moov-africa.bj", "name": "Moov Africa Benin"},
-        {"domain": "moov-africa.bf", "name": "Moov Africa Burkina"},
-        {"domain": "moov-africa.ml", "name": "Moov Africa Mali"},
-        {"domain": "moov-africa.cf", "name": "Moov Africa Centrafrique"},
-    ]
+    USER_AGENT = (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    )
+
+    # Domaines à scraper. Le slug Trustpilot est le domaine EXACT enregistré par
+    # l'entreprise, préfixe `www.` compris : "moov-africa.bj" renvoie 404 alors
+    # que "www.moov-africa.bj" existe.
+    # État vérifié le 2026-07-21 : seule la fiche Bénin existe (et elle est
+    # vide — "Be the first to review"), les trois autres n'ont aucune fiche
+    # Trustpilot. Ce collecteur ne peut donc rien remonter tant que Moov Africa
+    # n'a pas d'avis sur Trustpilot ; le code ci-dessous le signale
+    # explicitement au lieu de renvoyer 0 avis en silence.
+    # Fiches à scraper : chargées depuis config/operators.json (targets.py).
+    # Un domaine sans fiche Trustpilot est signalé explicitement (voir
+    # BusinessUnitNotFound) au lieu de renvoyer 0 avis en silence.
     
     def __init__(self):
         retry_config = RetryConfig(
@@ -70,6 +87,9 @@ class TrustpilotScraper(BaseCollector):
                 "locale": "en-US",
                 "timezone_id": "Africa/Casablanca",
                 "viewport": {"width": 1400, "height": 900},
+                # Sans UA explicite, Chromium annonce "HeadlessChrome" et
+                # Trustpilot durcit sa protection anti-bot.
+                "user_agent": self.USER_AGENT,
             }
             
             if self.state_path.exists():
@@ -86,15 +106,31 @@ class TrustpilotScraper(BaseCollector):
                 "Object.defineProperty(navigator,'webdriver',{get:()=>undefined});"
             )
             
-            for company in self.COMPANIES:
+            companies = trustpilot_companies()
+            self.logger.info("%d fiche(s) déclarée(s) en configuration", len(companies))
+            not_found = 0
+            failures = 0
+            for company in companies:
                 try:
                     self.logger.info(f"Scraping {company['name']} ({company['domain']})")
                     reviews = self._scrape_company(context, company)
                     all_reviews.extend(reviews)
                     time.sleep(2)  # Pause entre les domaines
+                except BusinessUnitNotFound as e:
+                    not_found += 1
+                    self.logger.warning(str(e))
+                    continue
                 except Exception as e:
+                    failures += 1
                     self.logger.error(f"Erreur scraping {company['name']} : {e}")
                     continue
+
+            if not_found:
+                self.logger.warning(
+                    "%d/%d domaines sans fiche Trustpilot : rien à collecter "
+                    "pour ceux-ci (ce n'est pas une panne du scraper)",
+                    not_found, len(companies),
+                )
             
             # Sauvegarder l'état de session
             try:
@@ -107,6 +143,15 @@ class TrustpilotScraper(BaseCollector):
                 self.logger.warning(f"Impossible de sauvegarder l'état : {e}")
             
             context.close()
+
+            # Toutes les fiches existantes en erreur => panne réelle (blocage
+            # anti-bot, refonte du site). On lève pour déclencher le retry et
+            # marquer le run "failed", au lieu d'un "success" à 0 avis.
+            if failures and failures == len(companies) - not_found:
+                raise RuntimeError(
+                    f"Les {failures} fiches Trustpilot accessibles ont toutes "
+                    f"échoué : site inaccessible ou structure modifiée"
+                )
 
             return all_reviews
 
@@ -135,45 +180,54 @@ class TrustpilotScraper(BaseCollector):
         reviews_list = []
         
         try:
-            url = f"https://www.trustpilot.com/review/{company['domain']}"
+            slug = company["domain"]
+            url = f"https://www.trustpilot.com/review/{slug}"
             self.logger.info(f"Navigation vers {url}")
-            
-            page.goto(url, wait_until="domcontentloaded", timeout=60000)
+
+            response = page.goto(url, wait_until="domcontentloaded", timeout=60000)
             time.sleep(2)
-            
+
+            # 404 = la fiche n'existe pas. Sans ce test, le scraper enchaînait
+            # sur une page vide et concluait "0 avis" comme s'il avait réussi.
+            if response is not None and response.status == 404:
+                raise BusinessUnitNotFound(
+                    f"Aucune fiche Trustpilot pour {slug} (HTTP 404)"
+                )
+
             # Accepter les cookies/consentement
             self._handle_consent(page)
             time.sleep(1)
-            
-            # Récupérer le buildId (ID du build Next.js)
+
+            # Page 1 : lue directement dans __NEXT_DATA__, déjà présent dans le
+            # HTML servi. Aucun appel réseau, et cela fonctionne même quand
+            # Trustpilot répond 403 derrière son écran anti-bot "Verifying
+            # Connection" (les données restent embarquées dans la page).
+            reviews_list.extend(self._reviews_from_next_data(page))
+            self.logger.debug(f"Page 1 : {len(reviews_list)} avis via __NEXT_DATA__")
+
+            # Pages suivantes : API interne Next.js
             build_id = self._get_build_id(page)
             if not build_id:
-                self.logger.warning("Impossible de récupérer le buildId")
-                return []
-            
-            # Récupérer le slug depuis l'URL
-            slug = company["domain"]
-            
-            # Scraper les pages
-            for page_num in range(1, settings.trustpilot.max_pages + 1):
-                self.logger.debug(f"Scraping page {page_num}")
-                
-                try:
-                    page_reviews = self._fetch_reviews_page(
-                        page, build_id, slug, page_num
-                    )
-                    
-                    if not page_reviews:
-                        self.logger.info(f"Fin du scraping (page {page_num} vide)")
+                self.logger.warning(
+                    "buildId introuvable : pagination désactivée (page 1 seule)"
+                )
+            else:
+                for page_num in range(2, settings.trustpilot.max_pages + 1):
+                    self.logger.debug(f"Scraping page {page_num}")
+                    try:
+                        page_reviews = self._fetch_reviews_page(
+                            page, build_id, slug, page_num
+                        )
+                        if not page_reviews:
+                            self.logger.info(f"Fin de la pagination (page {page_num})")
+                            break
+
+                        reviews_list.extend(page_reviews)
+                        time.sleep(1)
+                    except Exception as e:
+                        self.logger.warning(f"Erreur page {page_num} : {e}")
                         break
-                    
-                    reviews_list.extend(page_reviews)
-                    time.sleep(1)
-                    
-                except Exception as e:
-                    self.logger.warning(f"Erreur page {page_num} : {e}")
-                    continue
-            
+
             # Parser les avis bruts
             parsed = self._parse_reviews(reviews_list, company["name"])
             self.logger.info(f"{len(parsed)} avis parsés pour {company['name']}")
@@ -227,73 +281,119 @@ class TrustpilotScraper(BaseCollector):
         Récupère les avis d'une page via l'API interne.
         """
         try:
-            # URL de l'API interne Trustpilot
+            # URL de l'API interne Trustpilot.
+            # PAS de segment de locale : ".../_next/data/<build>/en/review/..."
+            # renvoyait 404 systématiquement — c'est ce qui vidait chaque page.
             api_url = (
                 f"https://www.trustpilot.com/_next/data/{build_id}/"
-                f"en/review/{slug}.json?page={page_num}"
+                f"review/{slug}.json?page={page_num}"
             )
-            
+
             self.logger.debug(f"Requête API : {api_url}")
-            
-            # Faire la requête depuis le navigateur (pour utiliser les cookies)
-            response = page.evaluate(f"""
-                async () => {{
-                    const response = await fetch('{api_url}');
-                    if (!response.ok) return null;
-                    return await response.json();
-                }}
-            """)
-            
+
+            # Requête émise depuis la page pour réutiliser cookies et session.
+            # On passe l'URL en argument plutôt qu'en f-string : un slug
+            # contenant une apostrophe casserait le littéral JS.
+            response = page.evaluate(
+                """async (u) => {
+                    const res = await fetch(u);
+                    if (!res.ok) return {status: res.status};
+                    return {status: res.status, body: await res.json()};
+                }""",
+                api_url,
+            )
+
             if not response:
                 return []
-            
-            # Parser la réponse JSON
-            reviews = self._extract_reviews_from_api_response(response)
-            return reviews
-            
+
+            # 404 = fin de pagination (dernière page dépassée), pas une erreur.
+            if response.get("status") != 200:
+                self.logger.debug(
+                    f"Page {page_num} : HTTP {response.get('status')} — fin"
+                )
+                return []
+
+            return self._extract_reviews_from_api_response(response.get("body") or {})
+
         except Exception as e:
             self.logger.warning(f"Erreur API page {page_num} : {e}")
             return []
     
+    def _reviews_from_next_data(self, page: Page) -> list[dict]:
+        """Lit les avis de la page courante dans window.__NEXT_DATA__."""
+        try:
+            raw = page.evaluate(
+                """() => {
+                    const props = window.__NEXT_DATA__ && window.__NEXT_DATA__.props;
+                    const pp = props && props.pageProps;
+                    return (pp && pp.reviews) ? pp.reviews : [];
+                }"""
+            )
+            return [self._normalize_review(r) for r in (raw or [])]
+        except Exception as e:
+            self.logger.debug(f"Erreur lecture __NEXT_DATA__ : {e}")
+            return []
+
     def _extract_reviews_from_api_response(self, data: dict) -> list[dict]:
         """Parse les avis depuis la réponse API JSON."""
-        reviews = []
-        
         try:
-            # Naviguer dans la structure JSON (selon Trustpilot API)
-            # La structure peut varier, il faut adapter selon l'API réelle
-            if "pageProps" not in data:
+            page_props = data.get("pageProps") or {}
+
+            # Réponse de redirection (308) : aucun avis dedans. L'ancien code la
+            # traitait comme une page normale et concluait "0 avis".
+            if "__N_REDIRECT" in page_props:
+                self.logger.debug(
+                    f"Redirection API vers {page_props['__N_REDIRECT']}"
+                )
                 return []
-            
-            page_props = data["pageProps"]
-            if "reviews" not in page_props:
-                return []
-            
-            for review in page_props["reviews"]:
-                reviews.append({
-                    "id": review.get("id"),
-                    "title": review.get("title"),
-                    "text": review.get("text"),
-                    "rating": review.get("rating"),
-                    "author": review.get("author", {}).get("displayName"),
-                    "created_at": review.get("createdAt"),
-                    "likes": review.get("likes"),
-                })
-        
+
+            return [
+                self._normalize_review(r)
+                for r in (page_props.get("reviews") or [])
+            ]
+
         except Exception as e:
             self.logger.debug(f"Erreur parsing API response : {e}")
-        
-        return reviews
+            return []
+
+    @staticmethod
+    def _normalize_review(review: dict) -> dict:
+        """Aplatit un avis Trustpilot brut vers les champs du modèle Review.
+
+        Le schéma réel imbrique l'auteur, la date et la vérification : les lire
+        à plat (`author`, `createdAt`) renvoyait None pour les trois, d'où des
+        avis sans auteur ni date réelle.
+        """
+        consumer = review.get("consumer") or {}
+        dates = review.get("dates") or {}
+        verification = (review.get("labels") or {}).get("verification") or {}
+
+        return {
+            "id": review.get("id"),
+            "title": review.get("title"),
+            "text": review.get("text"),
+            "rating": review.get("rating"),
+            "author": consumer.get("displayName"),
+            "created_at": dates.get("publishedDate") or dates.get("experiencedDate"),
+            "likes": review.get("likes"),
+            "verified": verification.get("isVerified"),
+        }
     
     def _parse_reviews(self, raw_reviews: list, company_name: str) -> list[Review]:
         """Parse les avis bruts en objets Review."""
         parsed = []
-        
+        seen: set[str] = set()
+
         for rv in raw_reviews:
             try:
                 if not rv.get("id") or not rv.get("text"):
                     continue
-                
+
+                # Deux pages consécutives peuvent renvoyer le même avis.
+                if rv["id"] in seen:
+                    continue
+                seen.add(rv["id"])
+
                 review = Review(
                     id=rv["id"],
                     company=company_name,
@@ -304,7 +404,9 @@ class TrustpilotScraper(BaseCollector):
                     author=rv.get("author"),
                     created_at=rv.get("created_at"),
                     likes=rv.get("likes"),
-                    verified=True,  # Trustpilot vérifie généralement
+                    # Valeur réelle : tous les avis Trustpilot ne sont pas
+                    # vérifiés (labels.verification.isVerified vaut souvent false).
+                    verified=rv.get("verified"),
                 )
                 parsed.append(review)
             except Exception as e:

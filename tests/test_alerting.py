@@ -309,7 +309,317 @@ def test_telegram_filtre_configurable(monkeypatch):
     assert tout.send(_alerte("scraper_zero")) is True
 
 
+def test_telegram_retient_l_identifiant_du_message_envoye():
+    """SANS LUI, UN MESSAGE PARTI À TORT EST DÉFINITIF.
+
+    Quatre alertes fondées sur des avis mal attribués sont parties dans le
+    groupe et n'ont pas pu être effacées : le code postait, lisait le statut
+    HTTP, et jetait la réponse — donc l'identifiant, seule prise permettant de
+    demander une suppression à l'API.
+    """
+    import reviews.alerting.notifiers as mod
+
+    def _faux_post(url, **kw):
+        return type("R", (), {
+            "status_code": 200, "text": "",
+            "json": lambda self=None: {"ok": True, "result": {"message_id": 4242}},
+        })()
+
+    original = mod.requests.post
+    mod.requests.post = _faux_post
+    try:
+        n = notifiers.TelegramNotifier(_cfg_telegram())
+        assert n.send(_alerte("negative_spike")) is True
+        assert n.last_message_id == 4242
+    finally:
+        mod.requests.post = original
+
+
+def test_un_identifiant_illisible_ne_fait_pas_echouer_l_envoi():
+    """L'envoi a RÉUSSI : perdre l'identifiant coûte la possibilité de retirer
+    ce message plus tard, jamais la notification elle-même."""
+    import reviews.alerting.notifiers as mod
+
+    def _sans_json(url, **kw):
+        return type("R", (), {
+            "status_code": 200, "text": "",
+            "json": lambda self=None: (_ for _ in ()).throw(ValueError("pas du JSON")),
+        })()
+
+    original = mod.requests.post
+    mod.requests.post = _sans_json
+    try:
+        n = notifiers.TelegramNotifier(_cfg_telegram())
+        assert n.send(_alerte("negative_spike")) is True
+        assert n.last_message_id is None
+    finally:
+        mod.requests.post = original
+
+
 def test_telegram_garde_le_filtre_de_gravite():
     """Le filtre par type s'AJOUTE au seuil de gravité, il ne le remplace pas."""
     notifieur = notifiers.TelegramNotifier(_cfg_telegram(telegram_min_severity="error"))
     assert notifieur.send(_alerte("negative_spike", AlertSeverity.WARNING)) is False
+
+
+# ---------------------------------------------------------------------------
+# Extraits joints aux alertes de pic
+# ---------------------------------------------------------------------------
+
+
+class _StatsAvecVerbatims:
+    """Dépôt minimal : rend des avis fixes et retient les périmètres demandés."""
+
+    def __init__(self, reviews):
+        self.reviews = reviews
+        self.scopes = []
+
+    def verbatims(self, f, polarity="negative", limit=20):
+        self.scopes.append((f, polarity, limit))
+        return {"reviews": self.reviews[:limit]}
+
+
+def _manager_avec(stats, mouvements, alertes):
+    from reviews.alerting.manager import AlertManager
+
+    mgr = AlertManager.__new__(AlertManager)
+    mgr.cfg = _cfg_telegram()
+    mgr.stats_repo = stats
+    mgr.alert_repo = None
+    mgr.notifiers = []
+    mgr._attacher_extraits(alertes, mouvements)
+    return mgr
+
+
+def test_les_extraits_sont_bornes_dates_et_tronques():
+    """Deux avis au plus, chacun daté et tronqué.
+
+    LA DATE N'EST PAS DÉCORATIVE : elle prouve que l'avis cité appartient bien
+    à la fenêtre du pic. Sans elle, rien ne distingue une alerte fondée sur des
+    avis d'hier d'une alerte illustrée par des avis de mars — et c'est le
+    premier doute qu'un lecteur exprime.
+    """
+    from datetime import date as _date
+
+    avis = [
+        {"text": f"Avis numero {i} " + "x" * 400, "source": "Google Play",
+         "occurred_at": _date(2026, 8, 8)}
+        for i in range(6)
+    ]
+    stats = _StatsAvecVerbatims(avis)
+    alerte = _alerte("negative_spike")
+    alerte.company = "MTN Ghana"
+
+    _manager_avec(stats, [{"label": "MTN Ghana", "key": 42}], [alerte])
+
+    assert len(alerte.evidence) == 2
+    assert all(len(e) < 260 for e in alerte.evidence), "extrait non tronqué"
+    assert alerte.evidence[0].startswith("8 août ·"), "date absente ou mal placée"
+    assert alerte.evidence[0].endswith("— Google Play")
+
+
+def test_les_avis_sont_cherches_sur_la_fenetre_du_pic():
+    """RÉGRESSION VISÉE : une alerte de pic sur sept jours illustrée par des
+    avis plus anciens ferait douter du chiffre lui-même. Le périmètre transmis
+    au dépôt doit porter EXACTEMENT la fenêtre configurée pour l'alerting."""
+    stats = _StatsAvecVerbatims([])
+    alerte = _alerte("negative_spike")
+    alerte.company = "MTN Ghana"
+
+    mgr_cfg = _cfg_telegram()
+    _manager_avec(stats, [{"label": "MTN Ghana", "key": 42}], [alerte])
+
+    scope, polarite, limite = stats.scopes[0]
+    assert scope.days == mgr_cfg.spike_window_days
+    assert polarite == "negative" and limite == 2
+
+
+def test_une_date_illisible_ne_fait_pas_echouer_l_extrait():
+    """Donnée abîmée : mieux vaut « ? » qu'une alerte perdue."""
+    stats = _StatsAvecVerbatims([{"text": "Reseau coupe", "source": "X",
+                                  "occurred_at": None}])
+    alerte = _alerte("negative_spike")
+    alerte.company = "MTN Ghana"
+    _manager_avec(stats, [{"label": "MTN Ghana", "key": 42}], [alerte])
+    assert alerte.evidence and alerte.evidence[0].startswith("? ·")
+
+
+def test_les_extraits_sont_cherches_sur_LA_filiale_alertee():
+    """RÉGRESSION VISÉE : la règle ne rend que le LIBELLÉ de la filiale, jamais
+    son identifiant. Sans le rapprochement avec les lignes de mouvement, on
+    interrogerait le périmètre global et on citerait les avis d'une AUTRE
+    filiale sous le nom de celle qui alerte."""
+    stats = _StatsAvecVerbatims([{"text": "Reseau coupe", "source": "App Store"}])
+    alerte = _alerte("negative_spike")
+    alerte.company = "MTN Ghana"
+
+    _manager_avec(
+        stats,
+        [{"label": "Orange Mali", "key": 7}, {"label": "MTN Ghana", "key": 42}],
+        [alerte],
+    )
+
+    scope = stats.scopes[0][0]
+    assert scope.subsidiaries == (42,), "mauvaise filiale interrogée"
+
+
+def test_une_filiale_introuvable_ne_declenche_aucune_requete():
+    """Mieux vaut une alerte sans extrait qu'une alerte illustrée par les avis
+    de quelqu'un d'autre."""
+    stats = _StatsAvecVerbatims([{"text": "Peu importe", "source": "X"}])
+    alerte = _alerte("negative_spike")
+    alerte.company = "Filiale inconnue"
+
+    _manager_avec(stats, [{"label": "MTN Ghana", "key": 42}], [alerte])
+
+    assert stats.scopes == [] and alerte.evidence == []
+
+
+def test_un_depot_en_echec_laisse_l_alerte_partir_sans_extrait():
+    """Une notification sans extrait reste utile ; une collecte qui échoue à
+    cause d'un extrait manquant ne l'est pas."""
+    class _Casse:
+        def verbatims(self, *a, **kw):
+            raise RuntimeError("base indisponible")
+
+    alerte = _alerte("negative_spike")
+    alerte.company = "MTN Ghana"
+    _manager_avec(_Casse(), [{"label": "MTN Ghana", "key": 42}], [alerte])
+    assert alerte.evidence == []
+
+
+def test_avis_et_evenements_sont_deux_sections_distinctes():
+    """Un avis dit ce qu'un client RESSENT, un article dit ce qui s'est PASSÉ.
+
+    Mêlés dans une même liste, une décision de régulateur se lirait comme une
+    plainte d'abonné — et la portée de la presse (« ce pays » plutôt que
+    « cette filiale ») disparaîtrait avec la distinction.
+    """
+    envoye = {}
+
+    def _faux_post(url, **kw):
+        envoye["text"] = kw["json"]["text"]
+        return type("R", (), {"status_code": 200, "text": ""})()
+
+    import reviews.alerting.notifiers as mod
+
+    original = mod.requests.post
+    mod.requests.post = _faux_post
+    try:
+        alerte = _alerte("negative_spike")
+        alerte.evidence = ["Coupures repetees — Google Play"]
+        alerte.events = ["2026-07-31 · inwi et Huawei etendent la couverture"]
+        alerte.events_scope = "cette filiale"
+        assert notifiers.TelegramNotifier(_cfg_telegram()).send(alerte) is True
+    finally:
+        mod.requests.post = original
+
+    texte = envoye["text"]
+    assert "Ce que disent les clients" in texte
+    assert "Ce qui pourrait coïncider" in texte
+    # La portée accompagne la section presse, pas la section avis.
+    assert "presse : cette filiale" in texte
+    # « pourrait coïncider » et jamais « à cause de » : un article contemporain
+    # n'est pas une cause démontrée.
+    assert "à cause de" not in texte
+
+
+def test_telegram_rend_les_extraits_en_citation():
+    """Le liseré de <blockquote> sépare la parole du client de la mesure ;
+    sans lui, les deux se lisent comme un seul bloc de texte."""
+    envoye = {}
+
+    def _faux_post(url, **kw):
+        envoye["text"] = kw["json"]["text"]
+        return type("R", (), {"status_code": 200, "text": ""})()
+
+    import reviews.alerting.notifiers as mod
+
+    original = mod.requests.post
+    mod.requests.post = _faux_post
+    try:
+        alerte = _alerte("negative_spike")
+        alerte.evidence = ["Coupures repetees — Google Play", "Facture fausse — App Store"]
+        notifieur = notifiers.TelegramNotifier(_cfg_telegram())
+        assert notifieur.send(alerte) is True
+    finally:
+        mod.requests.post = original
+
+    assert envoye["text"].count("<blockquote>") == 2
+    assert "Ce que disent les clients" in envoye["text"]
+
+
+# ---------------------------------------------------------------------------
+# Borne de fraîcheur du fil d'alertes
+# ---------------------------------------------------------------------------
+
+
+class _CurseurEspion:
+    """Curseur minimal : retient la requête et ses paramètres, ne rend rien."""
+
+    def __init__(self):
+        self.sql = None
+        self.params = None
+
+    def execute(self, sql, params=None):
+        self.sql, self.params = sql, list(params or [])
+
+    def fetchall(self):
+        return []
+
+
+class _BaseEspionne:
+    def __init__(self):
+        self.curseur = _CurseurEspion()
+
+    def cursor(self, dict_rows: bool = False):
+        from contextlib import contextmanager
+
+        @contextmanager
+        def _ouvrir():
+            yield self.curseur
+
+        return _ouvrir()
+
+
+def _lister(**kwargs):
+    from reviews.storage.repository import AlertRepository
+
+    db = _BaseEspionne()
+    AlertRepository(db).list_recent(**kwargs)
+    return db.curseur
+
+
+def test_sans_borne_de_fraicheur_aucune_clause_de_date_n_est_posee():
+    """L'absence de borne doit rester le comportement par défaut : d'autres
+    appelants (supervision, export) veulent l'historique complet."""
+    curseur = _lister()
+    assert "a.created_at >=" not in curseur.sql
+
+
+def test_la_borne_de_fraicheur_est_comptee_depuis_maintenant():
+    """Elle borne l'ÂGE de l'alerte, pas la fenêtre d'analyse.
+
+    RÉGRESSION VISÉE : sans elle, l'onglet Alertes empile indéfiniment — il
+    affichait encore un pic du 27 juillet le 10 août, présenté comme actuel au
+    milieu d'alertes du matin même. Un pic se calcule sur sept jours glissants ;
+    passé ce délai, la période qu'il décrit ne recouvre plus aujourd'hui.
+    """
+    from datetime import timezone
+
+    curseur = _lister(max_age_days=7)
+    assert "a.created_at >= %s" in curseur.sql
+
+    seuil = next(p for p in curseur.params if isinstance(p, datetime))
+    attendu = datetime.now(timezone.utc) - timedelta(days=7)
+    # Tolérance large : on vérifie la règle, pas l'instant d'exécution du test.
+    assert abs((seuil - attendu).total_seconds()) < 60
+
+
+def test_la_borne_de_fraicheur_s_ajoute_aux_autres_filtres():
+    """Elle ne remplace ni la gravité ni la nature : les trois se cumulent,
+    sinon afficher « critiques récentes » retomberait sur « toutes récentes »."""
+    curseur = _lister(max_age_days=7, severity="error", kind="business")
+    assert "a.created_at >= %s" in curseur.sql
+    assert "a.severity = %s" in curseur.sql
+    assert "a.type = ANY(%s)" in curseur.sql

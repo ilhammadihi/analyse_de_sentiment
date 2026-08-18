@@ -212,3 +212,38 @@ class Alert(BaseModel):
     company: Optional[str] = None
     source: Optional[str] = None
     created_at: datetime = Field(default_factory=datetime.utcnow)
+
+    #: Avis qui ont provoqué l'alerte, deux ou trois au plus.
+    #:
+    #: POURQUOI CE CHAMP EXISTE. « 67 % d'avis négatifs sur 12 avis » dit qu'il
+    #: se passe quelque chose, jamais QUOI. Le destinataire devait ouvrir le
+    #: dashboard, retrouver la filiale et lire les avis pour savoir s'il
+    #: s'agissait d'une panne réseau ou d'un litige de facturation — trois
+    #: gestes avant de pouvoir décider quoi que ce soit.
+    #:
+    #: NON PERSISTÉ, à dessein : ces extraits vivent le temps de la
+    #: notification. Le dashboard, lui, sait déjà afficher les avis d'une
+    #: filiale et le fait mieux — les recopier dans la table `alerts` les
+    #: figerait et les dupliquerait sans rien apporter.
+    evidence: list[str] = Field(default_factory=list)
+
+    #: Événements extérieurs datés de la fenêtre du pic — articles de presse.
+    #:
+    #: DISTINCT DE `evidence`, ET CE N'EST PAS UNE NUANCE. Les avis disent ce
+    #: que les clients RESSENTENT ; un article de presse dit ce qui s'est
+    #: PASSÉ. Confondus dans une même liste, le lecteur prendrait une décision
+    #: de régulateur pour une plainte d'abonné.
+    #:
+    #: Un article contemporain n'est jamais une cause démontrée — il coïncide.
+    #: L'écran doit le présenter comme tel, jamais comme l'explication.
+    events: list[str] = Field(default_factory=list)
+
+    #: Maille à laquelle les événements ont été trouvés, en français.
+    #:
+    #: Faute de presse propre à une filiale, la recherche s'élargit au pays.
+    #: « Un article national du 31 juillet » et « un article sur cette
+    #: filiale » n'ont pas la même valeur, et rien dans le titre ne permet de
+    #: les distinguer. Champ à part plutôt que première ligne d'`events` : ce
+    #: n'est pas un événement, et l'afficher comme tel en ferait une puce parmi
+    #: les autres.
+    events_scope: Optional[str] = None

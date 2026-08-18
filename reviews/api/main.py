@@ -14,7 +14,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from reviews.config import get_settings
 from reviews.log_setup import setup_logging
 from reviews.storage.db import get_database
-from reviews.api.routes import stats, reviews as reviews_routes, alerts, runs
+from reviews.api.routes import (
+    stats,
+    reviews as reviews_routes,
+    alerts,
+    runs,
+    insights,
+    campaigns,
+    quality,
+)
 from reviews.api.realtime import router as realtime_router
 
 logger = logging.getLogger("api")
@@ -42,6 +50,9 @@ def create_app() -> FastAPI:
     app.include_router(reviews_routes.router)
     app.include_router(alerts.router)
     app.include_router(runs.router)
+    app.include_router(insights.router)
+    app.include_router(campaigns.router)
+    app.include_router(quality.router)
     app.include_router(realtime_router)
 
     @app.get("/health", tags=["system"])

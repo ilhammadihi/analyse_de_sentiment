@@ -594,6 +594,54 @@ class SchedulerConfig(BaseSettings):
     #: ci-dessus dès la première minute.
     stagger_minutes: int = Field(default=2, validation_alias="SCHEDULER_STAGGER_MINUTES")
 
+    #: Agent de veille : actif, et à quelle heure locale il parle.
+    #:
+    #: UN RENDEZ-VOUS QUOTIDIEN, PAS UN INTERVALLE. Un briefing toutes les
+    #: N heures tombe à 3 h du matin une fois sur deux et perd son statut de
+    #: rendez-vous ; une heure fixe se lit comme le journal du matin, et son
+    #: absence se remarque. L'heure est locale au fuseau ci-dessus.
+    #:
+    #: Désactivé par défaut : cet agent ÉCRIT dans un groupe Telegram. Une
+    #: activation implicite à la première mise à jour enverrait un message non
+    #: sollicité à toute l'équipe.
+    agent_enabled: bool = Field(default=False, validation_alias="ENABLE_INSIGHT_AGENT")
+    agent_hour: int = Field(default=8, ge=0, le=23, validation_alias="INSIGHT_AGENT_HOUR")
+
+    #: Assistant de campagne : actif, quel jour de la semaine et à quelle heure.
+    #:
+    #: HEBDOMADAIRE, LÀ OÙ LA VEILLE EST QUOTIDIENNE. Une campagne se prépare,
+    #: se valide et se déroule sur plusieurs semaines : en proposer une chaque
+    #: matin saturerait la file de validation en trois jours, et l'équipe
+    #: prendrait l'habitude de ne plus les lire — exactement ce que le
+    #: refroidissement de l'agent existe pour éviter, mais au niveau du rythme.
+    #:
+    #: Lundi (0) à 9 h : le début de semaine est le seul moment où une équipe
+    #: marketing peut encore décider de quelque chose pour cette semaine-là.
+    #:
+    #: Désactivé par défaut, comme l'agent de veille et pour la même raison : ce
+    #: job ÉCRIT dans un groupe Telegram.
+    campaign_enabled: bool = Field(
+        default=False, validation_alias="ENABLE_CAMPAIGN_AGENT"
+    )
+    campaign_day: int = Field(
+        default=0, ge=0, le=6, validation_alias="CAMPAIGN_AGENT_DAY"
+    )
+    campaign_hour: int = Field(
+        default=9, ge=0, le=23, validation_alias="CAMPAIGN_AGENT_HOUR"
+    )
+
+    #: Indicateurs de marché : rafraîchissement MENSUEL, le 1er à 3 h.
+    #:
+    #: La source publie des données ANNUELLES, révisées en cours d'année. Un
+    #: passage quotidien referait 486 appels pour ne rien changer 364 jours sur
+    #: 365 ; un passage annuel raterait les révisions. Le mois est le bon pas.
+    #:
+    #: Actif par défaut, contrairement à l'agent de veille : ce job ne parle à
+    #: personne, il ne fait que lire une source publique.
+    market_enabled: bool = Field(default=True, validation_alias="ENABLE_MARKET_DATA")
+    market_day: int = Field(default=1, ge=1, le=28, validation_alias="MARKET_DATA_DAY")
+    market_hour: int = Field(default=3, ge=0, le=23, validation_alias="MARKET_DATA_HOUR")
+
 
 class AlertingConfig(BaseSettings):
     """Alerting temps réel : seuils + canaux de notification."""
@@ -697,6 +745,77 @@ class AlertingConfig(BaseSettings):
     )
 
 
+class ChatConfig(BaseSettings):
+    """Assistant conversationnel Telegram.
+
+    Répond à des questions posées en langage naturel, en traduisant chacune en
+    PARAMÈTRES validés contre le contrat de filtre. Le modèle ne compose jamais
+    de requête : voir `agents/questions.py`.
+    """
+
+    model_config = _ENV
+
+    #: DÉSACTIVÉ PAR DÉFAUT, même raison que l'agent de veille : cette boucle
+    #: ÉCRIT dans une conversation Telegram. Une activation implicite à la
+    #: première mise à jour ferait apparaître un robot qui répond dans un groupe
+    #: où personne ne l'attend.
+    #:
+    #: S'y ajoute une contrainte propre au long polling : un seul processus peut
+    #: interroger `getUpdates` pour un robot donné. Démarrer la boucle sans
+    #: l'avoir décidé volerait ses messages à une instance déjà en écoute — et
+    #: les deux répondraient une question sur deux.
+    enabled: bool = Field(default=False, validation_alias="ENABLE_CHAT_AGENT")
+
+    #: Secondes pendant lesquelles Telegram garde la connexion ouverte à
+    #: attendre un message.
+    #:
+    #: 25 s et non 0 : à zéro, la boucle interrogerait l'API en continu pour
+    #: n'obtenir presque toujours rien. Le long polling rend la réponse
+    #: quasi immédiate tout en tenant trois requêtes par minute. Au-delà de
+    #: 50 s, les coupures d'intermédiaires réseau deviennent fréquentes.
+    poll_timeout: int = Field(default=25, ge=0, le=50, validation_alias="CHAT_POLL_TIMEOUT")
+
+    #: Questions autorisées par personne sur 24 heures glissantes.
+    #:
+    #: LE BUDGET DE MODÈLE EST PARTAGÉ : 200 appels par jour couvrent aussi
+    #: l'analyse sémantique (jusqu'à 200 appels programmés) et le briefing
+    #: quotidien. Une question en coûte deux — traduction puis rédaction. Vingt
+    #: questions plafonnent donc une personne à 40 appels, soit un cinquième du
+    #: budget : de quoi explorer sérieusement sans que la veille du lendemain en
+    #: pâtisse.
+    daily_questions_per_user: int = Field(
+        default=20, ge=1, validation_alias="CHAT_DAILY_QUESTIONS"
+    )
+
+    #: Conversations autorisées à interroger le robot, séparées par des virgules.
+    #:
+    #: Vide = on retombe sur `TELEGRAM_CHAT_ID`, jamais sur « tout le monde » :
+    #: le nom d'un robot est public et sa conversation privée est ouverte à
+    #: quiconque le trouve. Voir `telegram_chat.build_boucle`.
+    #:
+    #: Un identifiant de conversation privée est celui de la PERSONNE (positif) ;
+    #: un identifiant de groupe est négatif. Les deux se mettent ici.
+    allowed_chat_ids: str = Field(default="", validation_alias="CHAT_ALLOWED_CHAT_IDS")
+
+    def allowed_chat_ids_list(self) -> list[int]:
+        """Identifiants valides de la liste blanche.
+
+        Les entrées illisibles sont IGNORÉES avec un avertissement plutôt que de
+        faire échouer le démarrage : une virgule en trop ne doit pas empêcher le
+        robot de répondre aux conversations correctement déclarées.
+        """
+        out: list[int] = []
+        for brut in self.allowed_chat_ids.split(","):
+            brut = brut.strip()
+            if not brut:
+                continue
+            try:
+                out.append(int(brut))
+            except ValueError:
+                logger.warning("CHAT_ALLOWED_CHAT_IDS : « %s » ignoré (entier attendu)", brut)
+        return out
+
+
 class LLMConfig(BaseSettings):
     """Analyse sémantique et synthèses en langage naturel.
 
@@ -714,6 +833,20 @@ class LLMConfig(BaseSettings):
     model_config = _ENV
 
     enabled: bool = Field(default=True, validation_alias="ENABLE_LLM")
+
+    #: Cloison de comptabilité dans `llm_usage`, et RIEN D'AUTRE.
+    #:
+    #: Ce n'est pas le nom du fournisseur : changer `LLM_BASE_URL` de Gemini
+    #: vers Groq ne doit pas scinder l'historique du jour en deux lignes ni
+    #: remettre le budget à zéro en milieu de journée. Ce champ dit à quel
+    #: USAGE le budget est adossé.
+    #:
+    #: Non lié à une variable d'environnement, délibérément : il est fixé par
+    #: le code qui construit le client (voir `quality_llm_config`), jamais par
+    #: l'exploitant. Un profil réglable par `.env` permettrait à une faute de
+    #: frappe de faire repartir un compteur à zéro — c'est-à-dire de désactiver
+    #: silencieusement le garde-fou qu'il sert à tenir.
+    profil: str = "defaut"
 
     #: Clé d'API. Absente = fonctionnalité dormante, jamais une erreur.
     api_key: Optional[str] = Field(default=None, validation_alias="LLM_API_KEY")
@@ -803,6 +936,305 @@ class LLMConfig(BaseSettings):
         return self.synthesis_model or self.model
 
 
+class QualityLLMConfig(BaseSettings):
+    """Fournisseur de modèle PROPRE à l'Agent 3.
+
+    POURQUOI UN SECOND PROFIL PLUTÔT QUE LE CLIENT EXISTANT
+        Le budget par défaut est de 200 appels par jour, et il est DÉJÀ
+        entièrement engagé : l'analyse sémantique en programme jusqu'à 200, le
+        briefing quotidien en consomme quelques-uns, l'assistant
+        conversationnel en autorise 40 par personne. Brancher un quatrième
+        consommateur sur ce compteur ne prendrait pas « un peu de marge » : il
+        assécherait l'analyse sémantique, dont dépendent les aspects, donc les
+        motifs, donc la ligne la plus utile du briefing de l'Agent 1.
+
+        D'où un profil distinct, avec sa clé, son fournisseur et son budget.
+        La cloison est tenue en base par `llm_usage.profil` (migration 022).
+
+    CE QUI A ÉTÉ VÉRIFIÉ SUR OLLAMA CLOUD, ET NON SUPPOSÉ (17 août 2026)
+        - L'endpoint compatible OpenAI EXISTE : une requête sans clé sur
+          `https://ollama.com/v1/chat/completions` rend HTTP 401, et non 404.
+          C'est décisif : le `LLMClient` de ce projet parle déjà ce dialecte,
+          donc Ollama Cloud est enfichable SANS UNE LIGNE DE CODE — deux
+          variables suffisent.
+        - Un palier gratuit à 0 $ existe réellement, avec un modèle cloud à la
+          fois et un usage qualifié de « léger ».
+        - MAIS les quotas gratuits ne sont PAS publiés en nombres : ils se
+          comptent en TEMPS GPU, avec remise à zéro par fenêtres de 5 h et de
+          7 jours. Aucune limite chiffrée ne peut donc être inscrite ici de
+          bonne foi.
+
+        Conséquence directe sur la conception : `daily_call_budget` reste la
+        borne dure et locale. On ne peut pas faire confiance à un quota qu'on
+        ne peut pas lire, donc on ne s'y adosse pas — on se plafonne soi-même.
+
+    LE REPLI EST EXPLICITE, JAMAIS AUTOMATIQUE ET SILENCIEUX
+        Sans clé propre, l'Agent 3 n'emprunte PAS la clé Gemini de son propre
+        chef : il fonctionne en mode déterministe (règles seules) et le dit.
+        C'est la même règle que partout ailleurs ici — sans clé, la couche est
+        dormante, jamais en erreur. Emprunter le quota d'un autre agent en
+        silence serait exactement la panne que ce profil existe pour empêcher.
+        Le repli sur Gemini doit être DEMANDÉ (`LLM3_FALLBACK_GEMINI=true`).
+    """
+
+    model_config = _ENV
+
+    enabled: bool = Field(default=True, validation_alias="ENABLE_QUALITY_LLM")
+
+    #: Fournisseur, à titre DOCUMENTAIRE et pour le diagnostic affiché.
+    #:
+    #: Le code ne s'en sert pas pour router : c'est `base_url` qui décide, et
+    #: c'est voulu. Un aiguillage sur ce nom obligerait à modifier le code pour
+    #: chaque nouveau fournisseur, alors que le dialecte est le même partout.
+    #: Valeurs d'usage : ollama_cloud, ollama_local, gemini, groq, zai, autre.
+    provider: str = Field(default="ollama_cloud", validation_alias="LLM3_PROVIDER")
+
+    api_key: Optional[str] = Field(default=None, validation_alias="LLM3_API_KEY")
+
+    #: Repères VÉRIFIÉS, à recopier dans `.env` selon le fournisseur retenu :
+    #:
+    #:   ollama_cloud  https://ollama.com/v1                gpt-oss:20b
+    #:   ollama_local  http://localhost:11434/v1            qwen2.5:7b
+    #:   gemini        https://generativelanguage.googleapis.com/v1beta/openai
+    #:   groq          https://api.groq.com/openai/v1
+    #:   zai (GLM)     https://api.z.ai/api/paas/v4
+    base_url: str = Field(
+        default="https://ollama.com/v1", validation_alias="LLM3_BASE_URL"
+    )
+
+    #: `gpt-oss:20b` et non `120b` : la tâche de l'Agent 3 est du RANGEMENT
+    #: dans une liste fermée (cet avis est-il du spam ? parle-t-il de cet
+    #: opérateur ?), pas de la rédaction. Le petit modèle y suffit, et sur un
+    #: palier gratuit compté en temps GPU, le modèle le plus léger est
+    #: littéralement celui qui rend le plus d'appels par semaine.
+    model: str = Field(default="gpt-oss:20b", validation_alias="LLM3_MODEL")
+
+    #: Autoriser le repli sur la configuration LLM principale (Gemini) quand
+    #: aucune clé propre n'est renseignée.
+    #:
+    #: FAUX PAR DÉFAUT. Voir la docstring : un repli implicite ferait de
+    #: l'Agent 3 le consommateur du quota qu'il devait épargner, et personne ne
+    #: s'en apercevrait avant de voir l'analyse sémantique s'arrêter.
+    fallback_gemini: bool = Field(
+        default=False, validation_alias="LLM3_FALLBACK_GEMINI"
+    )
+
+    #: Budget propre. 60 et non 200 : l'Agent 3 n'a pas besoin de volume. Il
+    #: n'appelle le modèle que sur des cas DÉJÀ triés par des règles
+    #: déterministes — quelques dizaines d'avis douteux par passage, pas le
+    #: corpus. Un budget large ne le rendrait pas meilleur, il le rendrait
+    #: seulement capable de brûler un quota sur une boucle défaillante.
+    daily_call_budget: int = Field(
+        default=60, validation_alias="LLM3_DAILY_CALL_BUDGET"
+    )
+
+    timeout: int = Field(default=90, validation_alias="LLM3_TIMEOUT")
+
+    #: 3 s et non 6 : sur un fournisseur dédié, la contrainte par minute n'est
+    #: pas partagée avec l'analyse sémantique. Reste espacé — un palier gratuit
+    #: se compte toujours aussi par minute, même quand il ne le dit pas.
+    min_interval_seconds: float = Field(
+        default=3.0, validation_alias="LLM3_MIN_INTERVAL_SECONDS"
+    )
+
+    #: Avis envoyés par appel de validation. Plus petit que les 20 de l'analyse
+    #: sémantique : ici le modèle doit rendre un VERDICT argumenté par avis
+    #: (pertinent, opérateur, filiale, spam, sujet, raison), soit une sortie
+    #: nettement plus verbeuse. À 20, la réponse se tronque et le lot est perdu
+    #: — la panne exactement mesurée sur le backfill sémantique (4 % de lots
+    #: perdus, voir `_TOKENS_PER_REVIEW`).
+    batch_size: int = Field(default=8, validation_alias="LLM3_BATCH_SIZE")
+
+    max_review_chars: int = Field(
+        default=600, validation_alias="LLM3_MAX_REVIEW_CHARS"
+    )
+
+
+class QualityConfig(BaseSettings):
+    """Agent 3 — seuils de diagnostic et pondérations du score de qualité.
+
+    LES POIDS SONT ICI, EXPLICITES ET MODIFIABLES, parce que l'énoncé l'exige
+    et parce qu'un score composite dont les poids sont enfouis dans le code est
+    indéfendable : la première question posée devant « 42 % » est « pourquoi
+    42 ? », et il faut pouvoir y répondre sans ouvrir un fichier Python.
+    """
+
+    model_config = _ENV
+
+    #: DÉSACTIVÉ PAR DÉFAUT, comme les agents 1 et 2 et pour la même raison :
+    #: ce passage ÉCRIT dans un groupe Telegram. Une activation implicite à la
+    #: première mise à jour enverrait un message non sollicité à toute l'équipe.
+    enabled: bool = Field(default=False, validation_alias="ENABLE_QUALITY_AGENT")
+    hour: int = Field(default=7, ge=0, le=23, validation_alias="QUALITY_AGENT_HOUR")
+
+    #: Le garde-fou consulté par les Agents 1 et 2 avant de parler.
+    #:
+    #: ACTIF PAR DÉFAUT, contrairement au passage de l'agent lui-même — et la
+    #: dissymétrie est voulue. Le passage ÉCRIT dans un groupe Telegram, donc
+    #: il s'active à la demande. Le garde-fou, lui, n'écrit nulle part : il
+    #: n'ajoute qu'une phrase de réserve à des briefings qui partaient déjà.
+    #: Le laisser à faux par défaut reviendrait à livrer un garde-fou installé
+    #: mais débranché, ce qui est la pire des deux options : on croit être
+    #: protégé.
+    #:
+    #: Tant qu'aucun instantané n'existe, il rend `INDETERMINE` et LAISSE
+    #: PASSER : activer ce drapeau sur une base neuve ne change donc rien
+    #: jusqu'au premier passage de l'agent.
+    gate_enabled: bool = Field(default=True, validation_alias="ENABLE_QUALITY_GATE")
+
+    # --- Seuils de couverture ---------------------------------------------
+
+    #: En dessous, une filiale est « sous-couverte » : ses taux ne sont pas
+    #: comparables à ceux d'une filiale à quatre cents avis.
+    #:
+    #: 10 et non 30 : aligné sur `ALERT_MIN_REVIEWS_FOR_RATIO`, déjà le seuil
+    #: retenu par l'alerting pour juger un taux crédible. Deux seuils
+    #: différents pour la même question produiraient un écran annonçant
+    #: « données insuffisantes » à côté d'une alerte fondée sur ces données.
+    min_reviews: int = Field(default=10, validation_alias="QUALITY_MIN_REVIEWS")
+
+    #: Sources d'avis clients attendues pour qu'une filiale soit dite diverse.
+    #:
+    #: 2 et non 3, et c'est une mesure et non une opinion : sur les 135
+    #: filiales, Google Maps est la SEULE source de 130 d'entre elles, et
+    #: 86 seulement déclarent une application. Exiger trois sources
+    #: déclarerait la majorité du périmètre en défaut pour une raison qui ne
+    #: dépend pas de nous — les plateformes n'existent pas dans ces pays.
+    min_sources: int = Field(default=2, validation_alias="QUALITY_MIN_SOURCES")
+
+    # --- Seuils de fraîcheur ----------------------------------------------
+
+    #: Multiple de la cadence déclarée au-delà duquel une source est « stale ».
+    #:
+    #: Un multiple, jamais un délai fixe : les cadences vont de 6 h (flux RSS)
+    #: à 24 h (Google Maps). « Pas de collecte depuis 48 h » est normal pour
+    #: l'un et grave pour l'autre. Un seuil absolu produirait donc soit du
+    #: bruit sur les sources lentes, soit de la cécité sur les rapides.
+    #:
+    #: 3 : deux occurrences manquées peuvent être un redémarrage, trois est un
+    #: motif. C'est le même raisonnement que `misfire_grace_time`.
+    stale_factor: float = Field(default=3.0, validation_alias="QUALITY_STALE_FACTOR")
+
+    # --- Détection de volume anormal --------------------------------------
+
+    #: Facteur d'augmentation à partir duquel un volume journalier est jugé
+    #: anormal, comparé à la médiane des jours précédents.
+    #:
+    #: MÉDIANE ET NON MOYENNE : la collecte est par nature en dents de scie
+    #: (un passage Google Maps insère des centaines d'avis d'un coup, le
+    #: suivant zéro). Une moyenne serait tirée par ces pics et ne
+    #: déclencherait jamais ; la médiane décrit la journée typique.
+    #:
+    #: 10 : l'exemple de l'énoncé (200 → 25 000) vaut 125. Un facteur 10 attrape
+    #: donc largement le cas visé sans réagir à un rattrapage de deux jours.
+    volume_spike_factor: float = Field(
+        default=10.0, validation_alias="QUALITY_VOLUME_SPIKE_FACTOR"
+    )
+
+    #: Plancher de volume sous lequel on ne parle jamais d'anomalie. Sans lui,
+    #: passer de 1 à 12 avis déclencherait une alerte de « volume anormal ».
+    volume_min_baseline: int = Field(
+        default=20, validation_alias="QUALITY_VOLUME_MIN_BASELINE"
+    )
+
+    #: Longueur en deçà de laquelle un texte d'avis est jugé non exploitable.
+    #:
+    #: Aligné sur `REDDIT_MIN_COMMENT_CHARS` (30) : « same », « +1 » ou « ok »
+    #: ne portent aucun sentiment analysable. Deux seuils différents pour la
+    #: même notion se contrediraient d'un écran à l'autre.
+    min_text_chars: int = Field(default=30, validation_alias="QUALITY_MIN_TEXT_CHARS")
+
+    # --- Pondérations du score global -------------------------------------
+    #
+    # SOMME ATTENDUE : 1,0. La normalisation est faite par le code (voir
+    # `score.poids_normalises`) plutôt qu'imposée par une validation : un
+    # exploitant qui veut doubler le poids de la couverture ne doit pas avoir à
+    # recalculer les cinq autres pour que ça marche.
+    #
+    # L'ORDRE DE GRANDEUR EST LE MESSAGE : la couverture pèse presque le double
+    # de tout le reste, parce que c'est la seule composante dont la défaillance
+    # rend les autres SANS OBJET. La fraîcheur d'une filiale sans aucun avis
+    # n'est pas une question — et un score qui la noterait à 100 % sur cinq
+    # composantes vides afficherait « 83 % » sur une filiale sans données.
+
+    #: Y a-t-il assez d'avis, et sur assez de sources attendues ?
+    weight_coverage: float = Field(default=0.30, validation_alias="QUALITY_W_COVERAGE")
+    #: Les données arrivent-elles encore ?
+    weight_freshness: float = Field(default=0.20, validation_alias="QUALITY_W_FRESHNESS")
+    #: Les avis sont-ils exploitables (texte, note, date) ?
+    weight_completeness: float = Field(
+        default=0.15, validation_alias="QUALITY_W_COMPLETENESS"
+    )
+    #: Combien de constats de qualité non résolus pèsent sur cette filiale ?
+    weight_consistency: float = Field(
+        default=0.15, validation_alias="QUALITY_W_CONSISTENCY"
+    )
+    #: Le signal repose-t-il sur une seule source ?
+    weight_diversity: float = Field(default=0.10, validation_alias="QUALITY_W_DIVERSITY")
+    #: Les collecteurs réussissent-ils ?
+    weight_reliability: float = Field(
+        default=0.10, validation_alias="QUALITY_W_RELIABILITY"
+    )
+
+    # --- Seuils de confiance (Data Trust Status) --------------------------
+    #
+    # CE SONT LES SEULS CHIFFRES QUE LISENT LES AGENTS 1 ET 2. Ils ne
+    # comparent pas des scores : ils lisent un mot. Un seuil unique, lu au même
+    # endroit par tous, vaut mieux que trois comparaisons numériques dispersées
+    # qui finiraient par diverger.
+    trusted_at: float = Field(default=0.75, validation_alias="QUALITY_TRUSTED_AT")
+    acceptable_at: float = Field(default=0.55, validation_alias="QUALITY_ACCEPTABLE_AT")
+    degraded_at: float = Field(default=0.30, validation_alias="QUALITY_DEGRADED_AT")
+
+    # --- Retenue ------------------------------------------------------------
+
+    #: Sujets remontés au maximum par notification. Même raison que l'Agent 1 :
+    #: un briefing de dix sujets n'est pas lu, et un briefing qu'on ne lit pas
+    #: est pire qu'aucun — il donne le sentiment d'être couvert.
+    max_sujets: int = Field(default=3, validation_alias="QUALITY_MAX_SUJETS")
+
+    #: Jours pendant lesquels on ne redit pas la même chose sur la même filiale.
+    #:
+    #: 7 et non 3 : un trou de couverture ne se comble pas en trois jours. Le
+    #: signaler tous les trois jours apprendrait à ignorer l'agent, sans que le
+    #: destinataire ait rien pu faire entre-temps.
+    cooldown_jours: int = Field(default=7, validation_alias="QUALITY_COOLDOWN_JOURS")
+
+    #: Chute de score (en points sur 100) faisant reparler malgré le
+    #: refroidissement. Même dissymétrie que l'Agent 1 : « déjà dit » fait
+    #: taire, « déjà dit mais pire » fait parler.
+    aggravation_points: float = Field(
+        default=10.0, validation_alias="QUALITY_AGGRAVATION_POINTS"
+    )
+
+    # --- Découverte de sources ---------------------------------------------
+
+    #: Sonder réellement les URL candidates en HTTP.
+    #:
+    #: C'est ce qui sépare une proposition d'une hypothèse. Désactivable pour
+    #: les tests et pour un environnement sans accès sortant, auquel cas les
+    #: candidates restent au statut CANDIDATE avec `accessibility='inconnu'` —
+    #: jamais présentées comme vérifiées.
+    probe_enabled: bool = Field(default=True, validation_alias="QUALITY_PROBE_ENABLED")
+    probe_timeout: int = Field(default=15, validation_alias="QUALITY_PROBE_TIMEOUT")
+
+    #: Candidates proposées au maximum par filiale. Trois suffisent : une liste
+    #: de quinze pistes non instruites n'est pas un travail, c'est un report de
+    #: travail sur le lecteur.
+    max_candidates: int = Field(default=3, validation_alias="QUALITY_MAX_CANDIDATES")
+
+    def poids(self) -> dict[str, float]:
+        """Pondérations telles que configurées, avant normalisation."""
+        return {
+            "coverage": self.weight_coverage,
+            "freshness": self.weight_freshness,
+            "completeness": self.weight_completeness,
+            "consistency": self.weight_consistency,
+            "diversity": self.weight_diversity,
+            "reliability": self.weight_reliability,
+        }
+
+
 class APIConfig(BaseSettings):
     """Configuration du service API (FastAPI)."""
     model_config = _ENV
@@ -882,6 +1314,9 @@ class Settings(BaseSettings):
     alerting: AlertingConfig = Field(default_factory=AlertingConfig)
     api: APIConfig = Field(default_factory=APIConfig)
     llm: LLMConfig = Field(default_factory=LLMConfig)
+    chat: ChatConfig = Field(default_factory=ChatConfig)
+    quality: QualityConfig = Field(default_factory=QualityConfig)
+    quality_llm: QualityLLMConfig = Field(default_factory=QualityLLMConfig)
 
     @field_validator("data_dir", mode="before")
     @classmethod
@@ -956,3 +1391,74 @@ class Settings(BaseSettings):
 def get_settings() -> Settings:
     """Retourne l'instance unique de configuration (construite à la demande)."""
     return Settings()
+
+
+def quality_llm_config(settings: Optional[Settings] = None) -> Optional[LLMConfig]:
+    """Configuration LLM de l'Agent 3, ou None s'il doit rester déterministe.
+
+    RÉSOUT LE PROFIL EN UNE SEULE FONCTION, et c'est le point : la règle de
+    repli doit exister à UN endroit. Dispersée entre la CLI, le planificateur
+    et l'API, elle divergerait — et l'agent n'appellerait pas le même
+    fournisseur selon la façon dont on le lance, ce qui rend tout écart de
+    résultat impossible à expliquer.
+
+    Trois cas, dans cet ordre :
+
+      1. Une clé propre est renseignée -> on l'utilise, sur `LLM3_BASE_URL`.
+      2. Pas de clé propre, mais `LLM3_FALLBACK_GEMINI=true` -> on emprunte la
+         configuration principale, en CONSERVANT le profil « qualite » : les
+         appels restent comptés à part, donc le budget de l'analyse sémantique
+         reste protégé même quand la clé est partagée. C'est là tout l'intérêt
+         d'avoir séparé le profil du fournisseur.
+      3. Ni l'un ni l'autre -> None. L'agent tourne alors en règles seules et
+         l'annonce. Il n'emprunte JAMAIS le quota d'un autre agent en silence.
+
+    Renvoie un `LLMConfig` plutôt qu'un client : la construction du client
+    demande une base de données, que ce module n'a pas à connaître.
+    """
+    settings = settings or get_settings()
+    cfg = settings.quality_llm
+
+    if not cfg.enabled:
+        return None
+
+    if cfg.api_key:
+        return LLMConfig(
+            enabled=True,
+            profil="qualite",
+            api_key=cfg.api_key,
+            base_url=cfg.base_url,
+            model=cfg.model,
+            # Le modèle de synthèse est le MÊME : l'Agent 3 ne rédige pas de
+            # texte lu par un décideur, il classe. Payer un modèle supérieur
+            # pour ranger dans une liste fermée n'achèterait rien.
+            synthesis_model=cfg.model,
+            timeout=cfg.timeout,
+            max_tokens=settings.llm.max_tokens,
+            temperature=settings.llm.temperature,
+            min_interval_seconds=cfg.min_interval_seconds,
+            daily_call_budget=cfg.daily_call_budget,
+            batch_size=cfg.batch_size,
+            max_review_chars=cfg.max_review_chars,
+        )
+
+    if cfg.fallback_gemini and settings.llm.enabled and settings.llm.api_key:
+        logger.info(
+            "Agent 3 : aucune clé LLM3_API_KEY, repli EXPLICITE sur la "
+            "configuration principale (budget cloisonné sous le profil « qualite »)."
+        )
+        return settings.llm.model_copy(
+            update={
+                "profil": "qualite",
+                "daily_call_budget": cfg.daily_call_budget,
+                "batch_size": cfg.batch_size,
+                "max_review_chars": cfg.max_review_chars,
+            }
+        )
+
+    logger.info(
+        "Agent 3 : aucun modèle configuré (LLM3_API_KEY absente et "
+        "LLM3_FALLBACK_GEMINI=false). La validation sémantique est inactive ; "
+        "les règles déterministes continuent de tourner."
+    )
+    return None

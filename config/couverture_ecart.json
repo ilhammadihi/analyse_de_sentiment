@@ -1,0 +1,3132 @@
+{
+ "manquants": [
+  {
+   "iso2": "BF",
+   "pays": "Burkina Faso",
+   "mcc": "613",
+   "mnc": "03",
+   "brand": "Telecel Faso",
+   "exploitant": "Telecel Faso SA",
+   "status": "Operational",
+   "bandes": "GSM 900 / LTE 1800",
+   "notes": ""
+  },
+  {
+   "iso2": "BJ",
+   "pays": "Benin",
+   "mcc": "616",
+   "mnc": "01",
+   "brand": "",
+   "exploitant": "Benin Telecoms Mobile",
+   "status": "Operational",
+   "bandes": "LTE 1800 / CDMA / WiMAX",
+   "notes": "Brands are:- Telecoms (LTE), Kanakoo (CDMA / WiMAX); Libercom GSM shut down 2018"
+  },
+  {
+   "iso2": "CD",
+   "pays": "Democratic Republic of the Congo",
+   "mcc": "630",
+   "mnc": "05",
+   "brand": "Supercell",
+   "exploitant": "Supercell SPRL",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800",
+   "notes": ""
+  },
+  {
+   "iso2": "CF",
+   "pays": "Central African Republic",
+   "mcc": "623",
+   "mnc": "03",
+   "brand": "Orange",
+   "exploitant": "Orange RCA",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / UMTS 2100 / WiMAX",
+   "notes": ""
+  },
+  {
+   "iso2": "CF",
+   "pays": "Central African Republic",
+   "mcc": "623",
+   "mnc": "04",
+   "brand": "Azur",
+   "exploitant": "Azur RCA",
+   "status": "Operational",
+   "bandes": "GSM 900 / UMTS 2100",
+   "notes": "Former Nationlink Telecom RCA"
+  },
+  {
+   "iso2": "CI",
+   "pays": "Ivory Coast",
+   "mcc": "612",
+   "mnc": "04",
+   "brand": "KoZ",
+   "exploitant": "Comium Ivory Coast Inc",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800",
+   "notes": ""
+  },
+  {
+   "iso2": "CI",
+   "pays": "Ivory Coast",
+   "mcc": "612",
+   "mnc": "06",
+   "brand": "GreenN",
+   "exploitant": "Oricel",
+   "status": "Operational",
+   "bandes": "GSM 1800",
+   "notes": ""
+  },
+  {
+   "iso2": "CI",
+   "pays": "Ivory Coast",
+   "mcc": "612",
+   "mnc": "07",
+   "brand": "café",
+   "exploitant": "Aircomm",
+   "status": "Operational",
+   "bandes": "GSM 1800",
+   "notes": ""
+  },
+  {
+   "iso2": "CI",
+   "pays": "Ivory Coast",
+   "mcc": "612",
+   "mnc": "18",
+   "brand": "",
+   "exploitant": "YooMee",
+   "status": "Operational",
+   "bandes": "TD-LTE 2300",
+   "notes": ""
+  },
+  {
+   "iso2": "CM",
+   "pays": "Cameroon",
+   "mcc": "624",
+   "mnc": "04",
+   "brand": "Nexttel",
+   "exploitant": "Viettel Cameroun",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / UMTS 2100",
+   "notes": ""
+  },
+  {
+   "iso2": "DZ",
+   "pays": "Algeria",
+   "mcc": "603",
+   "mnc": "07",
+   "brand": "AT",
+   "exploitant": "Algérie Télécom",
+   "status": "Operational",
+   "bandes": "CDMA 1900",
+   "notes": "Wireless Local Loop"
+  },
+  {
+   "iso2": "DZ",
+   "pays": "Algeria",
+   "mcc": "603",
+   "mnc": "09",
+   "brand": "AT",
+   "exploitant": "Algérie Télécom",
+   "status": "Operational",
+   "bandes": "LTE",
+   "notes": "Fixed Wireless Broadband"
+  },
+  {
+   "iso2": "DZ",
+   "pays": "Algeria",
+   "mcc": "603",
+   "mnc": "21",
+   "brand": "ANESRIF",
+   "exploitant": "Anesrif",
+   "status": "Ongoing",
+   "bandes": "GSM-R",
+   "notes": ""
+  },
+  {
+   "iso2": "GA",
+   "pays": "Gabon",
+   "mcc": "628",
+   "mnc": "01",
+   "brand": "Libertis",
+   "exploitant": "Gabon Telecom S.A",
+   "status": "Operational",
+   "bandes": "GSM 900 / UMTS 2100 / LTE 800 / LTE 1800 / LTE 2600",
+   "notes": ""
+  },
+  {
+   "iso2": "GH",
+   "pays": "Ghana",
+   "mcc": "620",
+   "mnc": "03",
+   "brand": "AT Ghana",
+   "exploitant": "AT Ghana Ltd",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / UMTS 2100",
+   "notes": "Re-brand from AirtelTigo (Jan 2024)"
+  },
+  {
+   "iso2": "GH",
+   "pays": "Ghana",
+   "mcc": "620",
+   "mnc": "06",
+   "brand": "AT Ghana",
+   "exploitant": "AT Ghana Ltd",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / UMTS 2100",
+   "notes": "Second MNC for same network"
+  },
+  {
+   "iso2": "GH",
+   "pays": "Ghana",
+   "mcc": "620",
+   "mnc": "07",
+   "brand": "Globacom",
+   "exploitant": "Globacom Group",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / UMTS 2100",
+   "notes": ""
+  },
+  {
+   "iso2": "GH",
+   "pays": "Ghana",
+   "mcc": "620",
+   "mnc": "10",
+   "brand": "Blu",
+   "exploitant": "Blu Telecommunications",
+   "status": "Operational",
+   "bandes": "TD-LTE 2500",
+   "notes": "LTE band 41"
+  },
+  {
+   "iso2": "GH",
+   "pays": "Ghana",
+   "mcc": "620",
+   "mnc": "14",
+   "brand": "busy",
+   "exploitant": "BusyInternet",
+   "status": "Operational",
+   "bandes": "TD-LTE 2300",
+   "notes": ""
+  },
+  {
+   "iso2": "GH",
+   "pays": "Ghana",
+   "mcc": "620",
+   "mnc": "16",
+   "brand": "",
+   "exploitant": "Telesol",
+   "status": "Operational",
+   "bandes": "LTE 1800",
+   "notes": "data only"
+  },
+  {
+   "iso2": "GM",
+   "pays": "Gambia",
+   "mcc": "607",
+   "mnc": "03",
+   "brand": "Comium",
+   "exploitant": "Comium",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800",
+   "notes": ""
+  },
+  {
+   "iso2": "GM",
+   "pays": "Gambia",
+   "mcc": "607",
+   "mnc": "05",
+   "brand": "",
+   "exploitant": "Gamtel-Ecowan",
+   "status": "Unknown",
+   "bandes": "WiMAX / LTE",
+   "notes": ""
+  },
+  {
+   "iso2": "GM",
+   "pays": "Gambia",
+   "mcc": "607",
+   "mnc": "06",
+   "brand": "",
+   "exploitant": "NETPAGE",
+   "status": "Operational",
+   "bandes": "TD-LTE 2300",
+   "notes": ""
+  },
+  {
+   "iso2": "GN",
+   "pays": "Guinea",
+   "mcc": "611",
+   "mnc": "05",
+   "brand": "Cellcom",
+   "exploitant": "Cellcom",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / UMTS 2100",
+   "notes": ""
+  },
+  {
+   "iso2": "GQ",
+   "pays": "Equatorial Guinea",
+   "mcc": "627",
+   "mnc": "03",
+   "brand": "Muni",
+   "exploitant": "Green Com S.A",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / UMTS 900 / LTE",
+   "notes": "Former HiTS"
+  },
+  {
+   "iso2": "GW",
+   "pays": "Guinea-Bissau",
+   "mcc": "632",
+   "mnc": "01",
+   "brand": "Guinetel",
+   "exploitant": "Guinétel S.A",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800",
+   "notes": ""
+  },
+  {
+   "iso2": "GW",
+   "pays": "Guinea-Bissau",
+   "mcc": "632",
+   "mnc": "07",
+   "brand": "Guinetel",
+   "exploitant": "Guinétel S.A",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800",
+   "notes": ""
+  },
+  {
+   "iso2": "KE",
+   "pays": "Kenya",
+   "mcc": "639",
+   "mnc": "10",
+   "brand": "Faiba 4G",
+   "exploitant": "Jamii Telecommunications Limited",
+   "status": "Operational",
+   "bandes": "LTE 700",
+   "notes": "LTE band 28"
+  },
+  {
+   "iso2": "LR",
+   "pays": "Liberia",
+   "mcc": "618",
+   "mnc": "04",
+   "brand": "Novafone",
+   "exploitant": "Novafone Inc",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / UMTS 2100",
+   "notes": "Former Comium"
+  },
+  {
+   "iso2": "LY",
+   "pays": "Libya",
+   "mcc": "606",
+   "mnc": "03",
+   "brand": "Libya Phone",
+   "exploitant": "Libya Telecom & Technology (LTT)",
+   "status": "Operational",
+   "bandes": "MVNO / LTE 800",
+   "notes": "Uses Libyana; LTE for fixed wireless broadband"
+  },
+  {
+   "iso2": "MA",
+   "pays": "Morocco",
+   "mcc": "604",
+   "mnc": "01",
+   "brand": "IAM",
+   "exploitant": "Ittissalat Al-Maghrib (Maroc Telecom)",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / UMTS 2100 / LTE 800 / LTE 2600 / 5G 700 / 5G 3500",
+   "notes": ""
+  },
+  {
+   "iso2": "MG",
+   "pays": "Madagascar",
+   "mcc": "646",
+   "mnc": "05",
+   "brand": "BIP / blueline",
+   "exploitant": "Gulfsat Madagascar S.A",
+   "status": "Operational",
+   "bandes": "LTE 2100 / TD-LTE 2600",
+   "notes": ""
+  },
+  {
+   "iso2": "ML",
+   "pays": "Mali",
+   "mcc": "610",
+   "mnc": "01",
+   "brand": "Malitel",
+   "exploitant": "Malitel SA",
+   "status": "Operational",
+   "bandes": "GSM 900 / UMTS 2100 / LTE",
+   "notes": ""
+  },
+  {
+   "iso2": "ML",
+   "pays": "Mali",
+   "mcc": "610",
+   "mnc": "03",
+   "brand": "Telecel",
+   "exploitant": "Alpha Telecommunication Mali S.A",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / UMTS 2100",
+   "notes": ""
+  },
+  {
+   "iso2": "MU",
+   "pays": "Mauritius",
+   "mcc": "617",
+   "mnc": "01",
+   "brand": "my.t",
+   "exploitant": "Cellplus Mobile Communications Ltd",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / UMTS 2100 / LTE 1800 / 5G 3500",
+   "notes": "Former Orange"
+  },
+  {
+   "iso2": "MU",
+   "pays": "Mauritius",
+   "mcc": "617",
+   "mnc": "03",
+   "brand": "CHILI",
+   "exploitant": "Mahanagar Telephone Mauritius Limited (MTML)",
+   "status": "Operational",
+   "bandes": "GSM 900 / UMTS 2100 / LTE 1800",
+   "notes": ""
+  },
+  {
+   "iso2": "MW",
+   "pays": "Malawi",
+   "mcc": "650",
+   "mnc": "02",
+   "brand": "Access",
+   "exploitant": "Access Communications Ltd",
+   "status": "Operational",
+   "bandes": "CDMA / LTE 850",
+   "notes": ""
+  },
+  {
+   "iso2": "MW",
+   "pays": "Malawi",
+   "mcc": "650",
+   "mnc": "03",
+   "brand": "MTL",
+   "exploitant": "Malawi Telecommunications Limited",
+   "status": "Operational",
+   "bandes": "LTE 1800",
+   "notes": ""
+  },
+  {
+   "iso2": "NA",
+   "pays": "Namibia",
+   "mcc": "649",
+   "mnc": "04",
+   "brand": "",
+   "exploitant": "Paratus Telecommunications (Pty)",
+   "status": "Operational",
+   "bandes": "WiMAX 2500 / TD-LTE",
+   "notes": "former ITN/WTN"
+  },
+  {
+   "iso2": "NA",
+   "pays": "Namibia",
+   "mcc": "649",
+   "mnc": "06",
+   "brand": "",
+   "exploitant": "MTN Namibia",
+   "status": "Operational",
+   "bandes": "LTE",
+   "notes": "LTE fixed wireless, MVNO"
+  },
+  {
+   "iso2": "NE",
+   "pays": "Niger",
+   "mcc": "614",
+   "mnc": "01",
+   "brand": "SahelCom",
+   "exploitant": "La Société Sahélienne de Télécommunications (SahelCom)",
+   "status": "Operational",
+   "bandes": "GSM 900",
+   "notes": ""
+  },
+  {
+   "iso2": "NG",
+   "pays": "Nigeria",
+   "mcc": "621",
+   "mnc": "22",
+   "brand": "InterC",
+   "exploitant": "InterC Network Ltd",
+   "status": "Operational",
+   "bandes": "LTE 800",
+   "notes": "Former Intercellular; LTE band 20"
+  },
+  {
+   "iso2": "NG",
+   "pays": "Nigeria",
+   "mcc": "621",
+   "mnc": "24",
+   "brand": "",
+   "exploitant": "Spectranet",
+   "status": "Operational",
+   "bandes": "TD-LTE 2300",
+   "notes": ""
+  },
+  {
+   "iso2": "NG",
+   "pays": "Nigeria",
+   "mcc": "621",
+   "mnc": "26",
+   "brand": "",
+   "exploitant": "Swift",
+   "status": "Operational",
+   "bandes": "TD-LTE 2300",
+   "notes": ""
+  },
+  {
+   "iso2": "NG",
+   "pays": "Nigeria",
+   "mcc": "621",
+   "mnc": "27",
+   "brand": "Smile",
+   "exploitant": "Smile Communications Nigeria",
+   "status": "Operational",
+   "bandes": "LTE 800",
+   "notes": "LTE band 20"
+  },
+  {
+   "iso2": "NG",
+   "pays": "Nigeria",
+   "mcc": "621",
+   "mnc": "40",
+   "brand": "Ntel",
+   "exploitant": "Nigerian Mobile Telecommunications Limited",
+   "status": "Operational",
+   "bandes": "LTE 900 / LTE 1800",
+   "notes": "Former M-Tel; LTE bands 8 / 3"
+  },
+  {
+   "iso2": "RW",
+   "pays": "Rwanda",
+   "mcc": "635",
+   "mnc": "17",
+   "brand": "KTRN",
+   "exploitant": "KT Rwanda Networks",
+   "status": "Operational",
+   "bandes": "LTE 800 / LTE 1800",
+   "notes": "Former Olleh; wholesale network used by Airtel, MTN, Tigo"
+  },
+  {
+   "iso2": "SD",
+   "pays": "Sudan",
+   "mcc": "634",
+   "mnc": "07",
+   "brand": "Sudani One",
+   "exploitant": "Sudatel Group",
+   "status": "Operational",
+   "bandes": "GSM 1800 / UMTS 2100 / LTE 1800 / CDMA 800",
+   "notes": ""
+  },
+  {
+   "iso2": "SD",
+   "pays": "Sudan",
+   "mcc": "634",
+   "mnc": "09",
+   "brand": "khartoum INC",
+   "exploitant": "NEC",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / UMTS 2100",
+   "notes": ""
+  },
+  {
+   "iso2": "SH",
+   "pays": "Saint Helena, Ascension and Tristan da Cunha",
+   "mcc": "658",
+   "mnc": "01",
+   "brand": "Sure",
+   "exploitant": "Sure South Atlantic Ltd",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / LTE 1800",
+   "notes": ""
+  },
+  {
+   "iso2": "SL",
+   "pays": "Sierra Leone",
+   "mcc": "619",
+   "mnc": "06",
+   "brand": "SierraTel",
+   "exploitant": "Sierra Leone Telephony",
+   "status": "Operational",
+   "bandes": "CDMA 800 / LTE",
+   "notes": ""
+  },
+  {
+   "iso2": "SL",
+   "pays": "Sierra Leone",
+   "mcc": "619",
+   "mnc": "09",
+   "brand": "Smart Mobile",
+   "exploitant": "InterGroup Telecom SL",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / UMTS 2100",
+   "notes": ""
+  },
+  {
+   "iso2": "SL",
+   "pays": "Sierra Leone",
+   "mcc": "619",
+   "mnc": "40",
+   "brand": "",
+   "exploitant": "Datatel (SL) Ltd",
+   "status": "Unknown",
+   "bandes": "GSM",
+   "notes": ""
+  },
+  {
+   "iso2": "SL",
+   "pays": "Sierra Leone",
+   "mcc": "619",
+   "mnc": "50",
+   "brand": "",
+   "exploitant": "Datatel (SL) Ltd",
+   "status": "Unknown",
+   "bandes": "CDMA",
+   "notes": ""
+  },
+  {
+   "iso2": "SO",
+   "pays": "Somalia",
+   "mcc": "637",
+   "mnc": "04",
+   "brand": "Somafone",
+   "exploitant": "Somafone FZLLC",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800",
+   "notes": ""
+  },
+  {
+   "iso2": "SO",
+   "pays": "Somalia",
+   "mcc": "637",
+   "mnc": "10",
+   "brand": "Nationlink",
+   "exploitant": "NationLink Telecom",
+   "status": "Operational",
+   "bandes": "GSM 900",
+   "notes": ""
+  },
+  {
+   "iso2": "SO",
+   "pays": "Somalia",
+   "mcc": "637",
+   "mnc": "20",
+   "brand": "SOMNET",
+   "exploitant": "SOMNET",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / UMTS 2100 / LTE 800",
+   "notes": "Uncertain bands"
+  },
+  {
+   "iso2": "SO",
+   "pays": "Somalia",
+   "mcc": "637",
+   "mnc": "30",
+   "brand": "Golis",
+   "exploitant": "Golis Telecom Somalia",
+   "status": "Operational",
+   "bandes": "GSM 900",
+   "notes": ""
+  },
+  {
+   "iso2": "SO",
+   "pays": "Somalia",
+   "mcc": "637",
+   "mnc": "57",
+   "brand": "UNITEL",
+   "exploitant": "UNITEL S.a.r.l",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800",
+   "notes": ""
+  },
+  {
+   "iso2": "SO",
+   "pays": "Somalia",
+   "mcc": "637",
+   "mnc": "60",
+   "brand": "Nationlink",
+   "exploitant": "Nationlink Telecom",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800",
+   "notes": ""
+  },
+  {
+   "iso2": "SO",
+   "pays": "Somalia",
+   "mcc": "637",
+   "mnc": "67",
+   "brand": "Horntel Group",
+   "exploitant": "HTG Group Somalia",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / UMTS 2100",
+   "notes": ""
+  },
+  {
+   "iso2": "SO",
+   "pays": "Somalia",
+   "mcc": "637",
+   "mnc": "82",
+   "brand": "Telcom",
+   "exploitant": "Telcom Somalia",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / CDMA2000 / LTE",
+   "notes": ""
+  },
+  {
+   "iso2": "SS",
+   "pays": "South Sudan",
+   "mcc": "659",
+   "mnc": "05",
+   "brand": "DIGITEL",
+   "exploitant": "DIGITEL Holdings Ltd",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / UMTS 2100 / LTE 800 / LTE 1800",
+   "notes": ""
+  },
+  {
+   "iso2": "TD",
+   "pays": "Chad",
+   "mcc": "622",
+   "mnc": "03",
+   "brand": "Tigo",
+   "exploitant": "Millicom",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / UMTS 2100 / LTE 2600",
+   "notes": ""
+  },
+  {
+   "iso2": "TG",
+   "pays": "Togo",
+   "mcc": "615",
+   "mnc": "01",
+   "brand": "Togo Cell",
+   "exploitant": "Togo Telecom",
+   "status": "Operational",
+   "bandes": "GSM 900 / LTE / 5G",
+   "notes": ""
+  },
+  {
+   "iso2": "TN",
+   "pays": "Tunisia",
+   "mcc": "605",
+   "mnc": "02",
+   "brand": "Tunicell",
+   "exploitant": "Tunisie Telecom",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / UMTS 2100 / LTE 800 / LTE 1800",
+   "notes": ""
+  },
+  {
+   "iso2": "TZ",
+   "pays": "Tanzania",
+   "mcc": "640",
+   "mnc": "02",
+   "brand": "tiGO",
+   "exploitant": "MIC Tanzania Limited",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / UMTS 900 / UMTS 2100 / LTE 800 / LTE 1800 / 5G 2500",
+   "notes": "Former Mobitel, Buzz"
+  },
+  {
+   "iso2": "TZ",
+   "pays": "Tanzania",
+   "mcc": "640",
+   "mnc": "03",
+   "brand": "Zantel",
+   "exploitant": "MIC Tanzania Limited",
+   "status": "Operational",
+   "bandes": "GSM 900 / GSM 1800 / UMTS 2100 / LTE 1800",
+   "notes": "Former Zanzibar Telecom"
+  },
+  {
+   "iso2": "TZ",
+   "pays": "Tanzania",
+   "mcc": "640",
+   "mnc": "06",
+   "brand": "",
+   "exploitant": "WIA Company Limited",
+   "status": "Operational",
+   "bandes": "WiMAX / LTE",
+   "notes": "Former Sasatel (Dovetel); fixed wireless"
+  },
+  {
+   "iso2": "TZ",
+   "pays": "Tanzania",
+   "mcc": "640",
+   "mnc": "07",
+   "brand": "TTCL Mobile",
+   "exploitant": "Tanzania Telecommunication Company LTD (TTCL)",
+   "status": "Operational",
+   "bandes": "CDMA 800 / UMTS 2100 / LTE 1800 / TD-LTE 2300",
+   "notes": ""
+  },
+  {
+   "iso2": "TZ",
+   "pays": "Tanzania",
+   "mcc": "640",
+   "mnc": "08",
+   "brand": "extel",
+   "exploitant": "Telxer Enterprise Limited",
+   "status": "Unknown",
+   "bandes": "GSM",
+   "notes": "Former Smart, Benson Informatics"
+  },
+  {
+   "iso2": "TZ",
+   "pays": "Tanzania",
+   "mcc": "640",
+   "mnc": "11",
+   "brand": "Smile",
+   "exploitant": "Smile Telecoms Holdings Ltd",
+   "status": "Operational",
+   "bandes": "LTE 800",
+   "notes": ""
+  },
+  {
+   "iso2": "UG",
+   "pays": "Uganda",
+   "mcc": "641",
+   "mnc": "04",
+   "brand": "",
+   "exploitant": "Tangerine Uganda Limited",
+   "status": "Operational",
+   "bandes": "LTE",
+   "notes": ""
+  },
+  {
+   "iso2": "UG",
+   "pays": "Uganda",
+   "mcc": "641",
+   "mnc": "11",
+   "brand": "Uganda Telecom",
+   "exploitant": "Uganda Telecom Ltd",
+   "status": "Operational",
+   "bandes": "GSM 900 / UMTS 2100",
+   "notes": ""
+  },
+  {
+   "iso2": "ZA",
+   "pays": "South Africa",
+   "mcc": "655",
+   "mnc": "14",
+   "brand": "Neotel",
+   "exploitant": "Neotel Pty Ltd",
+   "status": "Operational",
+   "bandes": "LTE 1800",
+   "notes": ""
+  },
+  {
+   "iso2": "ZA",
+   "pays": "South Africa",
+   "mcc": "655",
+   "mnc": "19",
+   "brand": "rain",
+   "exploitant": "Wireless Business Solutions (Pty) Ltd",
+   "status": "Operational",
+   "bandes": "LTE 1800 / TD-LTE 2600 / TD-5G 2600",
+   "notes": ""
+  },
+  {
+   "iso2": "ZM",
+   "pays": "Zambia",
+   "mcc": "645",
+   "mnc": "03",
+   "brand": "ZAMTEL",
+   "exploitant": "Zambia Telecommunications Company Ltd",
+   "status": "Operational",
+   "bandes": "GSM 900 / UMTS 2100 / TD-LTE 2300",
+   "notes": ""
+  },
+  {
+   "iso2": "ZM",
+   "pays": "Zambia",
+   "mcc": "645",
+   "mnc": "04",
+   "brand": "Zedmobile",
+   "exploitant": "Beeline Telecoms Limited",
+   "status": "Unknown",
+   "bandes": "LTE",
+   "notes": ""
+  }
+ ],
+ "sans_mnc": [
+  {
+   "iso2": "CG",
+   "pays": "Congo",
+   "operateur": "Orange",
+   "filiale": "Orange Congo"
+  },
+  {
+   "iso2": "GH",
+   "pays": "Ghana",
+   "operateur": "AirtelTigo",
+   "filiale": "AirtelTigo Ghana"
+  },
+  {
+   "iso2": "MA",
+   "pays": "Morocco",
+   "operateur": "Maroc Telecom",
+   "filiale": "Maroc Telecom"
+  },
+  {
+   "iso2": "ML",
+   "pays": "Mali",
+   "operateur": "Moov Africa",
+   "filiale": "Moov Africa Mali"
+  },
+  {
+   "iso2": "MU",
+   "pays": "Mauritius",
+   "operateur": "Mauritius Telecom",
+   "filiale": "Mauritius Telecom"
+  },
+  {
+   "iso2": "TG",
+   "pays": "Togo",
+   "operateur": "Togocom",
+   "filiale": "Togocom"
+  }
+ ],
+ "apparies": [
+  {
+   "iso2": "AO",
+   "operateur": "Africell",
+   "filiale": "Africell Angola",
+   "reseaux": [
+    {
+     "mcc": "631",
+     "mnc": "05",
+     "brand": "",
+     "operator": "Africell",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "AO",
+   "operateur": "Movicel",
+   "filiale": "Movicel",
+   "reseaux": [
+    {
+     "mcc": "631",
+     "mnc": "04",
+     "brand": "MOVICEL",
+     "operator": "MOVICEL Telecommunications S.A",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "AO",
+   "operateur": "Unitel",
+   "filiale": "Unitel Angola",
+   "reseaux": [
+    {
+     "mcc": "631",
+     "mnc": "02",
+     "brand": "UNITEL",
+     "operator": "UNITEL S.a.r.l",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "BF",
+   "operateur": "Moov Africa",
+   "filiale": "Moov Africa Burkina",
+   "reseaux": [
+    {
+     "mcc": "613",
+     "mnc": "01",
+     "brand": "Moov",
+     "operator": "Moov Africa Burkina Faso",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "BF",
+   "operateur": "Orange",
+   "filiale": "Orange Burkina Faso",
+   "reseaux": [
+    {
+     "mcc": "613",
+     "mnc": "02",
+     "brand": "Orange",
+     "operator": "Orange Burkina Faso",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "BI",
+   "operateur": "Econet",
+   "filiale": "Econet Burundi",
+   "reseaux": [
+    {
+     "mcc": "642",
+     "mnc": "01",
+     "brand": "econet Leo",
+     "operator": "Econet Wireless Burundi PLC",
+     "status": "Operational"
+    },
+    {
+     "mcc": "642",
+     "mnc": "82",
+     "brand": "econet Leo",
+     "operator": "Econet Wireless Burundi PLC",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "BI",
+   "operateur": "Lumitel",
+   "filiale": "Lumitel",
+   "reseaux": [
+    {
+     "mcc": "642",
+     "mnc": "08",
+     "brand": "Lumitel",
+     "operator": "Viettel Burundi",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "BI",
+   "operateur": "Onatel Burundi",
+   "filiale": "Onatel Burundi",
+   "reseaux": [
+    {
+     "mcc": "642",
+     "mnc": "03",
+     "brand": "Onatel",
+     "operator": "Onatel Burundi",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "BJ",
+   "operateur": "Celtiis",
+   "filiale": "Celtiis",
+   "reseaux": [
+    {
+     "mcc": "616",
+     "mnc": "07",
+     "brand": "Celtiis",
+     "operator": "SBIN",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "BJ",
+   "operateur": "MTN",
+   "filiale": "MTN Bénin",
+   "reseaux": [
+    {
+     "mcc": "616",
+     "mnc": "03",
+     "brand": "MTN",
+     "operator": "Spacetel Benin",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "BJ",
+   "operateur": "Moov Africa",
+   "filiale": "Moov Africa Benin",
+   "reseaux": [
+    {
+     "mcc": "616",
+     "mnc": "02",
+     "brand": "Moov",
+     "operator": "Telecel Benin",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "BW",
+   "operateur": "BTC",
+   "filiale": "BTC Botswana",
+   "reseaux": [
+    {
+     "mcc": "652",
+     "mnc": "04",
+     "brand": "BTC Mobile",
+     "operator": "Botswana Telecommunications Corporation",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "BW",
+   "operateur": "Mascom",
+   "filiale": "Mascom",
+   "reseaux": [
+    {
+     "mcc": "652",
+     "mnc": "01",
+     "brand": "Mascom",
+     "operator": "Mascom Wireless (Pty) Limited",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "BW",
+   "operateur": "Orange",
+   "filiale": "Orange Botswana",
+   "reseaux": [
+    {
+     "mcc": "652",
+     "mnc": "02",
+     "brand": "Orange",
+     "operator": "Orange (Botswana) Pty Limited",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "CD",
+   "operateur": "Africell",
+   "filiale": "Africell RDC",
+   "reseaux": [
+    {
+     "mcc": "630",
+     "mnc": "01",
+     "brand": "Vodacom",
+     "operator": "Vodacom Congo RDC sprl",
+     "status": "Operational"
+    },
+    {
+     "mcc": "630",
+     "mnc": "86",
+     "brand": "Orange RDC",
+     "operator": "Orange RDC sarl",
+     "status": "Operational"
+    },
+    {
+     "mcc": "630",
+     "mnc": "89",
+     "brand": "Orange RDC",
+     "operator": "Orange RDC sarl",
+     "status": "Operational"
+    },
+    {
+     "mcc": "630",
+     "mnc": "90",
+     "brand": "Africell",
+     "operator": "Africell RDC sprl",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "CD",
+   "operateur": "Airtel",
+   "filiale": "Airtel RDC",
+   "reseaux": [
+    {
+     "mcc": "630",
+     "mnc": "01",
+     "brand": "Vodacom",
+     "operator": "Vodacom Congo RDC sprl",
+     "status": "Operational"
+    },
+    {
+     "mcc": "630",
+     "mnc": "02",
+     "brand": "Airtel",
+     "operator": "Airtel sprl",
+     "status": "Operational"
+    },
+    {
+     "mcc": "630",
+     "mnc": "86",
+     "brand": "Orange RDC",
+     "operator": "Orange RDC sarl",
+     "status": "Operational"
+    },
+    {
+     "mcc": "630",
+     "mnc": "89",
+     "brand": "Orange RDC",
+     "operator": "Orange RDC sarl",
+     "status": "Operational"
+    },
+    {
+     "mcc": "630",
+     "mnc": "90",
+     "brand": "Africell",
+     "operator": "Africell RDC sprl",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "CD",
+   "operateur": "MTN",
+   "filiale": "MTN RDC",
+   "reseaux": [
+    {
+     "mcc": "630",
+     "mnc": "01",
+     "brand": "Vodacom",
+     "operator": "Vodacom Congo RDC sprl",
+     "status": "Operational"
+    },
+    {
+     "mcc": "630",
+     "mnc": "86",
+     "brand": "Orange RDC",
+     "operator": "Orange RDC sarl",
+     "status": "Operational"
+    },
+    {
+     "mcc": "630",
+     "mnc": "89",
+     "brand": "Orange RDC",
+     "operator": "Orange RDC sarl",
+     "status": "Operational"
+    },
+    {
+     "mcc": "630",
+     "mnc": "90",
+     "brand": "Africell",
+     "operator": "Africell RDC sprl",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "CD",
+   "operateur": "Orange",
+   "filiale": "Orange RDC",
+   "reseaux": [
+    {
+     "mcc": "630",
+     "mnc": "01",
+     "brand": "Vodacom",
+     "operator": "Vodacom Congo RDC sprl",
+     "status": "Operational"
+    },
+    {
+     "mcc": "630",
+     "mnc": "86",
+     "brand": "Orange RDC",
+     "operator": "Orange RDC sarl",
+     "status": "Operational"
+    },
+    {
+     "mcc": "630",
+     "mnc": "89",
+     "brand": "Orange RDC",
+     "operator": "Orange RDC sarl",
+     "status": "Operational"
+    },
+    {
+     "mcc": "630",
+     "mnc": "90",
+     "brand": "Africell",
+     "operator": "Africell RDC sprl",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "CD",
+   "operateur": "Vodacom",
+   "filiale": "Vodacom RDC",
+   "reseaux": [
+    {
+     "mcc": "630",
+     "mnc": "01",
+     "brand": "Vodacom",
+     "operator": "Vodacom Congo RDC sprl",
+     "status": "Operational"
+    },
+    {
+     "mcc": "630",
+     "mnc": "86",
+     "brand": "Orange RDC",
+     "operator": "Orange RDC sarl",
+     "status": "Operational"
+    },
+    {
+     "mcc": "630",
+     "mnc": "89",
+     "brand": "Orange RDC",
+     "operator": "Orange RDC sarl",
+     "status": "Operational"
+    },
+    {
+     "mcc": "630",
+     "mnc": "90",
+     "brand": "Africell",
+     "operator": "Africell RDC sprl",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "CF",
+   "operateur": "Moov Africa",
+   "filiale": "Moov Africa Centrafrique",
+   "reseaux": [
+    {
+     "mcc": "623",
+     "mnc": "01",
+     "brand": "Moov",
+     "operator": "Atlantique Telecom Centrafrique SA",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "CF",
+   "operateur": "Telecel",
+   "filiale": "Telecel Centrafrique",
+   "reseaux": [
+    {
+     "mcc": "623",
+     "mnc": "02",
+     "brand": "TC",
+     "operator": "Telecel Centrafrique",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "CG",
+   "operateur": "Airtel",
+   "filiale": "Airtel Congo",
+   "reseaux": [
+    {
+     "mcc": "629",
+     "mnc": "01",
+     "brand": "Airtel",
+     "operator": "Celtel Congo",
+     "status": "Operational"
+    },
+    {
+     "mcc": "629",
+     "mnc": "07",
+     "brand": "Airtel",
+     "operator": "Warid Telecom",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "CG",
+   "operateur": "MTN",
+   "filiale": "MTN Congo",
+   "reseaux": [
+    {
+     "mcc": "629",
+     "mnc": "10",
+     "brand": "Libertis Telecom",
+     "operator": "MTN CONGO S.A",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "CI",
+   "operateur": "MTN",
+   "filiale": "MTN Côte d'Ivoire",
+   "reseaux": [
+    {
+     "mcc": "612",
+     "mnc": "05",
+     "brand": "MTN",
+     "operator": "Loteny Telecom",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "CI",
+   "operateur": "Moov Africa",
+   "filiale": "Moov Africa Côte d'Ivoire",
+   "reseaux": [
+    {
+     "mcc": "612",
+     "mnc": "02",
+     "brand": "Moov",
+     "operator": "Atlantique Cellulaire",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "CI",
+   "operateur": "Orange",
+   "filiale": "Orange Côte d'Ivoire",
+   "reseaux": [
+    {
+     "mcc": "612",
+     "mnc": "03",
+     "brand": "Orange",
+     "operator": "Orange",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "CM",
+   "operateur": "Camtel",
+   "filiale": "Camtel",
+   "reseaux": [
+    {
+     "mcc": "624",
+     "mnc": "03",
+     "brand": "Camtel",
+     "operator": "Camtel",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "CM",
+   "operateur": "MTN",
+   "filiale": "MTN Cameroun",
+   "reseaux": [
+    {
+     "mcc": "624",
+     "mnc": "01",
+     "brand": "MTN Cameroon",
+     "operator": "Mobile Telephone Network Cameroon Ltd",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "CM",
+   "operateur": "Orange",
+   "filiale": "Orange Cameroun",
+   "reseaux": [
+    {
+     "mcc": "624",
+     "mnc": "02",
+     "brand": "Orange",
+     "operator": "Orange Cameroun S.A",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "CV",
+   "operateur": "CVMovel",
+   "filiale": "CVMovel",
+   "reseaux": [
+    {
+     "mcc": "625",
+     "mnc": "01",
+     "brand": "CVMOVEL",
+     "operator": "CVMóvel, S.A",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "CV",
+   "operateur": "Unitel",
+   "filiale": "Unitel T+",
+   "reseaux": [
+    {
+     "mcc": "625",
+     "mnc": "02",
+     "brand": "T+",
+     "operator": "UNITEL T+ TELECOMUNICACÕES, S.A",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "DJ",
+   "operateur": "Djibouti Telecom",
+   "filiale": "Djibouti Telecom",
+   "reseaux": [
+    {
+     "mcc": "638",
+     "mnc": "01",
+     "brand": "Evatis",
+     "operator": "Djibouti Telecom SA",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "DZ",
+   "operateur": "Djezzy",
+   "filiale": "Djezzy",
+   "reseaux": [
+    {
+     "mcc": "603",
+     "mnc": "02",
+     "brand": "Djezzy",
+     "operator": "Optimum Telecom Algérie Spa",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "DZ",
+   "operateur": "Mobilis",
+   "filiale": "Mobilis",
+   "reseaux": [
+    {
+     "mcc": "603",
+     "mnc": "01",
+     "brand": "Mobilis",
+     "operator": "Algérie Télécom",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "DZ",
+   "operateur": "Ooredoo",
+   "filiale": "Ooredoo Algérie",
+   "reseaux": [
+    {
+     "mcc": "603",
+     "mnc": "03",
+     "brand": "Ooredoo",
+     "operator": "Wataniya Telecom Algérie",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "EG",
+   "operateur": "Orange",
+   "filiale": "Orange Égypte",
+   "reseaux": [
+    {
+     "mcc": "602",
+     "mnc": "01",
+     "brand": "Orange",
+     "operator": "Orange Egypt",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "EG",
+   "operateur": "Vodafone",
+   "filiale": "Vodafone Égypte",
+   "reseaux": [
+    {
+     "mcc": "602",
+     "mnc": "02",
+     "brand": "Vodafone",
+     "operator": "Vodafone Egypt",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "EG",
+   "operateur": "e&",
+   "filiale": "e& Égypte",
+   "reseaux": [
+    {
+     "mcc": "602",
+     "mnc": "03",
+     "brand": "e&",
+     "operator": "e& Egypt",
+     "status": "Operational"
+    },
+    {
+     "mcc": "602",
+     "mnc": "04",
+     "brand": "WE",
+     "operator": "Telecom Egypt",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "EG",
+   "operateur": "WE",
+   "filiale": "WE Égypte",
+   "reseaux": [
+    {
+     "mcc": "602",
+     "mnc": "04",
+     "brand": "WE",
+     "operator": "Telecom Egypt",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "ER",
+   "operateur": "EriTel",
+   "filiale": "EriTel",
+   "reseaux": [
+    {
+     "mcc": "657",
+     "mnc": "01",
+     "brand": "Eritel",
+     "operator": "Eritrea Telecommunications Services Corporation",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "ET",
+   "operateur": "Ethio Telecom",
+   "filiale": "Ethio Telecom",
+   "reseaux": [
+    {
+     "mcc": "636",
+     "mnc": "01",
+     "brand": "MTN",
+     "operator": "Ethio Telecom",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "ET",
+   "operateur": "Safaricom",
+   "filiale": "Safaricom Éthiopie",
+   "reseaux": [
+    {
+     "mcc": "636",
+     "mnc": "02",
+     "brand": "Safari",
+     "operator": "Safaricom Telecommunications Ethiopia",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "GA",
+   "operateur": "Airtel",
+   "filiale": "Airtel Gabon",
+   "reseaux": [
+    {
+     "mcc": "628",
+     "mnc": "03",
+     "brand": "Airtel",
+     "operator": "Airtel Gabon S.A",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "GA",
+   "operateur": "Moov Africa",
+   "filiale": "Moov Africa Gabon",
+   "reseaux": [
+    {
+     "mcc": "628",
+     "mnc": "02",
+     "brand": "Moov",
+     "operator": "Gabon Telecom S.A",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "GH",
+   "operateur": "MTN",
+   "filiale": "MTN Ghana",
+   "reseaux": [
+    {
+     "mcc": "620",
+     "mnc": "01",
+     "brand": "MTN",
+     "operator": "MTN Group",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "GH",
+   "operateur": "Vodafone",
+   "filiale": "Vodafone Ghana",
+   "reseaux": [
+    {
+     "mcc": "620",
+     "mnc": "02",
+     "brand": "Vodafone",
+     "operator": "Vodafone Group",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "GM",
+   "operateur": "Africell",
+   "filiale": "Africell Gambie",
+   "reseaux": [
+    {
+     "mcc": "607",
+     "mnc": "02",
+     "brand": "Africell",
+     "operator": "Africell",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "GM",
+   "operateur": "Gamcel",
+   "filiale": "Gamcel",
+   "reseaux": [
+    {
+     "mcc": "607",
+     "mnc": "01",
+     "brand": "Gamcel",
+     "operator": "Gamcel",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "GM",
+   "operateur": "QCell",
+   "filiale": "QCell",
+   "reseaux": [
+    {
+     "mcc": "607",
+     "mnc": "04",
+     "brand": "QCell",
+     "operator": "QCell Gambia",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "GN",
+   "operateur": "MTN",
+   "filiale": "MTN Guinée-Conakry",
+   "reseaux": [
+    {
+     "mcc": "611",
+     "mnc": "04",
+     "brand": "MTN",
+     "operator": "Areeba Guinea",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "GN",
+   "operateur": "Orange",
+   "filiale": "Orange Guinée",
+   "reseaux": [
+    {
+     "mcc": "611",
+     "mnc": "01",
+     "brand": "Orange",
+     "operator": "Orange S.A",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "GQ",
+   "operateur": "GETESA",
+   "filiale": "GETESA",
+   "reseaux": [
+    {
+     "mcc": "627",
+     "mnc": "01",
+     "brand": "Orange GQ",
+     "operator": "GETESA",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "GW",
+   "operateur": "MTN",
+   "filiale": "MTN Guinée-Bissau",
+   "reseaux": [
+    {
+     "mcc": "632",
+     "mnc": "02",
+     "brand": "MTN Areeba",
+     "operator": "Spacetel Guiné-Bissau S.A",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "GW",
+   "operateur": "Orange",
+   "filiale": "Orange Guinée-Bissau",
+   "reseaux": [
+    {
+     "mcc": "632",
+     "mnc": "03",
+     "brand": "Orange",
+     "operator": "",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "KE",
+   "operateur": "Airtel",
+   "filiale": "Airtel Kenya",
+   "reseaux": [
+    {
+     "mcc": "639",
+     "mnc": "03",
+     "brand": "Airtel",
+     "operator": "Bharti Airtel",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "KE",
+   "operateur": "Safaricom",
+   "filiale": "Safaricom Kenya",
+   "reseaux": [
+    {
+     "mcc": "639",
+     "mnc": "01",
+     "brand": "Safaricom IoT",
+     "operator": "Safaricom Ltd",
+     "status": "Operational"
+    },
+    {
+     "mcc": "639",
+     "mnc": "02",
+     "brand": "Safaricom",
+     "operator": "Safaricom Limited",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "KE",
+   "operateur": "Telkom",
+   "filiale": "Telkom Kenya",
+   "reseaux": [
+    {
+     "mcc": "639",
+     "mnc": "07",
+     "brand": "Telkom",
+     "operator": "Telkom Kenya",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "KM",
+   "operateur": "Comores Telecom",
+   "filiale": "Comores Telecom",
+   "reseaux": [
+    {
+     "mcc": "654",
+     "mnc": "01",
+     "brand": "HURI",
+     "operator": "Comores Telecom",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "KM",
+   "operateur": "Telma",
+   "filiale": "Telma Comores",
+   "reseaux": [
+    {
+     "mcc": "654",
+     "mnc": "02",
+     "brand": "TELCO SA",
+     "operator": "Telecom Malagasy (Telma)",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "LR",
+   "operateur": "MTN",
+   "filiale": "MTN Liberia",
+   "reseaux": [
+    {
+     "mcc": "618",
+     "mnc": "01",
+     "brand": "Lonestar Cell MTN",
+     "operator": "Lonestar Communications Corporation",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "LR",
+   "operateur": "Orange",
+   "filiale": "Orange Liberia",
+   "reseaux": [
+    {
+     "mcc": "618",
+     "mnc": "07",
+     "brand": "Orange LBR",
+     "operator": "Orange Liberia",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "LS",
+   "operateur": "Econet",
+   "filiale": "Econet Lesotho",
+   "reseaux": [
+    {
+     "mcc": "651",
+     "mnc": "02",
+     "brand": "Econet Telecom",
+     "operator": "Econet Ezi-cel",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "LS",
+   "operateur": "Vodacom",
+   "filiale": "Vodacom Lesotho",
+   "reseaux": [
+    {
+     "mcc": "651",
+     "mnc": "01",
+     "brand": "Vodacom",
+     "operator": "Vodacom Lesotho (Pty) Ltd",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "LY",
+   "operateur": "Almadar",
+   "filiale": "Almadar Aljadid",
+   "reseaux": [
+    {
+     "mcc": "606",
+     "mnc": "01",
+     "brand": "Madar",
+     "operator": "Al-Madar Al-Jadeed",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "LY",
+   "operateur": "Libyana",
+   "filiale": "Libyana",
+   "reseaux": [
+    {
+     "mcc": "606",
+     "mnc": "00",
+     "brand": "Libyana",
+     "operator": "Libyana",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "MA",
+   "operateur": "Inwi",
+   "filiale": "Inwi",
+   "reseaux": [
+    {
+     "mcc": "604",
+     "mnc": "02",
+     "brand": "INWI",
+     "operator": "Wana Corporate",
+     "status": "Operational"
+    },
+    {
+     "mcc": "604",
+     "mnc": "05",
+     "brand": "INWI",
+     "operator": "Wana Corporate",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "MA",
+   "operateur": "Orange",
+   "filiale": "Orange Maroc",
+   "reseaux": [
+    {
+     "mcc": "604",
+     "mnc": "00",
+     "brand": "Orange Morocco",
+     "operator": "Médi Télécom",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "MG",
+   "operateur": "Airtel",
+   "filiale": "Airtel Madagascar",
+   "reseaux": [
+    {
+     "mcc": "646",
+     "mnc": "01",
+     "brand": "Airtel",
+     "operator": "Bharti Airtel",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "MG",
+   "operateur": "Orange",
+   "filiale": "Orange Madagascar",
+   "reseaux": [
+    {
+     "mcc": "646",
+     "mnc": "02",
+     "brand": "Orange",
+     "operator": "Orange Madagascar S.A",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "MG",
+   "operateur": "Telma",
+   "filiale": "Telma",
+   "reseaux": [
+    {
+     "mcc": "646",
+     "mnc": "04",
+     "brand": "Telma",
+     "operator": "Telma Mobile S.A",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "ML",
+   "operateur": "Orange",
+   "filiale": "Orange Mali",
+   "reseaux": [
+    {
+     "mcc": "610",
+     "mnc": "02",
+     "brand": "Orange",
+     "operator": "Orange Mali SA",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "MR",
+   "operateur": "Chinguitel",
+   "filiale": "Chinguitel",
+   "reseaux": [
+    {
+     "mcc": "609",
+     "mnc": "02",
+     "brand": "Chinguitel",
+     "operator": "Chinguitel",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "MR",
+   "operateur": "Mattel",
+   "filiale": "Mattel",
+   "reseaux": [
+    {
+     "mcc": "609",
+     "mnc": "01",
+     "brand": "Mattel",
+     "operator": "Mattel",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "MR",
+   "operateur": "Mauritel",
+   "filiale": "Mauritel",
+   "reseaux": [
+    {
+     "mcc": "609",
+     "mnc": "10",
+     "brand": "Moov",
+     "operator": "Mauritel Mobiles",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "MU",
+   "operateur": "Emtel",
+   "filiale": "Emtel",
+   "reseaux": [
+    {
+     "mcc": "617",
+     "mnc": "10",
+     "brand": "Emtel",
+     "operator": "Emtel Ltd",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "MW",
+   "operateur": "Airtel",
+   "filiale": "Airtel Malawi",
+   "reseaux": [
+    {
+     "mcc": "650",
+     "mnc": "10",
+     "brand": "Airtel",
+     "operator": "Airtel Malawi Limited",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "MW",
+   "operateur": "TNM",
+   "filiale": "TNM Malawi",
+   "reseaux": [
+    {
+     "mcc": "650",
+     "mnc": "01",
+     "brand": "TNM",
+     "operator": "Telecom Network Malawi",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "MZ",
+   "operateur": "Movitel",
+   "filiale": "Movitel",
+   "reseaux": [
+    {
+     "mcc": "643",
+     "mnc": "03",
+     "brand": "Movitel",
+     "operator": "Movitel, SA",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "MZ",
+   "operateur": "Tmcel",
+   "filiale": "Tmcel",
+   "reseaux": [
+    {
+     "mcc": "643",
+     "mnc": "01",
+     "brand": "tmCel",
+     "operator": "Moçambique Telecom S.A",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "MZ",
+   "operateur": "Vodacom",
+   "filiale": "Vodacom Mozambique",
+   "reseaux": [
+    {
+     "mcc": "643",
+     "mnc": "04",
+     "brand": "Vodacom",
+     "operator": "Vodacom Mozambique, S.A",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "NA",
+   "operateur": "MTC",
+   "filiale": "MTC Namibie",
+   "reseaux": [
+    {
+     "mcc": "649",
+     "mnc": "01",
+     "brand": "MTC",
+     "operator": "MTC Namibia",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "NA",
+   "operateur": "TN Mobile",
+   "filiale": "TN Mobile",
+   "reseaux": [
+    {
+     "mcc": "649",
+     "mnc": "03",
+     "brand": "TN Mobile",
+     "operator": "Telecom Namibia",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "NE",
+   "operateur": "Airtel",
+   "filiale": "Airtel Niger",
+   "reseaux": [
+    {
+     "mcc": "614",
+     "mnc": "02",
+     "brand": "Airtel",
+     "operator": "Bharti Airtel Limited",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "NE",
+   "operateur": "Moov Africa",
+   "filiale": "Moov Africa Niger",
+   "reseaux": [
+    {
+     "mcc": "614",
+     "mnc": "03",
+     "brand": "Moov",
+     "operator": "Atlantique Telecom (subsidiary of Etisalat)",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "NE",
+   "operateur": "Orange",
+   "filiale": "Orange Niger",
+   "reseaux": [
+    {
+     "mcc": "614",
+     "mnc": "04",
+     "brand": "Orange",
+     "operator": "Orange Niger",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "NG",
+   "operateur": "9mobile",
+   "filiale": "9mobile",
+   "reseaux": [
+    {
+     "mcc": "621",
+     "mnc": "60",
+     "brand": "9mobile",
+     "operator": "Emerging Markets Telecommunication Services Ltd",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "NG",
+   "operateur": "Airtel",
+   "filiale": "Airtel Nigeria",
+   "reseaux": [
+    {
+     "mcc": "621",
+     "mnc": "20",
+     "brand": "Airtel",
+     "operator": "Bharti Airtel Limited",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "NG",
+   "operateur": "Glo",
+   "filiale": "Glo Nigeria",
+   "reseaux": [
+    {
+     "mcc": "621",
+     "mnc": "50",
+     "brand": "Glo",
+     "operator": "Globacom Ltd",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "NG",
+   "operateur": "MTN",
+   "filiale": "MTN Nigeria",
+   "reseaux": [
+    {
+     "mcc": "621",
+     "mnc": "30",
+     "brand": "MTN",
+     "operator": "MTN Nigeria Communications Limited",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "RW",
+   "operateur": "Airtel",
+   "filiale": "Airtel Rwanda",
+   "reseaux": [
+    {
+     "mcc": "635",
+     "mnc": "13",
+     "brand": "Airtel",
+     "operator": "Airtel RWANDA",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "RW",
+   "operateur": "MTN",
+   "filiale": "MTN Rwanda",
+   "reseaux": [
+    {
+     "mcc": "635",
+     "mnc": "10",
+     "brand": "MTN Rwanda",
+     "operator": "MTN Rwandacell SARL",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "SC",
+   "operateur": "Airtel",
+   "filiale": "Airtel Seychelles",
+   "reseaux": [
+    {
+     "mcc": "633",
+     "mnc": "10",
+     "brand": "Airtel",
+     "operator": "Telecom Seychelles Ltd",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "SC",
+   "operateur": "Cable & Wireless",
+   "filiale": "Cable & Wireless Seychelles",
+   "reseaux": [
+    {
+     "mcc": "633",
+     "mnc": "01",
+     "brand": "Cable & Wireless",
+     "operator": "Cable & Wireless Seychelles",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "SD",
+   "operateur": "MTN",
+   "filiale": "MTN Soudan",
+   "reseaux": [
+    {
+     "mcc": "634",
+     "mnc": "02",
+     "brand": "MTN",
+     "operator": "MTN Sudan",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "SD",
+   "operateur": "Zain",
+   "filiale": "Zain Soudan",
+   "reseaux": [
+    {
+     "mcc": "634",
+     "mnc": "01",
+     "brand": "Zain SD",
+     "operator": "Zain Group - Sudan",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "SL",
+   "operateur": "Africell",
+   "filiale": "Africell Sierra Leone",
+   "reseaux": [
+    {
+     "mcc": "619",
+     "mnc": "03",
+     "brand": "Africell",
+     "operator": "Lintel Sierra Leone Limited",
+     "status": "Operational"
+    },
+    {
+     "mcc": "619",
+     "mnc": "05",
+     "brand": "Africell",
+     "operator": "Lintel Sierra Leone Limited",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "SL",
+   "operateur": "Orange",
+   "filiale": "Orange Sierra Leone",
+   "reseaux": [
+    {
+     "mcc": "619",
+     "mnc": "01",
+     "brand": "Orange",
+     "operator": "Orange SL Limited",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "SN",
+   "operateur": "Expresso",
+   "filiale": "Expresso Sénégal",
+   "reseaux": [
+    {
+     "mcc": "608",
+     "mnc": "03",
+     "brand": "Expresso",
+     "operator": "Expresso Telecom",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "SN",
+   "operateur": "Free Sénégal",
+   "filiale": "Free Sénégal",
+   "reseaux": [
+    {
+     "mcc": "608",
+     "mnc": "02",
+     "brand": "Free",
+     "operator": "Saga Africa Holdings Limited",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "SN",
+   "operateur": "Orange",
+   "filiale": "Orange Sénégal",
+   "reseaux": [
+    {
+     "mcc": "608",
+     "mnc": "01",
+     "brand": "Orange",
+     "operator": "Sonatel",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "SO",
+   "operateur": "Hormuud",
+   "filiale": "Hormuud",
+   "reseaux": [
+    {
+     "mcc": "637",
+     "mnc": "50",
+     "brand": "Hormuud",
+     "operator": "Hormuud Telecom Somalia Inc",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "SO",
+   "operateur": "Somtel",
+   "filiale": "Somtel",
+   "reseaux": [
+    {
+     "mcc": "637",
+     "mnc": "71",
+     "brand": "Somtel",
+     "operator": "Somtel",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "SO",
+   "operateur": "Telesom",
+   "filiale": "Telesom",
+   "reseaux": [
+    {
+     "mcc": "637",
+     "mnc": "01",
+     "brand": "Telesom",
+     "operator": "Telesom",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "SS",
+   "operateur": "MTN",
+   "filiale": "MTN Soudan du Sud",
+   "reseaux": [
+    {
+     "mcc": "659",
+     "mnc": "02",
+     "brand": "MTN",
+     "operator": "MTN South Sudan",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "SS",
+   "operateur": "Zain",
+   "filiale": "Zain Soudan du Sud",
+   "reseaux": [
+    {
+     "mcc": "659",
+     "mnc": "06",
+     "brand": "Zain",
+     "operator": "Zain South Sudan",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "ST",
+   "operateur": "CST",
+   "filiale": "CST",
+   "reseaux": [
+    {
+     "mcc": "626",
+     "mnc": "01",
+     "brand": "CSTmovel",
+     "operator": "Companhia Santomense de Telecomunicações",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "ST",
+   "operateur": "Unitel",
+   "filiale": "Unitel STP",
+   "reseaux": [
+    {
+     "mcc": "626",
+     "mnc": "02",
+     "brand": "Unitel STP",
+     "operator": "Unitel São Tomé and Príncipe",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "SZ",
+   "operateur": "Eswatini Mobile",
+   "filiale": "Eswatini Mobile",
+   "reseaux": [
+    {
+     "mcc": "653",
+     "mnc": "02",
+     "brand": "",
+     "operator": "Eswatini Mobile Limited",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "SZ",
+   "operateur": "MTN",
+   "filiale": "MTN eSwatini",
+   "reseaux": [
+    {
+     "mcc": "653",
+     "mnc": "10",
+     "brand": "MTN Eswatini",
+     "operator": "MTN Eswatini Limited",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "TD",
+   "operateur": "Airtel",
+   "filiale": "Airtel Tchad",
+   "reseaux": [
+    {
+     "mcc": "622",
+     "mnc": "01",
+     "brand": "Airtel",
+     "operator": "Bharti Airtel SA",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "TD",
+   "operateur": "Sotel Tchad",
+   "filiale": "Sotel Tchad",
+   "reseaux": [
+    {
+     "mcc": "622",
+     "mnc": "07",
+     "brand": "Salam",
+     "operator": "SotelTchad",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "TG",
+   "operateur": "Moov Africa",
+   "filiale": "Moov Africa Togo",
+   "reseaux": [
+    {
+     "mcc": "615",
+     "mnc": "03",
+     "brand": "Moov",
+     "operator": "Moov Togo",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "TN",
+   "operateur": "Ooredoo",
+   "filiale": "Ooredoo Tunisie",
+   "reseaux": [
+    {
+     "mcc": "605",
+     "mnc": "03",
+     "brand": "Ooredoo",
+     "operator": "Ooredoo Tunisiana",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "TN",
+   "operateur": "Orange",
+   "filiale": "Orange Tunisie",
+   "reseaux": [
+    {
+     "mcc": "605",
+     "mnc": "01",
+     "brand": "Orange",
+     "operator": "Orange Tunisie",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "TZ",
+   "operateur": "Airtel",
+   "filiale": "Airtel Tanzanie",
+   "reseaux": [
+    {
+     "mcc": "640",
+     "mnc": "05",
+     "brand": "Airtel",
+     "operator": "Bharti Airtel",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "TZ",
+   "operateur": "Halotel",
+   "filiale": "Halotel Tanzanie",
+   "reseaux": [
+    {
+     "mcc": "640",
+     "mnc": "09",
+     "brand": "Halotel",
+     "operator": "Viettel Tanzania Limited",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "TZ",
+   "operateur": "Vodacom",
+   "filiale": "Vodacom Tanzanie",
+   "reseaux": [
+    {
+     "mcc": "640",
+     "mnc": "04",
+     "brand": "Vodacom",
+     "operator": "Vodacom Tanzania Limited",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "UG",
+   "operateur": "Airtel",
+   "filiale": "Airtel Ouganda",
+   "reseaux": [
+    {
+     "mcc": "641",
+     "mnc": "01",
+     "brand": "Airtel",
+     "operator": "Bharti Airtel",
+     "status": "Operational"
+    },
+    {
+     "mcc": "641",
+     "mnc": "22",
+     "brand": "Airtel",
+     "operator": "Bharti Airtel",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "UG",
+   "operateur": "MTN",
+   "filiale": "MTN Ouganda",
+   "reseaux": [
+    {
+     "mcc": "641",
+     "mnc": "10",
+     "brand": "MTN",
+     "operator": "MTN Uganda",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "ZA",
+   "operateur": "Cell C",
+   "filiale": "Cell C",
+   "reseaux": [
+    {
+     "mcc": "655",
+     "mnc": "07",
+     "brand": "Cell C",
+     "operator": "Cell C (Pty) Ltd",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "ZA",
+   "operateur": "MTN",
+   "filiale": "MTN South Africa",
+   "reseaux": [
+    {
+     "mcc": "655",
+     "mnc": "10",
+     "brand": "MTN",
+     "operator": "MTN Group",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "ZA",
+   "operateur": "Telkom",
+   "filiale": "Telkom South Africa",
+   "reseaux": [
+    {
+     "mcc": "655",
+     "mnc": "02",
+     "brand": "Telkom",
+     "operator": "Telkom SA SOC Ltd",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "ZA",
+   "operateur": "Vodacom",
+   "filiale": "Vodacom South Africa",
+   "reseaux": [
+    {
+     "mcc": "655",
+     "mnc": "01",
+     "brand": "Vodacom",
+     "operator": "Vodacom",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "ZM",
+   "operateur": "Airtel",
+   "filiale": "Airtel Zambie",
+   "reseaux": [
+    {
+     "mcc": "645",
+     "mnc": "01",
+     "brand": "Airtel",
+     "operator": "Bharti Airtel",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "ZM",
+   "operateur": "MTN",
+   "filiale": "MTN Zambie",
+   "reseaux": [
+    {
+     "mcc": "645",
+     "mnc": "02",
+     "brand": "MTN",
+     "operator": "MTN Group",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "ZW",
+   "operateur": "Econet",
+   "filiale": "Econet Zimbabwe",
+   "reseaux": [
+    {
+     "mcc": "648",
+     "mnc": "04",
+     "brand": "Econet",
+     "operator": "Econet Wireless",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "ZW",
+   "operateur": "NetOne",
+   "filiale": "NetOne",
+   "reseaux": [
+    {
+     "mcc": "648",
+     "mnc": "01",
+     "brand": "Net*One",
+     "operator": "Net*One Cellular (Pvt) Ltd",
+     "status": "Operational"
+    }
+   ]
+  },
+  {
+   "iso2": "ZW",
+   "operateur": "Telecel",
+   "filiale": "Telecel Zimbabwe",
+   "reseaux": [
+    {
+     "mcc": "648",
+     "mnc": "03",
+     "brand": "Telecel",
+     "operator": "Telecel Zimbabwe (PVT) Ltd",
+     "status": "Operational"
+    }
+   ]
+  }
+ ],
+ "pays": {
+  "AO": {
+   "pays": "Angola",
+   "assignes": 3,
+   "declares": 3
+  },
+  "BF": {
+   "pays": "Burkina Faso",
+   "assignes": 3,
+   "declares": 2
+  },
+  "BI": {
+   "pays": "Burundi",
+   "assignes": 4,
+   "declares": 3
+  },
+  "BJ": {
+   "pays": "Benin",
+   "assignes": 4,
+   "declares": 3
+  },
+  "BW": {
+   "pays": "Botswana",
+   "assignes": 3,
+   "declares": 3
+  },
+  "CD": {
+   "pays": "Democratic Republic of the Congo",
+   "assignes": 6,
+   "declares": 5
+  },
+  "CF": {
+   "pays": "Central African Republic",
+   "assignes": 4,
+   "declares": 2
+  },
+  "CG": {
+   "pays": "Congo",
+   "assignes": 3,
+   "declares": 3
+  },
+  "CI": {
+   "pays": "Ivory Coast",
+   "assignes": 7,
+   "declares": 3
+  },
+  "CM": {
+   "pays": "Cameroon",
+   "assignes": 4,
+   "declares": 3
+  },
+  "CV": {
+   "pays": "Cape Verde",
+   "assignes": 2,
+   "declares": 2
+  },
+  "DJ": {
+   "pays": "Djibouti",
+   "assignes": 1,
+   "declares": 1
+  },
+  "DZ": {
+   "pays": "Algeria",
+   "assignes": 6,
+   "declares": 3
+  },
+  "EG": {
+   "pays": "Egypt",
+   "assignes": 4,
+   "declares": 4
+  },
+  "ER": {
+   "pays": "Eritrea",
+   "assignes": 1,
+   "declares": 1
+  },
+  "ET": {
+   "pays": "Ethiopia",
+   "assignes": 2,
+   "declares": 2
+  },
+  "GA": {
+   "pays": "Gabon",
+   "assignes": 3,
+   "declares": 2
+  },
+  "GH": {
+   "pays": "Ghana",
+   "assignes": 8,
+   "declares": 3
+  },
+  "GM": {
+   "pays": "Gambia",
+   "assignes": 6,
+   "declares": 3
+  },
+  "GN": {
+   "pays": "Guinea",
+   "assignes": 3,
+   "declares": 2
+  },
+  "GQ": {
+   "pays": "Equatorial Guinea",
+   "assignes": 2,
+   "declares": 1
+  },
+  "GW": {
+   "pays": "Guinea-Bissau",
+   "assignes": 4,
+   "declares": 2
+  },
+  "KE": {
+   "pays": "Kenya",
+   "assignes": 5,
+   "declares": 3
+  },
+  "KM": {
+   "pays": "Comoros",
+   "assignes": 2,
+   "declares": 2
+  },
+  "LR": {
+   "pays": "Liberia",
+   "assignes": 3,
+   "declares": 2
+  },
+  "LS": {
+   "pays": "Lesotho",
+   "assignes": 2,
+   "declares": 2
+  },
+  "LY": {
+   "pays": "Libya",
+   "assignes": 3,
+   "declares": 2
+  },
+  "MA": {
+   "pays": "Morocco",
+   "assignes": 4,
+   "declares": 3
+  },
+  "MG": {
+   "pays": "Madagascar",
+   "assignes": 4,
+   "declares": 3
+  },
+  "ML": {
+   "pays": "Mali",
+   "assignes": 3,
+   "declares": 2
+  },
+  "MR": {
+   "pays": "Mauritania",
+   "assignes": 3,
+   "declares": 3
+  },
+  "MU": {
+   "pays": "Mauritius",
+   "assignes": 3,
+   "declares": 2
+  },
+  "MW": {
+   "pays": "Malawi",
+   "assignes": 4,
+   "declares": 2
+  },
+  "MZ": {
+   "pays": "Mozambique",
+   "assignes": 3,
+   "declares": 3
+  },
+  "NA": {
+   "pays": "Namibia",
+   "assignes": 4,
+   "declares": 2
+  },
+  "NE": {
+   "pays": "Niger",
+   "assignes": 4,
+   "declares": 3
+  },
+  "NG": {
+   "pays": "Nigeria",
+   "assignes": 9,
+   "declares": 4
+  },
+  "RW": {
+   "pays": "Rwanda",
+   "assignes": 3,
+   "declares": 2
+  },
+  "SC": {
+   "pays": "Seychelles",
+   "assignes": 2,
+   "declares": 2
+  },
+  "SD": {
+   "pays": "Sudan",
+   "assignes": 4,
+   "declares": 2
+  },
+  "SH": {
+   "pays": "Saint Helena, Ascension and Tristan da Cunha",
+   "assignes": 1,
+   "declares": 0
+  },
+  "SL": {
+   "pays": "Sierra Leone",
+   "assignes": 7,
+   "declares": 2
+  },
+  "SN": {
+   "pays": "Senegal",
+   "assignes": 3,
+   "declares": 3
+  },
+  "SO": {
+   "pays": "Somalia",
+   "assignes": 11,
+   "declares": 3
+  },
+  "SS": {
+   "pays": "South Sudan",
+   "assignes": 3,
+   "declares": 2
+  },
+  "ST": {
+   "pays": "São Tomé and Príncipe",
+   "assignes": 2,
+   "declares": 2
+  },
+  "SZ": {
+   "pays": "Eswatini",
+   "assignes": 2,
+   "declares": 2
+  },
+  "TD": {
+   "pays": "Chad",
+   "assignes": 3,
+   "declares": 2
+  },
+  "TG": {
+   "pays": "Togo",
+   "assignes": 2,
+   "declares": 2
+  },
+  "TN": {
+   "pays": "Tunisia",
+   "assignes": 3,
+   "declares": 2
+  },
+  "TZ": {
+   "pays": "Tanzania",
+   "assignes": 9,
+   "declares": 3
+  },
+  "UG": {
+   "pays": "Uganda",
+   "assignes": 5,
+   "declares": 2
+  },
+  "ZA": {
+   "pays": "South Africa",
+   "assignes": 6,
+   "declares": 4
+  },
+  "ZM": {
+   "pays": "Zambia",
+   "assignes": 4,
+   "declares": 2
+  },
+  "ZW": {
+   "pays": "Zimbabwe",
+   "assignes": 3,
+   "declares": 3
+  }
+ }
+}

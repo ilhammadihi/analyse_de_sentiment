@@ -518,13 +518,30 @@ class TestUnJobParSource:
     def _settings(self, **surcharges):
         from types import SimpleNamespace
 
+        # `agent_enabled` et `campaign_enabled` sont faux par défaut ici comme
+        # dans la vraie config : ces tests mesurent la planification de la
+        # COLLECTE, et un job d'agent supplémentaire fausserait les comptages de
+        # jobs ci-dessous.
         base = dict(run_on_start=True, timezone="UTC", max_concurrent=3,
-                    stagger_minutes=2, interval_minutes=360)
+                    stagger_minutes=2, interval_minutes=360,
+                    agent_enabled=False, agent_hour=8,
+                    campaign_enabled=False, campaign_day=0, campaign_hour=9,
+                    market_enabled=False, market_day=1, market_hour=3)
+        # `quality` porte sa propre section dans la vraie configuration : on la
+        # retire des surcharges AVANT de composer celles du planificateur, sans
+        # quoi elle atterrirait dans `scheduler` où rien ne la lit.
+        #
+        # Faux par défaut, comme les deux autres agents et pour la même raison :
+        # ces tests comptent les jobs de COLLECTE, et un job supplémentaire
+        # fausserait les décomptes ci-dessous.
+        qualite = dict(enabled=False, hour=7)
+        qualite.update(surcharges.pop("quality", {}))
         base.update(surcharges)
         return SimpleNamespace(
             scheduler=SimpleNamespace(**base),
             llm=SimpleNamespace(enabled=False, api_key=None,
                                 scheduled_batch_limit=1000),
+            quality=SimpleNamespace(**qualite),
             get_enabled_scrapers=lambda: list(self.CADENCES),
             scraper_interval_minutes=lambda nom: self.CADENCES[nom],
         )
@@ -632,3 +649,57 @@ class TestUnJobParSource:
         # peut-être plusieurs.
         assert appel.kwargs.get("source") is None
         assert appel.kwargs["before"] is not None
+
+    def test_l_agent_de_veille_n_est_pas_planifie_par_defaut(self, monkeypatch):
+        """Cet agent ÉCRIT dans un groupe Telegram. Une activation implicite à
+        la première mise à jour enverrait un message non sollicité à l'équipe."""
+        faux, _ = self._lancer(monkeypatch)
+        assert "insight-agent" not in {j.get("id") for j in faux.jobs}
+
+    def test_le_gardien_de_qualite_n_est_pas_planifie_par_defaut(self, monkeypatch):
+        """Même raison que les deux autres agents : ce passage ÉCRIT dans un
+        groupe Telegram."""
+        faux, _ = self._lancer(monkeypatch)
+        assert "quality-agent" not in {j.get("id") for j in faux.jobs}
+
+    def test_le_gardien_de_qualite_passe_avant_l_agent_de_veille(self, monkeypatch):
+        """L'ORDRE EST LA RAISON D'ÊTRE DE CE RÉGLAGE.
+
+        L'Agent 1 lit un DATA TRUST STATUS pour savoir s'il peut se fier aux
+        données d'une filiale. Lancé APRÈS lui, le gardien le laisserait
+        raisonner sur l'instantané de la veille — donc commenter comme fiable
+        une filiale dont la qualité vient de se dégrader.
+
+        Une heure d'écart suffit : le passage est une poignée de requêtes
+        agrégées, pas une collecte.
+        """
+        faux, _ = self._lancer(
+            monkeypatch,
+            quality={"enabled": True, "hour": 7},
+            agent_enabled=True, agent_hour=8,
+        )
+        qualite = next(j for j in faux.jobs if j.get("id") == "quality-agent")
+        veille = next(j for j in faux.jobs if j.get("id") == "insight-agent")
+
+        assert qualite["trigger"] == "cron"
+        assert qualite["hour"] < veille["hour"]
+        # Sans coalesce, un conteneur arrêté trois jours enverrait trois
+        # alertes qualité d'un coup au redémarrage.
+        assert qualite["coalesce"] is True and qualite["max_instances"] == 1
+
+    def test_l_agent_de_veille_est_un_rendez_vous_quotidien_a_heure_fixe(self, monkeypatch):
+        """`cron` et non `interval`.
+
+        Un briefing à intervalle finit par tomber à 3 h du matin et se lit comme
+        une notification de plus ; à heure fixe, il se lit comme le journal du
+        matin et son ABSENCE se remarque — ce qui est la moitié de l'intérêt
+        d'une veille automatique.
+        """
+        faux, _ = self._lancer(monkeypatch, agent_enabled=True, agent_hour=7)
+        job = next(j for j in faux.jobs if j.get("id") == "insight-agent")
+
+        assert job["trigger"] == "cron"
+        assert job["hour"] == 7 and job["minute"] == 0
+        # Sans coalesce, un conteneur arrêté trois jours enverrait trois
+        # briefings d'un coup au redémarrage.
+        assert job["coalesce"] is True and job["max_instances"] == 1

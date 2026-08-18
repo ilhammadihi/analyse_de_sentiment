@@ -49,6 +49,109 @@ def _safe_run(pipeline, source: str) -> None:
         logger.error("Collecte %s en échec : %s", source, e, exc_info=True)
 
 
+def _safe_market_data(settings) -> None:
+    """Rafraîchissement mensuel des indicateurs de marché.
+
+    Job à part, comme l'analyse sémantique et l'agent : il dépend d'une API
+    externe, et son échec ne doit jamais toucher la collecte d'avis. Une
+    donnée annuelle non rafraîchie ce mois-ci reste juste ; un pipeline d'avis
+    interrompu perd des avis pour de bon.
+    """
+    from reviews.collectors.market_data import MarketDataCollector
+    from reviews.storage.db import get_database
+    from reviews.storage.market_repository import MarketRepository
+
+    try:
+        db = get_database()
+        with db.cursor() as cur:
+            cur.execute(
+                "SELECT iso3, country_id FROM dim_country WHERE iso3 IS NOT NULL"
+            )
+            pays = {r[0]: r[1] for r in cur.fetchall()}
+        lignes, erreurs = MarketDataCollector().collect(pays)
+        ecrites = MarketRepository(db).upsert(lignes)
+        logger.info(
+            "Indicateurs de marché : %d mesure(s) écrite(s), %d appel(s) en échec",
+            ecrites, len(erreurs),
+        )
+    except Exception as e:  # noqa: BLE001
+        logger.error("Collecte des indicateurs de marché en échec : %s", e, exc_info=True)
+
+
+def _safe_insight_agent(settings) -> None:
+    """Passage quotidien de l'agent de veille satisfaction.
+
+    JOB SÉPARÉ DE LA COLLECTE, pour la même raison que l'analyse sémantique :
+    l'agent dépend d'un fournisseur de modèle et de l'API Telegram. Greffé au
+    pipeline, une panne de l'un ou de l'autre deviendrait une panne de
+    collecte — soit le contraire de la hiérarchie voulue, où la donnée prime
+    toujours sur son commentaire.
+
+    Les exceptions sont avalées ici comme pour les autres jobs : APScheduler
+    désactive un job qui lève trop souvent, et un agent muet parce qu'il a été
+    désactivé silencieusement est exactement le mode de panne qui a fait taire
+    l'alerting trois jours durant.
+    """
+    from reviews.agents.insight_agent import build_agent
+    from reviews.storage.db import get_database
+
+    try:
+        passage = build_agent(get_database(), settings).run()
+        logger.info("Agent de veille : %s", passage.resume())
+    except Exception as e:  # noqa: BLE001
+        logger.error("Agent de veille en échec : %s", e, exc_info=True)
+
+
+def _safe_campaign_agent(settings) -> None:
+    """Passage hebdomadaire de l'assistant de campagne.
+
+    JOB DISTINCT DE CELUI DE LA VEILLE, alors que les deux agents partagent leur
+    infrastructure. Ils n'ont ni la même cadence — quotidienne contre
+    hebdomadaire — ni le même destinataire : la veille prévient qui exploite,
+    la campagne s'adresse à qui communique. Les fondre obligerait à retenir le
+    plus lent des deux rythmes, et une panne de l'un ferait taire l'autre.
+
+    Comme les autres jobs, les exceptions sont avalées : APScheduler désactive un
+    job qui lève trop souvent, et un agent désactivé silencieusement est le mode
+    de panne qu'on ne détecte qu'en s'apercevant, des semaines plus tard, qu'il
+    ne dit plus rien.
+    """
+    from reviews.agents.campaign_agent import build_campaign_agent
+    from reviews.storage.db import get_database
+
+    try:
+        campagne = build_campaign_agent(get_database(), settings).run()
+        logger.info("Assistant de campagne : %s", campagne.resume())
+    except Exception as e:  # noqa: BLE001
+        logger.error("Assistant de campagne en échec : %s", e, exc_info=True)
+
+
+def _safe_quality_agent(settings) -> None:
+    """Passage quotidien du gardien de la qualité (Agent 3).
+
+    PLANIFIÉ AVANT L'AGENT DE VEILLE, et l'ordre compte. L'Agent 1 doit pouvoir
+    lire un DATA TRUST STATUS À JOUR avant de décider de quoi il parle : lancé
+    après, il commenterait la satisfaction de filiales dont la qualité de
+    données vient seulement d'être réévaluée, sur l'instantané de la veille.
+
+    Une heure d'écart suffit : le passage complet est une poignée de requêtes
+    agrégées sur 135 filiales, pas une collecte.
+
+    Exceptions avalées comme les autres jobs : APScheduler désactive un job qui
+    lève trop souvent, et un gardien désactivé silencieusement laisserait les
+    deux autres agents raisonner sur des données dont plus rien ne vérifie la
+    qualité — sans que rien ne le signale.
+    """
+    from reviews.agents.quality.guardian import build_quality_agent
+    from reviews.storage.db import get_database
+
+    try:
+        passage = build_quality_agent(get_database(), settings).run()
+        logger.info("Agent qualité : %s", passage.resume())
+    except Exception as e:  # noqa: BLE001
+        logger.error("Agent qualité en échec : %s", e, exc_info=True)
+
+
 def _safe_semantic_pass(settings) -> None:
     """Analyse sémantique des avis nouvellement collectés.
 
@@ -184,6 +287,75 @@ def run_scheduler() -> None:
         logger.info(
             "Analyse sémantique inactive : aucune clé LLM_API_KEY configurée. "
             "Le lexique continue de classer tous les avis."
+        )
+
+    # Agent de veille : rendez-vous quotidien à heure fixe, jamais un intervalle.
+    #
+    # `cron` et non `interval` parce qu'un briefing est un rendez-vous : à heure
+    # fixe on remarque son absence, à intervalle il finit par tomber la nuit et
+    # se lit comme une notification de plus. `misfire_grace_time` d'une heure —
+    # au-delà, un briefing du matin rattrapé à midi commenterait une journée
+    # déjà entamée.
+    if settings.scheduler.agent_enabled:
+        scheduler.add_job(
+            _safe_insight_agent, "cron", hour=settings.scheduler.agent_hour, minute=0,
+            args=[settings], id="insight-agent", max_instances=1, coalesce=True,
+            misfire_grace_time=3600,
+        )
+        logger.info(
+            "Agent de veille planifié : tous les jours à %02d h 00 (%s)",
+            settings.scheduler.agent_hour, settings.scheduler.timezone,
+        )
+
+    # Gardien de la qualité : rendez-vous quotidien, AVANT l'agent de veille.
+    #
+    # `cron` et non `interval`, même raison que le briefing. L'heure par défaut
+    # (7 h) précède celle de la veille (8 h) pour que l'Agent 1 lise un statut
+    # de confiance calculé le matin même — voir `_safe_quality_agent`.
+    if settings.quality.enabled:
+        scheduler.add_job(
+            _safe_quality_agent, "cron", hour=settings.quality.hour, minute=0,
+            args=[settings], id="quality-agent", max_instances=1, coalesce=True,
+            misfire_grace_time=3600,
+        )
+        logger.info(
+            "Agent qualité planifié : tous les jours à %02d h 00 (%s)",
+            settings.quality.hour, settings.scheduler.timezone,
+        )
+
+    # Assistant de campagne : rendez-vous HEBDOMADAIRE.
+    #
+    # `day_of_week` et non `interval` pour la même raison que le briefing : un
+    # rendez-vous se remarque quand il manque. La tolérance de rattrapage est
+    # portée à six heures — contrairement à un briefing du matin, une
+    # proposition de campagne reste exploitable en fin de journée, et la perdre
+    # ferait attendre une semaine entière.
+    if settings.scheduler.campaign_enabled:
+        scheduler.add_job(
+            _safe_campaign_agent, "cron",
+            day_of_week=settings.scheduler.campaign_day,
+            hour=settings.scheduler.campaign_hour, minute=0,
+            args=[settings], id="campaign-agent", max_instances=1, coalesce=True,
+            misfire_grace_time=6 * 3600,
+        )
+        logger.info(
+            "Assistant de campagne planifié : jour %d à %02d h 00 (%s)",
+            settings.scheduler.campaign_day, settings.scheduler.campaign_hour,
+            settings.scheduler.timezone,
+        )
+
+    # Indicateurs de marché : mensuel. La source est annuelle et révisée en
+    # cours d'année — voir `SchedulerConfig.market_enabled`.
+    if settings.scheduler.market_enabled:
+        scheduler.add_job(
+            _safe_market_data, "cron",
+            day=settings.scheduler.market_day, hour=settings.scheduler.market_hour,
+            minute=0, args=[settings], id="market-data",
+            max_instances=1, coalesce=True, misfire_grace_time=6 * 3600,
+        )
+        logger.info(
+            "Indicateurs de marché planifiés : le %d de chaque mois à %02d h 00",
+            settings.scheduler.market_day, settings.scheduler.market_hour,
         )
 
     # Pas d'exécution synchrone ici : `run_on_start` est déjà porté par le
