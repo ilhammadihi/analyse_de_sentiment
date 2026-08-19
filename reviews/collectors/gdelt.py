@@ -245,6 +245,15 @@ class GDELTScraper(BaseCollector):
             self.logger.debug("%s : %d article(s)", target["name"], len(reviews))
         return reviews
 
+    #: En dessous de cette longueur, GDELT refuse la phrase entre guillemets
+    #: (« The specified phrase is too short. »), mesuré pour "MTN" (3 lettres)
+    #: — voir `_RequeteRefusee`. Vérifié en conditions réelles : la même
+    #: requête SANS guillemets est acceptée et rend de vrais articles. Les
+    #: opérateurs concernés (MTN, Glo, e&, WE, BTC…) sont de toute façon des
+    #: sigles peu ambigus : perdre l'exactitude de phrase ne coûte quasiment
+    #: rien en précision, contrairement à un mot commun.
+    LONGUEUR_MIN_PHRASE = 4
+
     def _build_query(self, target: dict) -> str:
         """Requête GDELT pour une filiale.
 
@@ -253,7 +262,8 @@ class GDELTScraper(BaseCollector):
         autre pays et les attribuerait à cette filiale. Le bruit se voit, la
         mauvaise attribution non.
         """
-        term = f'"{target["term"]}"'
+        brut = target["term"]
+        term = brut if len(brut) < self.LONGUEUR_MIN_PHRASE else f'"{brut}"'
         fips = fips_code(target["iso2"])
         if not fips:
             self.logger.warning(
