@@ -138,15 +138,17 @@ def test_une_page_qui_repond_sans_vocabulaire_telecom_reste_une_piste():
 
 
 def test_une_page_qui_repond_et_parle_telecom_est_verifiee():
-    """LE SEUL CAS OÙ L'AGENT AFFIRME QUELQUE CHOSE, et il repose sur DEUX
-    faits mesurés, pas un."""
+    """LE SEUL CAS OÙ L'AGENT AFFIRME QUELQUE CHOSE, et il repose sur TROIS
+    faits mesurés, pas un : ça répond, ça parle de télécoms, et ça cite
+    l'opérateur cherché (sinon une page générique passerait pour vérifiée)."""
     d = DecouverteSources(
         sonde=lambda url: {
             "http": 200, "accessibility": "http_ouvert", "vocabulaire": True,
+            "texte": "avis clients sur mtn — réseau mobile",
             "url_finale": "https://ok.example",
         }
     )
-    candidate = Candidate(source_name="X", url="https://ok.example")
+    candidate = Candidate(source_name="X", url="https://ok.example", operator="MTN")
     d._instruire(candidate)
 
     assert candidate.status == "VERIFIED"
@@ -156,6 +158,24 @@ def test_une_page_qui_repond_et_parle_telecom_est_verifiee():
     # reproductible par qui veut la vérifier.
     sonde = [e for e in candidate.evidence if e.get("type") == "sonde"]
     assert sonde and sonde[0]["http"] == 200
+
+
+def test_une_page_generique_qui_ne_cite_pas_loperateur_nest_pas_verifiee():
+    """LE PIÈGE COMPLAINTSBOARD : une recherche mal formée peut rediriger vers
+    une page d'accueil générique qui parle de télécoms sans jamais mentionner
+    l'opérateur cherché. Sans ce garde-fou, elle serait créditée VERIFIED."""
+    d = DecouverteSources(
+        sonde=lambda url: {
+            "http": 200, "accessibility": "http_ouvert", "vocabulaire": True,
+            "texte": "plaintes résolues : hp, etihad airways, t-mobile...",
+            "url_finale": "https://www.complaintsboard.com",
+        }
+    )
+    candidate = Candidate(source_name="X", url="https://ok.example", operator="MTN")
+    d._instruire(candidate)
+
+    assert candidate.status == "CANDIDATE"
+    assert candidate.confidence < 0.5
 
 
 def test_un_blocage_est_une_information_et_non_un_echec():

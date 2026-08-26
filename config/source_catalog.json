@@ -58,7 +58,7 @@
       "raison": "Plateforme de plaintes internationale, sans restriction géographique.",
       "apport": "Couvre les pays où ni Trustpilot ni HelloPeter n'ont de présence — c'est-à-dire la quasi-totalité du périmètre hors Afrique du Sud.",
       "connecteur_probable": "html",
-      "reserve": "Plateforme de PLAINTES : comme HelloPeter, ses taux ne seront pas comparables à ceux des autres sources. À déclarer `comparable = false` dans dim_source si elle est un jour intégrée (migration 007)."
+      "reserve": "Plateforme de PLAINTES : comme HelloPeter, ses taux ne seront pas comparables à ceux des autres sources. À déclarer `comparable = false` dans dim_source si elle est un jour intégrée (migration 007). VÉRIFIÉ le 23/08/2026 : `/search?q=...` redirige TOUJOURS vers la page d'accueil générique (200, url_finale sans le paramètre), quel que soit l'opérateur — la recherche ne fonctionne pas via une simple requête HTTP. La sonde (`decouverte.py::_nom_operateur_present`) exige désormais que le nom de l'opérateur apparaisse dans la page pour marquer une candidate VERIFIED ; cette entrée ne dépassera donc plus jamais ce statut tant que la vraie page de recherche (probablement rendue en JS) n'est pas identifiée à la main."
     },
     {
       "nom": "Downdetector",

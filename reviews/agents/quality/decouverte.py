@@ -123,6 +123,42 @@ def _lire_volume_avis(texte: str) -> Optional[int]:
     return max(candidats) if candidats else None
 
 
+def _nom_operateur_present(candidate: "Candidate", texte: str) -> bool:
+    """Le nom de l'opérateur ou de la filiale apparaît-il sur la page sondée ?
+
+    C'EST CE QUI MANQUAIT À LA VALIDATION PAR VOCABULAIRE SEUL. Une page de
+    recherche mal formée peut rediriger vers une page d'accueil générique qui
+    parle légitimement de "mobile" et de "réseau" sans jamais mentionner
+    l'opérateur cherché — c'est exactement ce que fait `complaintsboard.com`
+    avec `?q=`, vérifié à la main : la recherche redirige toujours vers
+    l'accueil, quel que soit le terme demandé. Sans ce contrôle, une telle
+    candidate est créditée `VERIFIED, confidence=0.8` alors qu'elle ne
+    contient aucun avis sur l'opérateur.
+
+    Ne s'applique volontairement pas aux régulateurs (voir `_instruire`) :
+    un régulateur national ne mentionne pas nécessairement un opérateur par
+    son nom pour être une source légitime sur le secteur.
+
+    EXCLUT LES NOMS NON RECONNAISSABLES (`WE`, `e&`, `BTC`…) — même liste que
+    `reviews.collectors.targets`, pour la même raison : ce sont des mots
+    courants (le pronom anglais "we", un ticker crypto…) qui apparaîtraient
+    sur presque n'importe quelle page rédigée en anglais, rendant ce contrôle
+    inopérant précisément pour les opérateurs qu'il devrait le plus mettre en
+    garde. Sans cette exclusion, WE Égypte serait VERIFIED sur ComplaintsBoard
+    au premier "we" trouvé dans la page générique — exactement le faux
+    positif que ce contrôle a été écrit pour éliminer.
+    """
+    from reviews.collectors.targets import _NOMS_NON_RECONNAISSABLES
+
+    texte = (texte or "").lower()
+    for nom in (candidate.operator, candidate.subsidiary):
+        if not nom or nom.strip().lower() in _NOMS_NON_RECONNAISSABLES:
+            continue
+        if nom.strip().lower() in texte:
+            return True
+    return False
+
+
 class Sonde(Protocol):
     """Interrogation réelle d'une URL. Remplaçable en test."""
 
@@ -238,6 +274,11 @@ def sonde_http(url: str, timeout: int = 15) -> dict[str, Any]:
         # vocabulaire — aucune requête supplémentaire, donc aucun pas de plus
         # vers un comportement de collecteur.
         "avis_estimes": _lire_volume_avis(texte),
+        # Réutilisé par `_instruire` pour vérifier que le nom de l'opérateur
+        # apparaît vraiment sur la page — le vocabulaire télécom seul ne
+        # prouve rien : une recherche qui redirige vers une page d'accueil
+        # générique parle aussi de "mobile" et de "réseau".
+        "texte": texte,
         "url_finale": str(resp.url),
         "le": depart.isoformat(),
     }
@@ -405,6 +446,16 @@ class DecouverteSources:
             candidate.confidence = 0.2
             return
 
+        # Un régulateur ne cite pas nécessairement l'opérateur par son nom
+        # pour être une source légitime sur le secteur ; toute autre candidate
+        # (forum, plateforme d'avis) qui prétend cibler UN opérateur doit
+        # vraiment le mentionner, sinon elle n'apporte rien de plus qu'une
+        # page générique. Voir `_nom_operateur_present`.
+        nom_ok = (
+            candidate.source_type == "regulateur"
+            or _nom_operateur_present(candidate, resultat.get("texte", ""))
+        )
+
         candidate.probe_status = resultat.get("http")
         candidate.accessibility = resultat.get("accessibility") or "inconnu"
         candidate.probe_at = datetime.now(timezone.utc)
@@ -416,6 +467,7 @@ class DecouverteSources:
                 "http": resultat.get("http"),
                 "accessibility": candidate.accessibility,
                 "vocabulaire_telecom": resultat.get("vocabulaire"),
+                "nom_operateur_detecte": nom_ok,
                 "url_finale": resultat.get("url_finale"),
                 "date": resultat.get("le"),
             }
@@ -429,9 +481,10 @@ class DecouverteSources:
             return
 
         if candidate.accessibility == "http_ouvert":
-            if resultat.get("vocabulaire"):
-                # Répond ET parle de télécoms : c'est le seul cas où l'on
-                # affirme quelque chose. Deux faits mesurés, pas un.
+            if resultat.get("vocabulaire") and nom_ok:
+                # Répond, parle de télécoms ET cite l'opérateur cherché :
+                # trois faits mesurés, pas un vocabulaire générique qui
+                # pourrait appartenir à n'importe quelle page du site.
                 candidate.status = "VERIFIED"
                 candidate.confidence = 0.8
                 candidate.estimated_relevance = "high"
@@ -439,6 +492,22 @@ class DecouverteSources:
                 # un chiffre lu sur une page de parking ou une redirection
                 # n'aurait aucun sens à afficher, même s'il matche le motif.
                 candidate.avis_estimes = resultat.get("avis_estimes")
+            elif resultat.get("vocabulaire") and not nom_ok:
+                # Parle de télécoms EN GÉNÉRAL mais jamais de CET opérateur :
+                # signe typique d'une recherche qui a échoué et redirigé vers
+                # une page générique (page d'accueil, résultats vides). Ne
+                # jamais présenter ça comme vérifié : c'est le piège précis
+                # qui faisait remonter ComplaintsBoard à 80 % de confiance
+                # sans qu'aucun avis n'y soit visible.
+                candidate.status = "CANDIDATE"
+                candidate.confidence = 0.3
+                candidate.estimated_relevance = "low"
+                candidate.apport += (
+                    " Le nom de l'opérateur n'apparaît pas sur la page rendue : "
+                    "la recherche a probablement échoué et redirigé vers un "
+                    "contenu générique — à vérifier manuellement avant toute "
+                    "intégration."
+                )
             else:
                 # Répond mais ne parle pas du sujet : page de parking,
                 # redirection, ou gabarit de recherche mal formé. On ne rejette

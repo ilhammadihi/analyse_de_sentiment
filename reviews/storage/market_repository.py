@@ -32,6 +32,10 @@ class MarketRepository:
         """Insère ou met à jour des indicateurs. Renvoie le nombre traité.
 
         `lignes` attend : country_id, indicator, unit, year, value, provider.
+        `source_url` est optionnel — les collectes automatiques (Banque
+        Mondiale/UIT) n'ont pas de page individuelle à citer par mesure ;
+        les saisies manuelles ponctuelles (presse, voir 026) en ont une, et
+        c'est elle qui permet de justifier le chiffre à l'écran.
         """
         if not lignes:
             return 0
@@ -51,7 +55,7 @@ class MarketRepository:
                 int(l["year"]),
                 str(l.get("provider") or "worldbank_itu")[:40],
             )
-            uniques[cle] = (*cle[:4], float(l["value"]), cle[4])
+            uniques[cle] = (*cle[:4], float(l["value"]), cle[4], l.get("source_url"))
 
         ecartes = len(lignes) - len(uniques)
         if ecartes:
@@ -64,10 +68,11 @@ class MarketRepository:
                 cur,
                 """
                 INSERT INTO market_indicators
-                    (country_id, indicator, unit, year, value, provider)
+                    (country_id, indicator, unit, year, value, provider, source_url)
                 VALUES %s
                 ON CONFLICT (country_id, indicator, unit, year, provider)
                 DO UPDATE SET value = EXCLUDED.value,
+                              source_url = EXCLUDED.source_url,
                               collected_at = now()
                 """,
                 valeurs,
@@ -111,6 +116,7 @@ class MarketRepository:
                 """
                 SELECT DISTINCT ON (m.indicator, m.unit)
                        m.indicator, m.unit, m.year, m.value,
+                       m.provider, m.source_url,
                        LAG(m.value) OVER (
                            PARTITION BY m.indicator, m.unit ORDER BY m.year
                        ) AS valeur_precedente,
@@ -166,7 +172,8 @@ class MarketRepository:
                 """
                 SELECT DISTINCT ON (c.iso2, m.indicator, m.unit)
                        c.iso2, c.name AS country, c.region,
-                       m.indicator, m.unit, m.year, m.value
+                       m.indicator, m.unit, m.year, m.value,
+                       m.provider, m.source_url
                 FROM market_indicators m
                 JOIN dim_country c ON c.country_id = m.country_id
                 WHERE m.indicator = ANY(%s)
@@ -185,9 +192,15 @@ class MarketRepository:
             )
             # Clé « indicateur|unité », comme dans `latest()` : deux mesures du
             # même indicateur dans des unités différentes sont deux mesures.
+            #
+            # `provider`/`source_url` accompagnent CHAQUE mesure, pas le pays
+            # entier : un pays peut porter à la fois un indicateur officiel
+            # (Banque Mondiale/UIT) et un indicateur `press` plus récent —
+            # voir 026. Sans ça, l'écran ne pourrait pas distinguer les deux.
             entree["indicators"][f"{r['indicator']}|{r['unit']}"] = {
                 "indicator": r["indicator"], "unit": r["unit"],
                 "year": r["year"], "value": r["value"],
+                "provider": r["provider"], "source_url": r["source_url"],
             }
         return sorted(pays.values(), key=lambda p: p["country"])
 

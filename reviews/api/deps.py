@@ -29,6 +29,13 @@ def get_market_repo():
     return MarketRepository(get_database())
 
 
+def get_operator_market_repo():
+    """Indicateurs de marché PAR OPÉRATEUR (régulateurs nationaux)."""
+    from reviews.storage.operator_market_repository import OperatorMarketRepository
+
+    return OperatorMarketRepository(get_database())
+
+
 def get_insight_service():
     """Service de synthèse en langage naturel.
 

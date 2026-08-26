@@ -126,15 +126,39 @@ def test_une_candidate_verifiee_recupere_son_volume_lu():
     d = DecouverteSources(
         sonde=lambda url: {
             "http": 200, "accessibility": "http_ouvert", "vocabulaire": True,
-            "avis_estimes": 86, "url_finale": url,
+            "texte": "86 avis sur mtn", "avis_estimes": 86, "url_finale": url,
         }
     )
-    candidate = Candidate(source_name="X", url="https://ok.example")
+    candidate = Candidate(source_name="X", url="https://ok.example", operator="MTN")
     d._instruire(candidate)
 
     assert candidate.status == "VERIFIED"
     assert candidate.avis_estimes == 86
     assert candidate.as_dict()["avis_estimes"] == 86
+
+
+def test_un_nom_d_operateur_non_reconnaissable_ne_verifie_jamais_par_accident():
+    """RÉGRESSION ÉVITÉE À LA SOURCE : « WE » (Telecom Egypt) est un mot
+    anglais courant — voir `reviews.collectors.targets._NOMS_NON_RECONNAISSABLES`
+    et son cas mesuré (« We need better broadband in Lagos » -> WE Égypte).
+    Une page générique qui parle de télécoms et contient, par pur hasard, le
+    pronom « we » ne doit jamais suffire à vérifier cette candidate : ce
+    serait exactement le faux positif que le contrôle du nom d'opérateur a
+    été ajouté pour éliminer, reproduit pour l'unique opérateur que ce dépôt
+    a déjà mesuré comme non reconnaissable en texte libre."""
+    from reviews.agents.quality.decouverte import DecouverteSources
+
+    d = DecouverteSources(
+        sonde=lambda url: {
+            "http": 200, "accessibility": "http_ouvert", "vocabulaire": True,
+            "texte": "we offer the best mobile network and customer service",
+            "avis_estimes": None, "url_finale": url,
+        }
+    )
+    candidate = Candidate(source_name="X", url="https://generique.example", operator="WE")
+    d._instruire(candidate)
+
+    assert candidate.status != "VERIFIED"
 
 
 # ===========================================================================

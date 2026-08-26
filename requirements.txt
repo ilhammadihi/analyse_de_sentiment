@@ -12,6 +12,10 @@ requests>=2.31.0
 google-play-scraper>=1.2.0
 feedparser>=6.0.0
 beautifulsoup4>=4.11.0
+# Lecture des jeux de données ANRT (XLSX) — voir reviews/collectors/anrt_maroc.py
+openpyxl>=3.1.0
+# Lecture du tableau de bord ARCEP Bénin (PDF) — voir reviews/collectors/arcep_benin.py
+pdfplumber>=0.11.0
 
 # Planification
 APScheduler>=3.10.0

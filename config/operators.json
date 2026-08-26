@@ -2269,36 +2269,6 @@
       }
     },
     {
-      "operator": "MTN",
-      "country": "Guinée",
-      "iso2": "GN",
-      "subsidiary_name": "MTN Guinée-Conakry",
-      "sources": {
-        "appstore": null,
-        "playstore": {
-          "apps": [
-            {
-              "package_id": "gn.com.mtn.evd.reseller",
-              "_country_verdict": "match",
-              "_name": "MTN Super-POS",
-              "_developer": "Seamless Distibution System AB",
-              "_score": null,
-              "_play_reviews": 0,
-              "_play_score": null
-            }
-          ]
-        },
-        "google_maps": {
-          "query": "Agence MTN Guinée"
-        },
-        "trustpilot": null,
-        "rss": {
-          "search_term": "MTN Guinée Conakry"
-        },
-        "hellopeter": null
-      }
-    },
-    {
       "operator": "Orange",
       "country": "Guinée",
       "iso2": "GN",
@@ -2351,38 +2321,6 @@
         "trustpilot": null,
         "rss": {
           "search_term": "GETESA"
-        },
-        "hellopeter": null
-      }
-    },
-    {
-      "operator": "MTN",
-      "country": "Guinée-Bissau",
-      "iso2": "GW",
-      "subsidiary_name": "MTN Guinée-Bissau",
-      "sources": {
-        "appstore": {
-          "apps": [
-            {
-              "app_id": "977968085",
-              "store_country": "gw",
-              "_verified_app": "MyMTN",
-              "_verified_publisher": "MTN Group LTD",
-              "_verified_on": "2026-07-30",
-              "_verified_reviews": 0,
-              "_shared_app": true,
-              "_name": "MyMTN",
-              "_store_reviews": 0
-            }
-          ]
-        },
-        "playstore": null,
-        "google_maps": {
-          "query": "Agence MTN Guinée-Bissau"
-        },
-        "trustpilot": null,
-        "rss": {
-          "search_term": "MTN Guinée-Bissau"
         },
         "hellopeter": null
       }
@@ -4120,37 +4058,6 @@
       }
     },
     {
-      "operator": "Orange",
-      "country": "Niger",
-      "iso2": "NE",
-      "subsidiary_name": "Orange Niger",
-      "sources": {
-        "appstore": {
-          "apps": [
-            {
-              "app_id": "1547958789",
-              "store_country": "ne",
-              "_verified_app": "Orange Travel: Prepaid eSIM",
-              "_verified_publisher": "Orange",
-              "_verified_on": "2026-07-30",
-              "_verified_reviews": 0,
-              "_name": "Orange Travel: Prepaid eSIM",
-              "_store_reviews": 0
-            }
-          ]
-        },
-        "playstore": null,
-        "google_maps": {
-          "query": "Agence Orange Niger"
-        },
-        "trustpilot": null,
-        "rss": {
-          "search_term": "Orange Niger"
-        },
-        "hellopeter": null
-      }
-    },
-    {
       "operator": "9mobile",
       "country": "Nigeria",
       "iso2": "NG",
@@ -4670,47 +4577,6 @@
         "trustpilot": null,
         "rss": {
           "search_term": "Airtel RDC"
-        },
-        "hellopeter": null
-      }
-    },
-    {
-      "operator": "MTN",
-      "country": "RD Congo",
-      "iso2": "CD",
-      "subsidiary_name": "MTN RDC",
-      "sources": {
-        "appstore": {
-          "apps": [
-            {
-              "app_id": "977968085",
-              "store_country": "cd",
-              "_verified_app": "MyMTN",
-              "_verified_publisher": "MTN Group LTD",
-              "_verified_on": "2026-07-30",
-              "_verified_reviews": 10,
-              "_shared_app": true,
-              "_name": "MyMTN",
-              "_store_reviews": 10
-            },
-            {
-              "app_id": "1474080783",
-              "store_country": "cd",
-              "_country_verdict": "neutral",
-              "_name": "MTN MoMo",
-              "_seller": "MTN Group LTD",
-              "_global_ratings": 6,
-              "_store_reviews": 10
-            }
-          ]
-        },
-        "playstore": null,
-        "google_maps": {
-          "query": "Agence MTN RD Congo"
-        },
-        "trustpilot": null,
-        "rss": {
-          "search_term": "MTN RDC"
         },
         "hellopeter": null
       }

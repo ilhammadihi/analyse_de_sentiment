@@ -22,6 +22,7 @@ Un run qui échoue n'interrompt jamais le planificateur. Utilisé par le service
 
 import logging
 from datetime import datetime, timedelta, timezone
+from importlib import import_module
 from zoneinfo import ZoneInfo
 
 from apscheduler.executors.pool import ThreadPoolExecutor
@@ -76,6 +77,37 @@ def _safe_market_data(settings) -> None:
         )
     except Exception as e:  # noqa: BLE001
         logger.error("Collecte des indicateurs de marché en échec : %s", e, exc_info=True)
+
+
+def _safe_operator_regulateur(settings, nom: str, collecteur_cls) -> None:
+    """Rafraîchissement d'UN régulateur national PAR OPÉRATEUR.
+
+    UN JOB PAR RÉGULATEUR, comme un job par source de collecte (voir l'en-tête
+    de ce fichier) : NCC Nigeria, ANRT Maroc et ARCEP Bénin dépendent chacun
+    d'une page ou d'un fichier externe distinct, avec sa propre cadence et son
+    propre point de défaillance. Un régulateur en échec ne doit jamais
+    entraîner les autres ni la source pays (`_safe_market_data`).
+
+    `nom` et `collecteur_cls` sont portés par le job APScheduler
+    (`args=[settings, nom, Collecteur]`) plutôt que fermés sur trois fonctions
+    quasi identiques : les trois régulateurs partagent EXACTEMENT le même
+    contrat (`.collect() -> (lignes, erreurs)` puis
+    `OperatorMarketRepository.upsert`), seuls le nom affiché et la classe
+    diffèrent.
+    """
+    from reviews.storage.db import get_database
+    from reviews.storage.operator_market_repository import OperatorMarketRepository
+
+    try:
+        db = get_database()
+        lignes, erreurs = collecteur_cls().collect()
+        ecrites = OperatorMarketRepository(db).upsert(lignes)
+        logger.info(
+            "%s : %d mesure(s) écrite(s), %d erreur(s)",
+            nom, ecrites, len(erreurs),
+        )
+    except Exception as e:  # noqa: BLE001
+        logger.error("Collecte %s en échec : %s", nom, e, exc_info=True)
 
 
 def _safe_insight_agent(settings) -> None:
@@ -357,6 +389,62 @@ def run_scheduler() -> None:
             "Indicateurs de marché planifiés : le %d de chaque mois à %02d h 00",
             settings.scheduler.market_day, settings.scheduler.market_hour,
         )
+
+    # Abonnés par opérateur : UN JOB PAR RÉGULATEUR NATIONAL — voir
+    # `_safe_operator_regulateur`. Chacun garde SA propre cadence (NCC Nigeria
+    # et ANRT Maroc sont mensuel/trimestriel, ARCEP Bénin n'a qu'une édition
+    # annuelle) plutôt que d'en forcer une commune.
+    #
+    # KENYA (Communications Authority) ET SÉNÉGAL (ARTP) ONT ÉTÉ ÉVALUÉS ET
+    # ÉCARTÉS le 23 août 2026 — à ne pas retenter sans nouvelle source. Dans
+    # les deux cas, le parc d'abonnés PAR OPÉRATEUR n'existe dans aucun
+    # format exploitable de façon fiable :
+    #   - CA Kenya : uniquement un graphique du rapport PDF trimestriel
+    #     (« Figure 2 : Mobile Subscription per Operator »), aucun texte ni
+    #     table sous-jacente. Le portail opendata.go.ke est hors service.
+    #   - ARTP Sénégal : uniquement des étiquettes de graphique en camembert,
+    #     reprises dans une phrase narrative fixe côté texte ; le portail
+    #     `artp.sn/open-data` ne publie que des listes d'équipements/
+    #     installateurs agréés, aucun jeu de données marché.
+    #   - Les rapports financiers des groupes cotés (Safaricom, Sonatel) ont
+    #     aussi été vérifiés : Sonatel publie un chiffre GROUPE multi-pays en
+    #     diapositives infographiques (pas de détail Sénégal isolé, pas de
+    #     table), et Safaricom ne couvrirait de toute façon qu'un seul des
+    #     opérateurs kényans.
+    # Décision : pas d'OCR, pas de scraper fondé sur une formulation de phrase
+    # (trop fragile, casse sans erreur visible au moindre changement de
+    # rédaction). Ces deux pays restent donc SANS donnée par opérateur tant
+    # qu'aucune source structurée n'est trouvée.
+    # Import RETARDÉ À L'INTÉRIEUR DE LA BOUCLE, comme chaque `_safe_*` de ce
+    # fichier importe ses propres dépendances au moment de l'exécution plutôt
+    # qu'à la configuration : `openpyxl` (ANRT) et `pdfplumber` (ARCEP, NCA)
+    # ne doivent pas devenir une condition de démarrage du planificateur pour
+    # un déploiement qui a désactivé les quatre régulateurs.
+    regulateurs = (
+        ("NCC Nigeria", "ncc-nigeria", settings.scheduler.ncc_nigeria_enabled,
+         settings.scheduler.ncc_nigeria_day, settings.scheduler.ncc_nigeria_hour,
+         "reviews.collectors.ncc_nigeria", "NccNigeriaCollector"),
+        ("ANRT Maroc", "anrt-maroc", settings.scheduler.anrt_maroc_enabled,
+         settings.scheduler.anrt_maroc_day, settings.scheduler.anrt_maroc_hour,
+         "reviews.collectors.anrt_maroc", "AnrtMarocCollector"),
+        ("ARCEP Bénin", "arcep-benin", settings.scheduler.arcep_benin_enabled,
+         settings.scheduler.arcep_benin_day, settings.scheduler.arcep_benin_hour,
+         "reviews.collectors.arcep_benin", "ArcepBeninCollector"),
+        ("NCA Ghana", "nca-ghana", settings.scheduler.nca_ghana_enabled,
+         settings.scheduler.nca_ghana_day, settings.scheduler.nca_ghana_hour,
+         "reviews.collectors.nca_ghana", "NcaGhanaCollector"),
+    )
+    for nom, job_id, actif, jour, heure, module_path, classe_nom in regulateurs:
+        if not actif:
+            continue
+        collecteur_cls = getattr(import_module(module_path), classe_nom)
+        scheduler.add_job(
+            _safe_operator_regulateur, "cron",
+            day=jour, hour=heure, minute=0,
+            args=[settings, nom, collecteur_cls], id=job_id,
+            max_instances=1, coalesce=True, misfire_grace_time=6 * 3600,
+        )
+        logger.info("%s planifié : le %d de chaque mois à %02d h 00", nom, jour, heure)
 
     # Pas d'exécution synchrone ici : `run_on_start` est déjà porté par le
     # `next_run_time` de chaque job. Lancer la collecte avant `start()` rendait

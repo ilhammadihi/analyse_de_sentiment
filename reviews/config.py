@@ -642,6 +642,45 @@ class SchedulerConfig(BaseSettings):
     market_day: int = Field(default=1, ge=1, le=28, validation_alias="MARKET_DATA_DAY")
     market_hour: int = Field(default=3, ge=0, le=23, validation_alias="MARKET_DATA_HOUR")
 
+    #: Abonnés GSM par opérateur (NCC Nigeria) : rafraîchissement MENSUEL lui
+    #: aussi, mais la source elle-même est mensuelle — voir
+    #: `reviews/collectors/ncc_nigeria.py`. Un jour différent de
+    #: `market_day` (2 plutôt que 1) : les deux jobs lisent des sources
+    #: publiques indépendantes, rien n'oblige à les faire courir le même jour,
+    #: et les séparer facilite la lecture des logs si l'un échoue.
+    #:
+    #: Actif par défaut, comme les indicateurs de marché pays : lecture seule
+    #: d'une source publique, ne parle à personne.
+    ncc_nigeria_enabled: bool = Field(default=True, validation_alias="ENABLE_NCC_NIGERIA")
+    ncc_nigeria_day: int = Field(default=2, ge=1, le=28, validation_alias="NCC_NIGERIA_DAY")
+    ncc_nigeria_hour: int = Field(default=3, ge=0, le=23, validation_alias="NCC_NIGERIA_HOUR")
+
+    #: Abonnés mobile par opérateur (ANRT Maroc) : la source elle-même est
+    #: TRIMESTRIELLE, mais un passage mensuel ne coûte rien de plus qu'un
+    #: appel HTTP inutile deux mois sur trois — voir `market_enabled` sur le
+    #: même raisonnement pour la source pays.
+    anrt_maroc_enabled: bool = Field(default=True, validation_alias="ENABLE_ANRT_MAROC")
+    anrt_maroc_day: int = Field(default=3, ge=1, le=28, validation_alias="ANRT_MAROC_DAY")
+    anrt_maroc_hour: int = Field(default=3, ge=0, le=23, validation_alias="ANRT_MAROC_HOUR")
+
+    #: Abonnés mobile actifs par opérateur (ARCEP Bénin) : la source est
+    #: ANNUELLE et son URL change à chaque édition (voir
+    #: `reviews/collectors/arcep_benin.py`) — un passage mensuel ne trouvera
+    #: donc rien de neuf onze mois sur douze tant que le lien n'est pas
+    #: recontrôlé à la main, mais reste inoffensif (upsert idempotent).
+    arcep_benin_enabled: bool = Field(default=True, validation_alias="ENABLE_ARCEP_BENIN")
+    arcep_benin_day: int = Field(default=4, ge=1, le=28, validation_alias="ARCEP_BENIN_DAY")
+    arcep_benin_hour: int = Field(default=3, ge=0, le=23, validation_alias="ARCEP_BENIN_HOUR")
+
+    #: Abonnements voix mobile par opérateur (NCA Ghana) : la source publie un
+    #: bulletin TRIMESTRIEL, comme ANRT Maroc — même raisonnement sur le
+    #: passage mensuel qui ne trouve rien de neuf deux mois sur trois, sans
+    #: coût réel. URL datée par édition, comme ARCEP Bénin — voir
+    #: `reviews/collectors/nca_ghana.py`.
+    nca_ghana_enabled: bool = Field(default=True, validation_alias="ENABLE_NCA_GHANA")
+    nca_ghana_day: int = Field(default=5, ge=1, le=28, validation_alias="NCA_GHANA_DAY")
+    nca_ghana_hour: int = Field(default=3, ge=0, le=23, validation_alias="NCA_GHANA_HOUR")
+
 
 class AlertingConfig(BaseSettings):
     """Alerting temps réel : seuils + canaux de notification."""

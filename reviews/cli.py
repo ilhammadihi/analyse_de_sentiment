@@ -159,6 +159,34 @@ def _cmd_market_data(limit_countries: int | None) -> int:
     return 0
 
 
+def _cmd_operator_regulateur(nom: str, collecteur_cls) -> int:
+    """Collecte d'UN régulateur national par opérateur, à la main.
+
+    Partagée par `ncc-nigeria`, `anrt-maroc` et `arcep-benin` : les trois
+    régulateurs suivent exactement le même contrat
+    (`.collect() -> (lignes, erreurs)` puis `OperatorMarketRepository.upsert`)
+    — voir `_safe_operator_regulateur` dans `scheduling.py` pour le même
+    regroupement côté planificateur.
+    """
+    from reviews.storage.db import get_database
+    from reviews.storage.operator_market_repository import OperatorMarketRepository
+
+    db = get_database()
+    try:
+        print(f"Collecte {nom} (abonnés par opérateur)…")
+        lignes, erreurs = collecteur_cls().collect()
+        ecrites = OperatorMarketRepository(db).upsert(lignes)
+
+        print(f"✓ {ecrites} mesure(s) enregistrée(s)")
+        if erreurs:
+            print(f"⚠ {len(erreurs)} erreur(s) :")
+            for e in erreurs[:5]:
+                print(f"   {e}")
+    finally:
+        db.close_all()
+    return 0
+
+
 def _cmd_agent(dry_run: bool) -> int:
     """Un passage de l'agent de veille, à la main.
 
@@ -489,6 +517,23 @@ def main(argv: list[str] | None = None) -> int:
         help="N'interroger que les N premiers pays (mise au point)",
     )
 
+    sub.add_parser(
+        "ncc-nigeria",
+        help="Collecter les abonnés GSM par opérateur (NCC Nigeria)",
+    )
+    sub.add_parser(
+        "anrt-maroc",
+        help="Collecter les abonnés mobile par opérateur (ANRT Maroc)",
+    )
+    sub.add_parser(
+        "arcep-benin",
+        help="Collecter les abonnés mobile par opérateur (ARCEP Bénin)",
+    )
+    sub.add_parser(
+        "nca-ghana",
+        help="Collecter les abonnements voix mobile par opérateur (NCA Ghana)",
+    )
+
     p_agent = sub.add_parser(
         "agent", help="Un passage de l'agent de veille satisfaction"
     )
@@ -603,6 +648,18 @@ def main(argv: list[str] | None = None) -> int:
             return _cmd_retract_alert(args.alert_ids)
         if args.command == "market-data":
             return _cmd_market_data(args.limit_countries)
+        if args.command == "ncc-nigeria":
+            from reviews.collectors.ncc_nigeria import NccNigeriaCollector
+            return _cmd_operator_regulateur("NCC Nigeria", NccNigeriaCollector)
+        if args.command == "anrt-maroc":
+            from reviews.collectors.anrt_maroc import AnrtMarocCollector
+            return _cmd_operator_regulateur("ANRT Maroc", AnrtMarocCollector)
+        if args.command == "arcep-benin":
+            from reviews.collectors.arcep_benin import ArcepBeninCollector
+            return _cmd_operator_regulateur("ARCEP Bénin", ArcepBeninCollector)
+        if args.command == "nca-ghana":
+            from reviews.collectors.nca_ghana import NcaGhanaCollector
+            return _cmd_operator_regulateur("NCA Ghana", NcaGhanaCollector)
         if args.command == "agent":
             return _cmd_agent(args.dry_run)
         if args.command == "quality":

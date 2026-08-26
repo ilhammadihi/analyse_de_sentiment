@@ -526,7 +526,11 @@ class TestUnJobParSource:
                     stagger_minutes=2, interval_minutes=360,
                     agent_enabled=False, agent_hour=8,
                     campaign_enabled=False, campaign_day=0, campaign_hour=9,
-                    market_enabled=False, market_day=1, market_hour=3)
+                    market_enabled=False, market_day=1, market_hour=3,
+                    ncc_nigeria_enabled=False, ncc_nigeria_day=2, ncc_nigeria_hour=3,
+                    anrt_maroc_enabled=False, anrt_maroc_day=3, anrt_maroc_hour=3,
+                    arcep_benin_enabled=False, arcep_benin_day=4, arcep_benin_hour=3,
+                    nca_ghana_enabled=False, nca_ghana_day=5, nca_ghana_hour=3)
         # `quality` porte sa propre section dans la vraie configuration : on la
         # retire des surcharges AVANT de composer celles du planificateur, sans
         # quoi elle atterrirait dans `scheduler` où rien ne la lit.

@@ -17,7 +17,7 @@ from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 
-from reviews.api.deps import get_market_repo, get_stats_repo
+from reviews.api.deps import get_market_repo, get_operator_market_repo, get_stats_repo
 from reviews.api.filter_params import FilterDep
 from reviews.storage.filters import ALLOWED_GRANULARITIES, LEVELS
 from reviews.storage.stats_repository import StatsRepository
@@ -398,6 +398,8 @@ def market(
                     "unit_label": _market_unit_label(v["unit"]),
                     "year": v["year"],
                     "value": v["value"],
+                    "provider": v.get("provider"),
+                    "source_url": v.get("source_url"),
                     "previous_year": v.get("annee_precedente"),
                     "previous_value": v.get("valeur_precedente"),
                     "variation_pct": v.get("variation_pct"),
@@ -451,6 +453,41 @@ def market_coverage(repo=Depends(get_market_repo)):
     un trou de couverture, au même titre qu'une filiale sans avis.
     """
     return {"rows": repo.coverage()}
+
+
+@router.get("/market/operators")
+def market_operators(repo=Depends(get_operator_market_repo)):
+    """Contexte marché PAR OPÉRATEUR — régulateurs nationaux et presse sourcée,
+    jamais la source pays (Banque Mondiale/UIT, retirée de l'écran le
+    24 août 2026).
+
+    NE COUVRE PAS TOUT LE PÉRIMÈTRE : quatre régulateurs intégrés en continu
+    (NCC Nigeria, ANRT Maroc, ARCEP Bénin, NCA Ghana — voir
+    `reviews/collectors/`) plus un backfill ponctuel presse/rapports
+    financiers (`tools/backfill_press_operator_data_2026.py`). C'est délibéré
+    et provisoire — chaque source supplémentaire ajoute des filiales sans
+    changer ce contrat.
+
+    `repo.latest_by_subsidiary()` NE GARDE QUE L'ANNÉE EN COURS par défaut
+    (`recent_only=True`) — demandé explicitement le 24 août 2026 : ce
+    dashboard ne doit montrer QUE des opérateurs à jour, jamais un chiffre
+    2024/2025 mêlé à des chiffres 2026. La donnée plus ancienne reste en
+    base, seul l'affichage se resserre.
+
+    `period` et `frequency` accompagnent CHAQUE mesure plutôt qu'un unique
+    horodatage d'écran : les régulateurs n'ont pas tous la même cadence
+    (mensuel pour NCC, trimestriel pour ANRT, annuel pour ARCEP/NCA) et le
+    dashboard ne doit jamais en inventer une commune.
+    """
+    rows = repo.latest_by_subsidiary()
+    return {
+        "rows": rows,
+        "granularity": "subsidiary",
+        "note": (
+            "Couverture partielle : seuls les opérateurs avec une mesure de "
+            "l'année en cours apparaissent ici."
+        ),
+    }
 
 
 def _market_label(code: str) -> str:
