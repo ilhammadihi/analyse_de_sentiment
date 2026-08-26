@@ -1,38 +1,82 @@
-version: '3.8'
+# Socle complet dockerisé : `docker compose up --build`
+#   - postgres : base de données (schéma appliqué automatiquement au 1er démarrage)
+#   - api      : API FastAPI (REST + SSE)         -> http://localhost:8000/docs
+#   - worker   : pipeline planifié (APScheduler)  -> collecte + sentiment + alerting
+# (Pas de service dashboard : techno réservée au choix de l'équipe.)
 
 services:
-  # PostgreSQL avec volume persistant
   postgres:
     image: postgres:15-alpine
-    container_name: telecom_postgres
+    container_name: reviews_postgres
     restart: unless-stopped
-    
     environment:
-      POSTGRES_USER: telecom_user
-      POSTGRES_PASSWORD: telecom_password
-      POSTGRES_DB: telecom_db
+      POSTGRES_USER: ${DB_USER:-telecom_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-telecom_password}
+      POSTGRES_DB: ${DB_NAME:-telecom_db}
       POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
-    
     ports:
-      - "5432:5432"
-    
+      # Lié à la boucle locale, PAS à 0.0.0.0 : seuls l'API et le worker ont
+      # besoin de la base, et ils passent par le réseau interne du compose. Un
+      # « 5432:5432 » nu la publie sur toutes les interfaces — sur un serveur
+      # de test partagé, c'est une base exposée au réseau. Le port reste
+      # joignable depuis la machine hôte pour psql et les sauvegardes.
+      - "127.0.0.1:5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./migrations:/docker-entrypoint-initdb.d
-    
+      # Schéma appliqué automatiquement à la création de la base
+      - ./migrations:/docker-entrypoint-initdb.d:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U telecom_user"]
+      # -d obligatoire : sans base cible, pg_isready se connecte à une base
+      # homonyme de l'utilisateur ("telecom_user"), inexistante -> le log se
+      # remplit de « FATAL: database "telecom_user" does not exist » toutes les
+      # 10 s (le check passe quand même, mais le bruit est trompeur).
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-telecom_user} -d ${DB_NAME:-telecom_db}"]
       interval: 10s
       timeout: 5s
       retries: 5
-    
-    networks:
-      - scraping_network
+    networks: [reviews_net]
+
+  api:
+    build: .
+    container_name: reviews_api
+    restart: unless-stopped
+    command: ["python", "-m", "reviews", "serve"]
+    env_file: .env
+    environment:
+      DB_HOST: postgres
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/health').status==200 else 1)\""]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    networks: [reviews_net]
+
+  worker:
+    build: .
+    container_name: reviews_worker
+    restart: unless-stopped
+    command: ["python", "-m", "reviews", "schedule"]
+    env_file: .env
+    environment:
+      DB_HOST: postgres
+      ENABLE_SCHEDULER: "true"
+    volumes:
+      - review_state:/app/data/state   # persiste l'état de session des scrapers
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks: [reviews_net]
 
 volumes:
   postgres_data:
-    driver: local
+  review_state:
 
 networks:
-  scraping_network:
+  reviews_net:
     driver: bridge

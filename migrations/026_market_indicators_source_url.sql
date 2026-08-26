@@ -1,0 +1,25 @@
+-- ===========================================================================
+-- 026 — market_indicators : traçabilité pour les mesures hors Banque Mondiale/UIT
+-- ===========================================================================
+--
+-- POURQUOI CETTE COLONNE, ET POURQUOI MAINTENANT
+--   014 anticipait déjà « le jour où une seconde source alimentera cette
+--   table » via la colonne `provider` — voir sa documentation. Ce jour est
+--   arrivé le 24 août 2026 : l'encadrant a demandé de compléter 2025-2026 là
+--   où la Banque Mondiale/UIT s'arrête à 2023-2024 (source structurellement
+--   annuelle, aucune alternative gratuite plus fraîche trouvée — voir
+--   `tools/backfill_press_operator_data_2026.py`). Les valeurs ajoutées
+--   viennent de RAPPORTS DE RÉGULATEURS relayés par la presse, PAS de la
+--   Banque Mondiale — une rigueur inférieure, assumée et non automatisée
+--   (voir ce script : c'est une saisie manuelle ponctuelle, pas un
+--   collecteur planifié, exactement pour ne pas reproduire le problème du
+--   scraper fondé sur une formulation de phrase déjà écarté pour le
+--   Kenya/Sénégal opérateur).
+--
+--   SANS `source_url`, UNE VALEUR PRESSE EST INDISCERNABLE D'UNE VALEUR
+--   OFFICIELLE À L'ÉCRAN. `provider` distingue déjà les deux dans le modèle,
+--   mais rien ne permettait de vérifier D'OÙ vient un chiffre `press` — et un
+--   dashboard consulté par des dirigeants doit pouvoir justifier chaque
+--   nombre qu'il affiche, au même titre que `operator_market_indicators`
+--   (025) le fait déjà pour les régulateurs par opérateur.
+ALTER TABLE market_indicators ADD COLUMN IF NOT EXISTS source_url TEXT;

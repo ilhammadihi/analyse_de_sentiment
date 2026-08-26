@@ -1,0 +1,58 @@
+[project]
+name = "reviews-platform"
+version = "1.0.0"
+description = "Collecte, analyse de sentiment, alerting et API des avis clients (socle phase 1)"
+requires-python = ">=3.11"
+
+dependencies = [
+    # Core
+    "python-dotenv>=1.0.0",
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.1.0",
+    # Base de données
+    "psycopg2-binary>=2.9.0",
+    # Collecte
+    "playwright>=1.40.0",
+    "requests>=2.31.0",
+    "google-play-scraper>=1.2.0",
+    "feedparser>=6.0.0",
+    "beautifulsoup4>=4.11.0",
+    # Planification
+    "APScheduler>=3.10.0",
+    "tzdata>=2024.1",          # base de fuseaux IANA requise par APScheduler
+    # API
+    "fastapi>=0.109.0",
+    "uvicorn[standard]>=0.27.0",
+    # Logging
+    "python-json-logger>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.3.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+]
+
+[project.scripts]
+reviews = "reviews.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+filterwarnings = [
+    # utcnow() est déprécié en 3.12+ ; migration tz-aware prévue (suivi phase 1)
+    "ignore:datetime.datetime.utcnow:DeprecationWarning",
+]
+
+[tool.black]
+line-length = 100
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["reviews*"]

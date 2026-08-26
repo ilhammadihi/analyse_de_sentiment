@@ -1,0 +1,49 @@
+@baseUrl = http://localhost:8000
+
+### Sonde de santé
+GET {{baseUrl}}/health
+
+### Racine
+GET {{baseUrl}}/
+
+### KPI globaux (dashboard)
+GET {{baseUrl}}/stats/overview
+
+### Tendance de sentiment (14 jours)
+GET {{baseUrl}}/stats/sentiment-trend?days=14
+
+### Tendance de sentiment pour une filiale précise
+GET {{baseUrl}}/stats/sentiment-trend?days=30&company=Moov Africa Benin
+
+### Répartition par entreprise (legacy, préférer by-subsidiary)
+GET {{baseUrl}}/stats/by-company
+
+### Répartition par pays
+GET {{baseUrl}}/stats/by-country
+
+### Répartition par opérateur
+GET {{baseUrl}}/stats/by-operator
+
+### Répartition par filiale (le plus fin : opérateur x pays)
+GET {{baseUrl}}/stats/by-subsidiary
+
+### Derniers avis
+GET {{baseUrl}}/reviews?limit=10
+
+### Derniers avis négatifs uniquement
+GET {{baseUrl}}/reviews?limit=10&sentiment=negative
+
+### Alertes récentes
+GET {{baseUrl}}/alerts
+
+### Alertes critiques uniquement
+GET {{baseUrl}}/alerts?severity=error
+
+### Runs du pipeline
+GET {{baseUrl}}/runs
+
+### Détail d'un run précis (remplacer {id})
+GET {{baseUrl}}/runs/1
+
+### Flux temps réel (SSE) - tester plutôt via navigateur ou curl -N
+# GET {{baseUrl}}/stream

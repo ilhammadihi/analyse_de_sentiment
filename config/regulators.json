@@ -1,0 +1,993 @@
+{
+ "_meta": {
+  "description": "Régulateur national des télécommunications par pays du périmètre. Sert d'AUTORITÉ pour trancher ce que la table E.212 ne peut pas dire : un code MCC/MNC reste assigné longtemps après qu'un opérateur a cessé d'émettre, et seule la liste de licences du régulateur dit qui exploite RÉELLEMENT un réseau aujourd'hui.",
+  "pourquoi": "config/mnc_e212.json sur-déclare (opérateurs éteints toujours listés) et config/operators.json sous-déclare (60 réseaux assignés absents). Le régulateur est le seul arbitre des deux.",
+  "protocole": "Un pays n'est VALIDÉ que lorsque 'verifie_le' est rempli à la main, après consultation de la page de licences citée. tools/verify_regulators.py ne fait que tester l'ACCESSIBILITÉ des URL : un site joignable ne prouve pas que la liste d'opérateurs y figure, ni qu'elle est à jour.",
+  "champs": {
+   "sigle": "acronyme usuel du régulateur",
+   "nom": "dénomination complète",
+   "site": "racine du site officiel — CANDIDAT tant que 'sonde' ne l'a pas confirmé",
+   "page_operateurs": "page listant les licences/opérateurs, null si non localisée",
+   "sonde": "résultat du dernier tools/verify_regulators.py (automatique, accessibilité seulement)",
+   "verifie_le": "date de validation HUMAINE de la liste d'opérateurs, null tant que non faite",
+   "verifie_note": "ce qui a ete lu, ou, et ce que la source affirme — pour qu'une validation puisse etre recontrolee sans la refaire a l'aveugle"
+  },
+  "avertissement": "NE JAMAIS renseigner 'verifie_le' sans avoir réellement ouvert la page et comparé la liste. Une date de validation fausse est pire que son absence : elle fait passer un contrôle non fait pour un contrôle réussi."
+ },
+ "regulateurs": [
+  {
+   "iso2": "AO",
+   "pays": "Angola",
+   "sigle": "INACOM",
+   "nom": "Instituto Angolano das Comunicações",
+   "site": "https://www.inacom.gov.ao/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://inacom.gov.ao/",
+    "piste_operateurs": "https://inacom.gov.ao/licenca-multiservico/",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "BF",
+   "pays": "Burkina Faso",
+   "sigle": "ARCEP",
+   "nom": "Autorité de Régulation des Communications Électroniques et des Postes",
+   "site": "https://www.arcep.bf/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.arcep.bf/",
+    "piste_operateurs": "https://www.arcep.bf/demande-de-licences-2/",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "BI",
+   "pays": "Burundi",
+   "sigle": "ARCT",
+   "nom": "Agence de Régulation et de Contrôle des Télécommunications",
+   "site": "https://www.arct.gov.bi/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://arct.gov.bi/",
+    "piste_operateurs": "https://arct.gov.bi/license/",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "BJ",
+   "pays": "Bénin",
+   "sigle": "ARCEP",
+   "nom": "Autorité de Régulation des Communications Électroniques et de la Poste du Bénin",
+   "site": "https://arcep.bj/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://arcep.bj/",
+    "piste_operateurs": "https://arcep.bj/octroi-des-licences-et-autorisations/",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "BW",
+   "pays": "Botswana",
+   "sigle": "BOCRA",
+   "nom": "Botswana Communications Regulatory Authority",
+   "site": "https://www.bocra.org.bw/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.bocra.org.bw/",
+    "piste_operateurs": "https://www.bocra.org.bw/licensing",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "CD",
+   "pays": "RD Congo",
+   "sigle": "ARPTC",
+   "nom": "Autorité de Régulation de la Poste et des Télécommunications du Congo",
+   "site": "https://arptc.gouv.cd/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://arptc.gouv.cd/",
+    "piste_operateurs": "https://arptc.gouv.cd/aux-operateurs/",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "CF",
+   "pays": "Centrafrique",
+   "sigle": "ARCEP",
+   "nom": "Agence de Régulation des Communications Électroniques et des Postes",
+   "site": null,
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "URL ABSENTE",
+    "verifie_tls": null,
+    "vocabulaire": null,
+    "http": null,
+    "url_finale": null,
+    "piste_operateurs": null,
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "CG",
+   "pays": "Congo-Brazzaville",
+   "sigle": "ARPCE",
+   "nom": "Agence de Régulation des Postes et des Communications Électroniques",
+   "site": "https://www.arpce.cg/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.arpce.cg/",
+    "piste_operateurs": null,
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "CI",
+   "pays": "Côte d'Ivoire",
+   "sigle": "ARTCI",
+   "nom": "Autorité de Régulation des Télécommunications/TIC de Côte d'Ivoire",
+   "site": "https://www.artci.ci/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://artci.ci/",
+    "piste_operateurs": "https://artci.ci/autorisations/",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "CM",
+   "pays": "Cameroun",
+   "sigle": "ART",
+   "nom": "Agence de Régulation des Télécommunications",
+   "site": "https://www.art.cm/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.art.cm/",
+    "piste_operateurs": "https://www.art.cm/fr/operateurs",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "CV",
+   "pays": "Cap-Vert",
+   "sigle": "ARME",
+   "nom": "Agência Reguladora Multissectorial da Economia",
+   "site": "https://www.arme.cv/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "INJOIGNABLE (ConnectTimeout)",
+    "verifie_tls": null,
+    "vocabulaire": null,
+    "http": null,
+    "url_finale": null,
+    "piste_operateurs": null,
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "DJ",
+   "pays": "Djibouti",
+   "sigle": "ARMD",
+   "nom": "Autorité de Régulation Multisectorielle de Djibouti",
+   "site": null,
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "URL ABSENTE",
+    "verifie_tls": null,
+    "vocabulaire": null,
+    "http": null,
+    "url_finale": null,
+    "piste_operateurs": null,
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "DZ",
+   "pays": "Algérie",
+   "sigle": "ARPCE",
+   "nom": "Autorité de Régulation de la Poste et des Communications Électroniques",
+   "site": "https://www.arpce.dz/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.arpce.dz/",
+    "piste_operateurs": null,
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "EG",
+   "pays": "Égypte",
+   "sigle": "NTRA",
+   "nom": "National Telecom Regulatory Authority",
+   "site": "https://www.tra.gov.eg/",
+   "page_operateurs": "https://www.tra.gov.eg/en/consumers/quality-of-services/",
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.tra.gov.eg/ar/",
+    "piste_operateurs": null,
+    "le": "2026-08-05"
+   },
+   "verifie_le": "2026-08-05",
+   "verifie_note": "La NTRA nomme elle-meme les titulaires : « the licensed mobile network operators in Egypt (Orange, Vodafone, Etisalat, WE) ». Quatre operateurs, identiques aux quatre MNC 602-01 a 602-04. Le perimetre n'en declarait que deux ; e& (ex-Etisalat) et WE ont ete ajoutes."
+  },
+  {
+   "iso2": "ER",
+   "pays": "Érythrée",
+   "sigle": null,
+   "nom": "Ministry of Transport and Communications",
+   "site": null,
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "URL ABSENTE",
+    "verifie_tls": null,
+    "vocabulaire": null,
+    "http": null,
+    "url_finale": null,
+    "piste_operateurs": null,
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "ET",
+   "pays": "Éthiopie",
+   "sigle": "ECA",
+   "nom": "Ethiopian Communications Authority",
+   "site": "https://eca.et/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.eca.et/",
+    "piste_operateurs": "https://www.eca.et/services#licensing",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "GA",
+   "pays": "Gabon",
+   "sigle": "ARCEP",
+   "nom": "Autorité de Régulation des Communications Électroniques et des Postes",
+   "site": "https://arcep.ga/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://arcep.ga/",
+    "piste_operateurs": null,
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "GH",
+   "pays": "Ghana",
+   "sigle": "NCA",
+   "nom": "National Communications Authority",
+   "site": "https://nca.org.gh/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "INJOIGNABLE (ReadTimeout)",
+    "verifie_tls": null,
+    "vocabulaire": null,
+    "http": null,
+    "url_finale": null,
+    "piste_operateurs": null,
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "GM",
+   "pays": "Gambie",
+   "sigle": "PURA",
+   "nom": "Public Utilities Regulatory Authority",
+   "site": "https://www.pura.gm/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://pura.gm/",
+    "piste_operateurs": "https://pura.gm/ict/sub-sectors/mobile-network-operators/",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "GN",
+   "pays": "Guinée",
+   "sigle": "ARPT",
+   "nom": "Autorité de Régulation des Postes et Télécommunications",
+   "site": "https://www.arpt.gov.gn/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.arpt.gov.gn/",
+    "piste_operateurs": "https://www.arpt.gov.gn/operateurs-postaux/",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "GQ",
+   "pays": "Guinée équatoriale",
+   "sigle": "ORTEL",
+   "nom": "Órgano Regulador de las Telecomunicaciones",
+   "site": null,
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "URL ABSENTE",
+    "verifie_tls": null,
+    "vocabulaire": null,
+    "http": null,
+    "url_finale": null,
+    "piste_operateurs": null,
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "GW",
+   "pays": "Guinée-Bissau",
+   "sigle": "ARN",
+   "nom": "Autoridade Reguladora Nacional das TIC",
+   "site": "https://www.arn.gw/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://arn.gw/",
+    "piste_operateurs": null,
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "KE",
+   "pays": "Kenya",
+   "sigle": "CA",
+   "nom": "Communications Authority of Kenya",
+   "site": "https://www.ca.go.ke/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.ca.go.ke/",
+    "piste_operateurs": "https://www.ca.go.ke/licensing-overview",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "KM",
+   "pays": "Comores",
+   "sigle": "ANRTIC",
+   "nom": "Autorité Nationale de Régulation des TIC",
+   "site": "https://www.anrtic.km/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.anrtic.km/",
+    "piste_operateurs": "https://www.anrtic.km/actualites/articles/attribution-de-frequence-5g-a-l-operateur-yas-comores-par-l-anrtic",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "LR",
+   "pays": "Liberia",
+   "sigle": "LTA",
+   "nom": "Liberia Telecommunications Authority",
+   "site": "https://www.lta.gov.lr/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://lta.gov.lr/",
+    "piste_operateurs": "https://lta.gov.lr/licensing-requirement/",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "LS",
+   "pays": "Lesotho",
+   "sigle": "LCA",
+   "nom": "Lesotho Communications Authority",
+   "site": "https://www.lca.org.ls/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://lca.org.ls/",
+    "piste_operateurs": "https://lca.org.ls/broadcasting#licenses/",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "LY",
+   "pays": "Libye",
+   "sigle": "GATIT",
+   "nom": "General Authority for Telecommunication and Informatics",
+   "site": null,
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "URL ABSENTE",
+    "verifie_tls": null,
+    "vocabulaire": null,
+    "http": null,
+    "url_finale": null,
+    "piste_operateurs": null,
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "MA",
+   "pays": "Maroc",
+   "sigle": "ANRT",
+   "nom": "Agence Nationale de Réglementation des Télécommunications",
+   "site": "https://www.anrt.ma/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.anrt.ma/",
+    "piste_operateurs": "https://www.anrt.ma/observatoires/operateurs-telecoms",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "MG",
+   "pays": "Madagascar",
+   "sigle": "ARTEC",
+   "nom": "Autorité de Régulation des Technologies de Communication",
+   "site": "https://www.artec.mg/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "INJOIGNABLE (ConnectTimeout)",
+    "verifie_tls": null,
+    "vocabulaire": null,
+    "http": null,
+    "url_finale": null,
+    "piste_operateurs": null,
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "ML",
+   "pays": "Mali",
+   "sigle": "AMRTP",
+   "nom": "Autorité Malienne de Régulation des Télécommunications/TIC et Postes",
+   "site": "https://amrtp.ml/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "INJOIGNABLE (ReadTimeout)",
+    "verifie_tls": null,
+    "vocabulaire": null,
+    "http": null,
+    "url_finale": null,
+    "piste_operateurs": null,
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "MR",
+   "pays": "Mauritanie",
+   "sigle": "ARE",
+   "nom": "Autorité de Régulation",
+   "site": "https://www.are.mr/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.are.mr/",
+    "piste_operateurs": "https://www.are.mr/index.php/telecommunications-fr/licences",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "MU",
+   "pays": "Maurice",
+   "sigle": "ICTA",
+   "nom": "Information and Communication Technologies Authority",
+   "site": "https://www.icta.mu/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.icta.mu/",
+    "piste_operateurs": "https://www.icta.mu/documents/2021/09/licensing_fees.pdf",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "MW",
+   "pays": "Malawi",
+   "sigle": "MACRA",
+   "nom": "Malawi Communications Regulatory Authority",
+   "site": "https://www.macra.mw/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://macra.mw/",
+    "piste_operateurs": "https://macra.mw/telecommunication-licensees/",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "MZ",
+   "pays": "Mozambique",
+   "sigle": "INCM",
+   "nom": "Instituto Nacional das Comunicações de Moçambique",
+   "site": "https://www.incm.gov.mz/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.incm.gov.mz/",
+    "piste_operateurs": "https://www.incm.gov.mz/licenciamento-no-sector-postal/",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "NA",
+   "pays": "Namibie",
+   "sigle": "CRAN",
+   "nom": "Communications Regulatory Authority of Namibia",
+   "site": "https://www.cran.na/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.cran.na/",
+    "piste_operateurs": "https://www.cran.na/licensing/",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "NE",
+   "pays": "Niger",
+   "sigle": "ARCEP",
+   "nom": "Autorité de Régulation des Communications Électroniques et de la Poste",
+   "site": "https://www.arcep.ne/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://arcep.ne/",
+    "piste_operateurs": "https://arcep.ne/operateurs-2/",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "NG",
+   "pays": "Nigeria",
+   "sigle": "NCC",
+   "nom": "Nigerian Communications Commission",
+   "site": "https://www.ncc.gov.ng/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.ncc.gov.ng/",
+    "piste_operateurs": "https://www.ncc.gov.ng/industry/licensing/apply-licence",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "RW",
+   "pays": "Rwanda",
+   "sigle": "RURA",
+   "nom": "Rwanda Utilities Regulatory Authority",
+   "site": "https://rura.rw/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.rura.rw/",
+    "piste_operateurs": "https://licensing.rura.rw/",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "SC",
+   "pays": "Seychelles",
+   "sigle": "DICT",
+   "nom": "Department of Information Communications Technology",
+   "site": null,
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "URL ABSENTE",
+    "verifie_tls": null,
+    "vocabulaire": null,
+    "http": null,
+    "url_finale": null,
+    "piste_operateurs": null,
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "SD",
+   "pays": "Soudan",
+   "sigle": "TPRA",
+   "nom": "Telecommunications and Post Regulatory Authority",
+   "site": "https://www.tpra.gov.sd/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": false,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://tpra.gov.sd/",
+    "piste_operateurs": null,
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "SL",
+   "pays": "Sierra Leone",
+   "sigle": "NatCA",
+   "nom": "National Communications Authority",
+   "site": "https://natca.gov.sl/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "REPOND (contenu non textuel)",
+    "verifie_tls": true,
+    "vocabulaire": false,
+    "http": 200,
+    "url_finale": "https://natca.gov.sl/",
+    "piste_operateurs": null,
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "SN",
+   "pays": "Sénégal",
+   "sigle": "ARTP",
+   "nom": "Autorité de Régulation des Télécommunications et des Postes",
+   "site": "https://www.artp.sn/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": false,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://artp.sn/",
+    "piste_operateurs": "https://artp.sn/observatoire/qualite-de-service/suivi-des-incidents-operateurs",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "SO",
+   "pays": "Somalie",
+   "sigle": "NCA",
+   "nom": "National Communications Authority",
+   "site": "https://nca.gov.so/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://nca.gov.so/",
+    "piste_operateurs": "https://nca.gov.so/what-we-do/licensing",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "SS",
+   "pays": "Soudan du Sud",
+   "sigle": "NCA",
+   "nom": "National Communication Authority",
+   "site": null,
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "URL ABSENTE",
+    "verifie_tls": null,
+    "vocabulaire": null,
+    "http": null,
+    "url_finale": null,
+    "piste_operateurs": null,
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "ST",
+   "pays": "Sao Tomé-et-Principe",
+   "sigle": "AGER",
+   "nom": "Autoridade Geral de Regulação",
+   "site": null,
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "URL ABSENTE",
+    "verifie_tls": null,
+    "vocabulaire": null,
+    "http": null,
+    "url_finale": null,
+    "piste_operateurs": null,
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "SZ",
+   "pays": "Eswatini",
+   "sigle": "ESCCOM",
+   "nom": "Eswatini Communications Commission",
+   "site": "https://www.esccom.org.sz/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.esccom.org.sz/",
+    "piste_operateurs": "https://www.esccom.org.sz/mandate/telecommunications/licenced",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "TD",
+   "pays": "Tchad",
+   "sigle": "ARCEP",
+   "nom": "Autorité de Régulation des Communications Électroniques et des Postes",
+   "site": "https://www.arcep.td/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.arcep.td/",
+    "piste_operateurs": "https://www.arcep.td/licence_exploitation.html",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "TG",
+   "pays": "Togo",
+   "sigle": "ARCEP",
+   "nom": "Autorité de Régulation des Communications Électroniques et des Postes",
+   "site": "https://arcep.tg/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://arcep.tg/",
+    "piste_operateurs": "https://arcep.tg/professionnels/postal/operateur-des-services-postaux/",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "TN",
+   "pays": "Tunisie",
+   "sigle": "INT",
+   "nom": "Instance Nationale des Télécommunications",
+   "site": "https://www.intt.tn/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.intt.tn/fr/index.php?home",
+    "piste_operateurs": "https://www.intt.tn/fr/index.php?typeactu=92&amp;actu=1017",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "TZ",
+   "pays": "Tanzanie",
+   "sigle": "TCRA",
+   "nom": "Tanzania Communications Regulatory Authority",
+   "site": "https://www.tcra.go.tz/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.tcra.go.tz/",
+    "piste_operateurs": "https://tanzanite.tcra.go.tz",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "UG",
+   "pays": "Ouganda",
+   "sigle": "UCC",
+   "nom": "Uganda Communications Commission",
+   "site": "https://www.ucc.co.ug/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.ucc.co.ug/",
+    "piste_operateurs": "https://www.ucc.co.ug/telecommunication-licensing/",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "ZA",
+   "pays": "Afrique du Sud",
+   "sigle": "ICASA",
+   "nom": "Independent Communications Authority of South Africa",
+   "site": "https://www.icasa.org.za/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": true,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.icasa.org.za/",
+    "piste_operateurs": "https://www.icasa.org.za/pages/services-licencing",
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  },
+  {
+   "iso2": "ZM",
+   "pays": "Zambie",
+   "sigle": "ZICTA",
+   "nom": "Zambia Information and Communications Technology Authority",
+   "site": "https://www.zicta.zm/",
+   "page_operateurs": "https://www.zicta.zm/services/licensing/registers",
+   "sonde": {
+    "etat": "OK",
+    "verifie_tls": false,
+    "vocabulaire": true,
+    "http": 200,
+    "url_finale": "https://www.zicta.zm/",
+    "piste_operateurs": null,
+    "le": "2026-08-05"
+   },
+   "verifie_le": null,
+   "verifie_note": "NON VALIDE — le registre n'a pas pu etre lu. ZICTA le cite pourtant elle-meme dans sa mise a jour de licences du 31 mars 2026 : « For the complete list of licensed operators, please visit the registers below ». Mais la page est servie par une application JavaScript, et l'API du site n'expose que les actualites : /api/media/<n-importe-quoi> renvoie une liste vide sauf pour le type 'news'. Douze noms d'endpoints essayes, aucun ne rend le registre. Zamtel a donc ete ajoute sur la seule foi de ses identifiants d'application, verifies sur les boutiques ZAMBIENNES (App Store 1660556273 editeur 'Zamtel', 64 avis ; Play Store com.myzamtel editeur 'Zamtel Developer', 1 111 avis). RESTE A CONFIRMER A LA MAIN : que Zamtel est bien licencie, et le sort de Zedmobile (Beeline Telecoms, MNC 645-04), annonce comme 4e licence mobile du pays et toujours absent du perimetre."
+  },
+  {
+   "iso2": "ZW",
+   "pays": "Zimbabwe",
+   "sigle": "POTRAZ",
+   "nom": "Postal and Telecommunications Regulatory Authority of Zimbabwe",
+   "site": "https://www.potraz.gov.zw/",
+   "page_operateurs": null,
+   "sonde": {
+    "etat": "SUSPECT (vocabulaire absent)",
+    "verifie_tls": true,
+    "vocabulaire": false,
+    "http": 307,
+    "url_finale": "https://www.potraz.gov.zw/",
+    "piste_operateurs": null,
+    "le": "2026-08-05"
+   },
+   "verifie_le": null
+  }
+ ]
+}

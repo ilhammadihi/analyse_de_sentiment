@@ -1,0 +1,2272 @@
+[
+  {
+    "subsidiary_name": "Cell C",
+    "found": {
+      "appstore": {
+        "app_id": "1112161720",
+        "store_country": "za",
+        "_app_name": "Cell C",
+        "_seller": "Cell C PTY Ltd",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": null,
+        "_app_name": "Cell C",
+        "_developer": "Cell C Ltd",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Cell C Afrique du Sud"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Vodacom South Africa",
+    "found": {
+      "appstore": {
+        "app_id": "1544702651",
+        "store_country": "za",
+        "_app_name": "VodaPay",
+        "_seller": "VODACOM PTY LTD",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": "za.co.vodacom.vodapay",
+        "_app_name": "VodaPay",
+        "_developer": "Vodacom Pty Ltd",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Vodacom Afrique du Sud"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Mobilis",
+    "found": {
+      "appstore": {
+        "app_id": "1449997894",
+        "store_country": "dz",
+        "_app_name": "Mobilis Go",
+        "_seller": "Pavel Lyashko",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": "com.segmatek.mobilis",
+        "_app_name": "MobiSpace",
+        "_developer": "ATM Mobilis",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Mobilis Algérie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Telkom South Africa",
+    "found": {
+      "appstore": {
+        "app_id": "1589756813",
+        "store_country": "za",
+        "_app_name": "MyTelkom App",
+        "_seller": "Telkom SA SOC Ltd",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": "za.co.telkom.mytelkomapp",
+        "_app_name": "MyTelkom",
+        "_developer": "TELKOM SA SOC LTD",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Telkom Afrique du Sud"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "MTN South Africa",
+    "found": {
+      "appstore": {
+        "app_id": "6478032901",
+        "store_country": "za",
+        "_app_name": "MTN App ZA",
+        "_seller": "Mobile Telephone Networks (PTY) Limited",
+        "_confidence": "match"
+      },
+      "playstore": {
+        "package_id": "com.mtnapp",
+        "_app_name": "MTN App ZA",
+        "_developer": "MTN South Africa",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence MTN Afrique du Sud"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Djezzy",
+    "found": {
+      "appstore": {
+        "app_id": "1262903573",
+        "store_country": "dz",
+        "_app_name": "Djezzy",
+        "_seller": "SPA OPTIMUM TELECOM ALGERIE",
+        "_confidence": "match"
+      },
+      "playstore": {
+        "package_id": null,
+        "_app_name": "Djezzy",
+        "_developer": "Djezzy Developper",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Djezzy Algérie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Ooredoo Algérie",
+    "found": {
+      "appstore": {
+        "app_id": "1644340373",
+        "store_country": "dz",
+        "_app_name": "My Ooredoo Algeria",
+        "_seller": "EL WATANIA TELECOM ALGERIE",
+        "_confidence": "match"
+      },
+      "playstore": {
+        "package_id": null,
+        "_app_name": "My Ooredoo Algeria",
+        "_developer": "Ooredoo Algeria",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Ooredoo Algérie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Unitel Angola",
+    "found": {
+      "appstore": {
+        "app_id": "6463431454",
+        "store_country": "ao",
+        "_app_name": "MyUnitel",
+        "_seller": "Unitel S.A",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": null,
+        "_app_name": "MyUnitel",
+        "_developer": "Unitel SA",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Unitel Angola"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Mascom",
+    "found": {
+      "appstore": {
+        "app_id": "1495969866",
+        "store_country": "bw",
+        "_app_name": "MascomOnline",
+        "_seller": "MASCOM WIRELESS BOTSWANA PTY LTD",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": null,
+        "_app_name": "MascomOnline",
+        "_developer": "Mascom Wireless (Pty) Ltd",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Mascom Botswana"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "BTC Botswana",
+    "found": {
+      "appstore": {
+        "app_id": "1466522862",
+        "store_country": "bw",
+        "_app_name": "BTC Mobile App",
+        "_seller": "BOTSWANA TELECOMMUNICATIONS CORPORATION LIMITED",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": "com.btc.MOBILEAPPS",
+        "_app_name": "BTC Mobile App",
+        "_developer": "Botswana Telecommunications Corporation",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence BTC Botswana"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Africell Angola",
+    "found": {
+      "appstore": {
+        "app_id": "6753748323",
+        "store_country": "ao",
+        "_app_name": "MyAfricell AO",
+        "_seller": "AFRICELL ANGOLA, S.A.",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": "com.africellao.myafricell",
+        "_app_name": "MyAfricell AO",
+        "_developer": "Africell Angola SA",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Africell Angola"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Movicel",
+    "found": {
+      "appstore": null,
+      "playstore": null,
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Movicel Angola"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Moov Africa Burkina",
+    "found": {
+      "appstore": {
+        "app_id": "1523636766",
+        "store_country": "bf",
+        "_app_name": "MyMOOV BF",
+        "_seller": "ONATEL SA",
+        "_confidence": "match"
+      },
+      "playstore": {
+        "package_id": "bf.moovmoney.hwmm",
+        "_app_name": "MOOV MONEY BF",
+        "_developer": "MOOV AFRICA",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Moov Africa Burkina Faso"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Orange Botswana",
+    "found": {
+      "appstore": {
+        "app_id": "1195839458",
+        "store_country": "bw",
+        "_app_name": "Orange Max it - Botswana",
+        "_seller": "Orange Botswana",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": "com.orange.myorange.obw",
+        "_app_name": "Orange Max it - Botswana",
+        "_developer": "Orange Botswana",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Orange Botswana"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Orange Burkina Faso",
+    "found": {
+      "appstore": {
+        "app_id": "1553774707",
+        "store_country": "bf",
+        "_app_name": "Orange Max it - Burkina Faso",
+        "_seller": "Orange Burkina Faso SA",
+        "_confidence": "match"
+      },
+      "playstore": {
+        "package_id": "com.orange.myorange.obf",
+        "_app_name": "Orange Max it - Burkina Faso",
+        "_developer": "Orange Burkina Faso",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Orange Burkina Faso"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Econet Burundi",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.gaia.cx",
+        "_app_name": "My Econet",
+        "_developer": "Econet Zimbabwe",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Econet Burundi"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Lumitel",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "My Lumitel",
+        "_developer": "Viettel Burundi (Lumitel)",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Lumitel Burundi"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Onatel Burundi",
+    "found": {
+      "appstore": null,
+      "playstore": null,
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Onatel Burundi Burundi"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Celtiis",
+    "found": {
+      "appstore": {
+        "app_id": "6443397512",
+        "store_country": "bj",
+        "_app_name": "Myceltiis cash",
+        "_seller": "SOCIETE BENINOISE D'INFRASTRUCTURES NUMERIQUES",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": "bj.sbin.mobilemoney.customer",
+        "_app_name": "Waa",
+        "_developer": "Celtiis",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Celtiis Bénin"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Moov Africa Benin",
+    "found": {
+      "appstore": {
+        "app_id": "6745018971",
+        "store_country": "bj",
+        "_app_name": "Moov Money BJ",
+        "_seller": "STE ETISALAT BENIN S.A",
+        "_confidence": "match"
+      },
+      "playstore": {
+        "package_id": "com.digitalpayment.benin.customer",
+        "_app_name": "Moov Money BJ",
+        "_developer": "Moov Bénin",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Moov Africa Bénin"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "MTN Bénin",
+    "found": {
+      "appstore": {
+        "app_id": "6480581002",
+        "store_country": "bj",
+        "_app_name": "MyMTN BN",
+        "_seller": "SPACETEL BENIN SA",
+        "_confidence": "match"
+      },
+      "playstore": {
+        "package_id": "com.mtn.mtnbjnextgen",
+        "_app_name": "MyMTN BN",
+        "_developer": "MTN Bénin",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence MTN Bénin"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Camtel",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.camtelblue.bluebox",
+        "_app_name": "Blue Max (Recharge Camtel)",
+        "_developer": "(CAMTEL CAMEROUN) for KALSAL GROUPE",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Camtel Cameroun"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "MTN Cameroun",
+    "found": {
+      "appstore": {
+        "app_id": "1576865855",
+        "store_country": "cm",
+        "_app_name": "MyMTN Cameroon",
+        "_seller": "MTN Cameroon",
+        "_confidence": "match"
+      },
+      "playstore": {
+        "package_id": null,
+        "_app_name": "MyMTN Cameroon",
+        "_developer": "MTN Cameroon",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence MTN Cameroun"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "CVMovel",
+    "found": {
+      "appstore": {
+        "app_id": "1126574990",
+        "store_country": "cv",
+        "_app_name": "Alou App",
+        "_seller": "CVMOVEL SOCIEDADE UNIPESSOAL, SA",
+        "_confidence": "neutral"
+      },
+      "playstore": null,
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence CVMovel Cap-Vert"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Unitel T+",
+    "found": {
+      "appstore": {
+        "app_id": "591293253",
+        "store_country": "cv",
+        "_app_name": "Unitel",
+        "_seller": "Unitel Group",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": "com.myunitel.activities",
+        "_app_name": "Unitel",
+        "_developer": "Unitel Group",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Unitel Cap-Vert"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Moov Africa Centrafrique",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "bf.moovmoney.hwmm",
+        "_app_name": "MOOV MONEY BF",
+        "_developer": "MOOV AFRICA",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Moov Africa Centrafrique"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Orange Cameroun",
+    "found": {
+      "appstore": {
+        "app_id": "1116920093",
+        "store_country": "cm",
+        "_app_name": "Orange Max it - Cameroun",
+        "_seller": "ORANGE MIDDLE EAST AND AFRICA MANAGEMENT",
+        "_confidence": "match"
+      },
+      "playstore": {
+        "package_id": "com.orange.myorange.ocm",
+        "_app_name": "Orange Max it - Cameroun",
+        "_developer": "Orange MEA",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Orange Cameroun"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Airtel Congo",
+    "found": {
+      "appstore": {
+        "app_id": "1462268018",
+        "store_country": "cg",
+        "_app_name": "My Airtel Africa",
+        "_seller": "Bharti Airtel Ltd",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": "com.airtel.africa.selfcare",
+        "_app_name": "My Airtel",
+        "_developer": "Airtel Africa",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Airtel Congo-Brazzaville"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "MTN Congo",
+    "found": {
+      "appstore": {
+        "app_id": "977968085",
+        "store_country": "cg",
+        "_app_name": "MyMTN",
+        "_seller": "MTN Group LTD",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": null,
+        "_app_name": "MyMTN Congo",
+        "_developer": "Rêveurs Professionnels",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence MTN Congo-Brazzaville"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Orange Congo",
+    "found": {
+      "appstore": {
+        "app_id": "1480149405",
+        "store_country": "cg",
+        "_app_name": "Orange Money Jordan",
+        "_seller": "JORDAN TELECOMUNICATIONS CO",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": "com.orange.orangemoney_customer",
+        "_app_name": "Orange Money Jordan",
+        "_developer": "Orange Jordan",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Orange Congo-Brazzaville"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Telma Comores",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "fr.ap7.telma",
+        "_app_name": "Telma",
+        "_developer": "telma.food.ia",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Telma Comores"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Telecel Centrafrique",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.teliTravel",
+        "_app_name": "Telitravel: Global eSIM Data",
+        "_developer": "TELECEL GLOBAL LIMITED",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Telecel Centrafrique"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Comores Telecom",
+    "found": {
+      "appstore": null,
+      "playstore": null,
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Comores Telecom Comores"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Moov Africa Côte d'Ivoire",
+    "found": {
+      "appstore": {
+        "app_id": "6736658717",
+        "store_country": "ci",
+        "_app_name": "Moov Money CI",
+        "_seller": "ATLANTIQUE TELECOM COTE D'IVOIRE",
+        "_confidence": "match"
+      },
+      "playstore": {
+        "package_id": "ci.moovmoney.mmpayapi",
+        "_app_name": "Moov Money CI",
+        "_developer": "Moov Africa CI",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Moov Africa Côte d'Ivoire"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "MTN Côte d'Ivoire",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "MyMTN CI",
+        "_developer": "MTN Cote d'Ivoire",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence MTN Côte d'Ivoire"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Djibouti Telecom",
+    "found": {
+      "appstore": null,
+      "playstore": null,
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Djibouti Telecom Djibouti"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Orange Côte d'Ivoire",
+    "found": {
+      "appstore": {
+        "app_id": "1061120855",
+        "store_country": "ci",
+        "_app_name": "Orange Max it - Côte d'Ivoire",
+        "_seller": "ORANGE COTE D'IVOIRE S.A.",
+        "_confidence": "match"
+      },
+      "playstore": {
+        "package_id": "com.orange.myorange.oci",
+        "_app_name": "Orange Max it - Côte d'Ivoire",
+        "_developer": "Orange Côte d'Ivoire S.A",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Orange Côte d'Ivoire"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Moov Africa Gabon",
+    "found": {
+      "appstore": {
+        "app_id": "6504250574",
+        "store_country": "ga",
+        "_app_name": "Moov Money Gabon",
+        "_seller": "GABON TELECOM SA",
+        "_confidence": "match"
+      },
+      "playstore": {
+        "package_id": "com.mobiblanc.moov.mymoov_gabon",
+        "_app_name": "MyMoov Gabon",
+        "_developer": "GABON TELECOM",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Moov Africa Gabon"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Airtel Gabon",
+    "found": {
+      "appstore": {
+        "app_id": "543184334",
+        "store_country": "ga",
+        "_app_name": "Airtel App: Recharge & Bank",
+        "_seller": "Bharti Airtel Limited",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": null,
+        "_app_name": "My Airtel",
+        "_developer": "Airtel Africa",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Airtel Gabon"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Africell Gambie",
+    "found": {
+      "appstore": {
+        "app_id": "1353411682",
+        "store_country": "gm",
+        "_app_name": "MyAfricell GM",
+        "_seller": "AFRICELL GAMBIA LTD",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": "com.africell.africell.africellapp",
+        "_app_name": "MyAfricell GM",
+        "_developer": "Africell GM",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Africell Gambie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "QCell",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "QCELL GM",
+        "_developer": "QGroup Gambia",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence QCell Gambie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Gamcel",
+    "found": {
+      "appstore": null,
+      "playstore": null,
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Gamcel Gambie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "AirtelTigo Ghana",
+    "found": {
+      "appstore": null,
+      "playstore": null,
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence AirtelTigo Ghana"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "MTN Ghana",
+    "found": {
+      "appstore": {
+        "app_id": "1466214871",
+        "store_country": "gh",
+        "_app_name": "My MTN Ghana",
+        "_seller": "SCANCOM LIMITED",
+        "_confidence": "match"
+      },
+      "playstore": {
+        "package_id": null,
+        "_app_name": "myMTN Ghana",
+        "_developer": "MTN GHANA",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence MTN Ghana"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Vodafone Ghana",
+    "found": {
+      "appstore": {
+        "app_id": "1076290326",
+        "store_country": "gh",
+        "_app_name": "My Vodafone (Qatar)",
+        "_seller": "VODAFONE QATAR Q.S.C",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": "com.vodafone.png",
+        "_app_name": "My Vodafone (PNG)",
+        "_developer": "Vodafone PNG",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Vodafone Ghana"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "MTN Guinée-Conakry",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.consumerug",
+        "_app_name": "MTN MoMo",
+        "_developer": "MTN",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence MTN Guinée"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Orange Guinée",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.orange.myorange.ogn",
+        "_app_name": "Orange Max it - Guinée",
+        "_developer": "Orange Guinée",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Orange Guinée"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Orange Guinée-Bissau",
+    "found": {
+      "appstore": {
+        "app_id": "1574668652",
+        "store_country": "gw",
+        "_app_name": "Orange Max it - Guinea-Bissau",
+        "_seller": "Orange Bissau",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": "com.orange.myorange.ogw",
+        "_app_name": "Orange Max it - Guinée-Bissau",
+        "_developer": "Orange Bissau",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Orange Guinée-Bissau"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "GETESA",
+    "found": {
+      "appstore": null,
+      "playstore": null,
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence GETESA Guinée équatoriale"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "MTN Guinée-Bissau",
+    "found": {
+      "appstore": {
+        "app_id": "1474080783",
+        "store_country": "gw",
+        "_app_name": "MTN MoMo",
+        "_seller": "MTN Group LTD",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": "com.mtn1app",
+        "_app_name": "MyMTN",
+        "_developer": "MTN",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence MTN Guinée-Bissau"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Safaricom Kenya",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "MySafaricom",
+        "_developer": "Safaricom PLC",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Safaricom Kenya"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Airtel Kenya",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "My Airtel",
+        "_developer": "Airtel Africa",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Airtel Kenya"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Telkom Kenya",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.tkashapp",
+        "_app_name": "T-kash",
+        "_developer": "Telkom Kenya",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Telkom Kenya"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Econet Lesotho",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.econet.applesotho",
+        "_app_name": "Econet App Lesotho",
+        "_developer": "Econet Telecom LS",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Econet Lesotho"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "MTN Liberia",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.consumerug",
+        "_app_name": "MTN MoMo",
+        "_developer": "MTN",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence MTN Liberia"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Vodacom Lesotho",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.vodafone.mpesa.ls",
+        "_app_name": "My M-Pesa Lesotho",
+        "_developer": "VODACOM LESOTHO (PTY) LIMITED",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Vodacom Lesotho"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Orange Liberia",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "Orange Max it - Liberia",
+        "_developer": "Orange Liberia",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Orange Liberia"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Almadar Aljadid",
+    "found": {
+      "appstore": {
+        "app_id": "1397148023",
+        "store_country": "ly",
+        "_app_name": "المدار الجديد",
+        "_seller": "ALMADAR ALJADID COMPANY",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": null,
+        "_app_name": "المدار الجديد",
+        "_developer": "Almadar Aljadid  Co.",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Almadar Libye"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Libyana",
+    "found": {
+      "appstore": {
+        "app_id": "1493257014",
+        "store_country": "ly",
+        "_app_name": "My Libyana",
+        "_seller": "Libyana Mobile Phone",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": null,
+        "_app_name": "My Libyana",
+        "_developer": "Libyana",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Libyana Libye"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Airtel Madagascar",
+    "found": {
+      "appstore": {
+        "app_id": "1462268018",
+        "store_country": "mg",
+        "_app_name": "My Airtel Africa",
+        "_seller": "Bharti Airtel Ltd",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": "com.airtel.africa.selfcare",
+        "_app_name": "My Airtel",
+        "_developer": "Airtel Africa",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Airtel Madagascar"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Telma",
+    "found": {
+      "appstore": {
+        "app_id": "6738844612",
+        "store_country": "mg",
+        "_app_name": "Virginia Arruda",
+        "_seller": "Telma Virginia Castiglioni",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": "fr.ap7.telma",
+        "_app_name": "Telma",
+        "_developer": "telma.food.ia",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Telma Madagascar"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Moov Africa Mali",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "My Moov Mali",
+        "_developer": "Malitel",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Moov Africa Mali"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "TNM Malawi",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "mw.co.tnm.topup.tnmsmartapp",
+        "_app_name": "TNM Smart App",
+        "_developer": "Telekom Networks Malawi PLC",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence TNM Malawi"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Orange Madagascar",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "Orange Max it - Madagascar",
+        "_developer": "Orange Madagascar",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Orange Madagascar"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Airtel Malawi",
+    "found": {
+      "appstore": {
+        "app_id": "1462268018",
+        "store_country": "mw",
+        "_app_name": "My Airtel Africa",
+        "_seller": "Bharti Airtel Ltd",
+        "_confidence": "neutral"
+      },
+      "playstore": {
+        "package_id": "com.airtel.africa.selfcare",
+        "_app_name": "My Airtel",
+        "_developer": "Airtel Africa",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Airtel Malawi"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Inwi",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "My inwi",
+        "_developer": "inwi",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Inwi Maroc"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Orange Mali",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "Orange Max it – Mali",
+        "_developer": "Orange Mali",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Orange Mali"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Orange Maroc",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.orange.meditel.mediteletmoi",
+        "_app_name": "Max it – Maroc",
+        "_developer": "Orange Maroc",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Orange Maroc"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Emtel",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.emtel.payment",
+        "_app_name": "blink by Emtel",
+        "_developer": "Emtel Ltd",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Emtel Maurice"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Mauritius Telecom",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "mu.mt.eventapp",
+        "_app_name": "Connect by Mauritius Telecom",
+        "_developer": "Mauritius Telecom Ltd",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Mauritius Telecom Maurice"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Maroc Telecom",
+    "found": {
+      "appstore": null,
+      "playstore": null,
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Maroc Telecom Maroc"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Chinguitel",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "Chinguitel",
+        "_developer": "SelamPay",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Chinguitel Mauritanie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Mattel",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "My Mattel",
+        "_developer": "mattel.mr",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Mattel Mauritanie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Tmcel",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.vibhumit.TMCELRegistos",
+        "_app_name": "TMCEL-Registos",
+        "_developer": "VibhumIT",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Tmcel Mozambique"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Movitel",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "Super Movitel",
+        "_developer": "Movitel SA",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Movitel Mozambique"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Mauritel",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "My Moov Mauritel",
+        "_developer": "MAURITEL. S.A.",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Mauritel Mauritanie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Vodacom Mozambique",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "mz.co.vodacom.ubuntu.app",
+        "_app_name": "Meu Vodacom (Lite)",
+        "_developer": "Vodacom (Pty) Ltd.",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Vodacom Mozambique"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "MTC Namibie",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "MyMTC Namibia",
+        "_developer": "MTC (Mobile Telecommunications Limited)",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence MTC Namibie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "TN Mobile",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.csiweb.digitalbanking.bk0554",
+        "_app_name": "Legends Bank - TN Mobile",
+        "_developer": "Computer Services Inc.",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence TN Mobile Namibie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Airtel Niger",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.airtel.africa.selfcare",
+        "_app_name": "My Airtel",
+        "_developer": "Airtel Africa",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Airtel Niger"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Moov Africa Niger",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "MyMoov Niger",
+        "_developer": "Moov Africa Niger",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Moov Africa Niger"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "9mobile",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.ninemobile.ursafe",
+        "_app_name": "9mobile: Safety & Security App",
+        "_developer": "UrSafe",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence 9mobile Nigeria"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Orange Niger",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.orange.orangemoney_customer",
+        "_app_name": "Orange Money Jordan",
+        "_developer": "Orange Jordan",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Orange Niger"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Glo Nigeria",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "Glo Cafe Nigeria",
+        "_developer": "Glo SelfCare",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Glo Nigeria"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Airtel Nigeria",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "My Airtel",
+        "_developer": "Airtel Africa",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Airtel Nigeria"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "MTN Nigeria",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "myMTN NG",
+        "_developer": "MTN Nigeria Communications Plc",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence MTN Nigeria"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Airtel Ouganda",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.airtel.africa.selfcare",
+        "_app_name": "My Airtel",
+        "_developer": "Airtel Africa",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Airtel Ouganda"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "MTN Ouganda",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.mtn1app",
+        "_app_name": "MyMTN",
+        "_developer": "MTN",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence MTN Ouganda"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Africell RDC",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.africellcd.myafricell",
+        "_app_name": "MyAfricell RDC",
+        "_developer": "Africell DRC",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Africell RD Congo"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Airtel RDC",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "My Airtel",
+        "_developer": "Airtel Africa",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Airtel RD Congo"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "MTN RDC",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.consumerug",
+        "_app_name": "MTN MoMo",
+        "_developer": "MTN",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence MTN RD Congo"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Vodacom RDC",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "Vodacom RDC app",
+        "_developer": "Vodacom DR Congo",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Vodacom RD Congo"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Orange RDC",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "Orange Max it - RDC",
+        "_developer": "Orange RD Congo",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Orange RD Congo"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Airtel Rwanda",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "My Airtel",
+        "_developer": "Airtel Africa",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Airtel Rwanda"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "MTN Rwanda",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.consumerug",
+        "_app_name": "MTN MoMo",
+        "_developer": "MTN",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence MTN Rwanda"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "CST",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "tv.perception.android.tvcabostp",
+        "_app_name": "CST ON",
+        "_developer": "CST Companhia Santomense de Telecomunicações",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence CST Sao Tomé-et-Principe"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Unitel STP",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "ao.unitel.MyAppUnitel",
+        "_app_name": "MyUnitel",
+        "_developer": "Unitel SA",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Unitel Sao Tomé-et-Principe"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Africell Sierra Leone",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "MyAfricell SL",
+        "_developer": "Africell",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Africell Sierra Leone"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Cable & Wireless Seychelles",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.cwseychelles.selfservice",
+        "_app_name": "CWS MyCare",
+        "_developer": "CABLE & WIRELESS (SEYCHELLES) LIMITED",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Cable & Wireless Seychelles"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Orange Sierra Leone",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "Orange Max it - Sierra Leone",
+        "_developer": "Orange Sierra Leone",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Orange Sierra Leone"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Airtel Seychelles",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.airtel.africa.selfcare",
+        "_app_name": "My Airtel",
+        "_developer": "Airtel Africa",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Airtel Seychelles"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Hormuud",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "My Hormuud",
+        "_developer": "Hormuud",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Hormuud Somalie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Somtel",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "Somtel SuperApp!",
+        "_developer": "Somtel",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Somtel Somalie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "MTN Soudan",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.mtn.my_mtn_sudan",
+        "_app_name": "MyMTN: Manage & Explore",
+        "_developer": "MTN Sudan",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence MTN Soudan"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Telesom",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "Telesom Super App",
+        "_developer": "Telesom",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Telesom Somalie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Zain Soudan",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.zain.sd.zainapp",
+        "_app_name": "Zain SD",
+        "_developer": "Zain Sudan",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Zain Soudan"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "MTN Soudan du Sud",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.mtn.mtnssr3",
+        "_app_name": "MyMTN South Sudan",
+        "_developer": "MTN  South Sudan",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence MTN Soudan du Sud"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Zain Soudan du Sud",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "mobi.foo.quran",
+        "_app_name": "القرآن الكريم Zain by",
+        "_developer": "Zain Group",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Zain Soudan du Sud"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Expresso Sénégal",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.montymobile.expressoselfcare",
+        "_app_name": "Osez by expresso",
+        "_developer": "Expresso Sénégal",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Expresso Sénégal"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Airtel Tanzanie",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.airtel.africa.selfcare",
+        "_app_name": "My Airtel",
+        "_developer": "Airtel Africa",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Airtel Tanzanie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Orange Sénégal",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.orange.myorange.osn",
+        "_app_name": "Orange Max it Sénégal",
+        "_developer": "Orange Sénégal",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Orange Sénégal"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Halotel Tanzanie",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.halotel.superapp",
+        "_app_name": "MyHalo – Your Digital Hub",
+        "_developer": "Halotel Company",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Halotel Tanzanie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Vodacom Tanzanie",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.vodafone.mpesa.tanzania",
+        "_app_name": "M-Pesa Tanzania",
+        "_developer": "Vodacom Tanzania PLC",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Vodacom Tanzanie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Free Sénégal",
+    "found": {
+      "appstore": null,
+      "playstore": null,
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Free Sénégal Sénégal"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Airtel Tchad",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "My Airtel",
+        "_developer": "Airtel Africa",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Airtel Tchad"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Moov Africa Togo",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.huawei.moovmoney.tg.uat",
+        "_app_name": "Moov Money TG",
+        "_developer": "Moov Africa Togo",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Moov Africa Togo"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Togocom",
+    "found": {
+      "appstore": null,
+      "playstore": null,
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Togocom Togo"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Ooredoo Tunisie",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "My Ooredoo Tunisie",
+        "_developer": "Ooredoo Tunisie",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Ooredoo Tunisie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Orange Tunisie",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "Orange Max it - Tunisie",
+        "_developer": "Orange Tunisie",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Orange Tunisie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Sotel Tchad",
+    "found": {
+      "appstore": null,
+      "playstore": null,
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Sotel Tchad Tchad"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Airtel Zambie",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.airtel.africa.selfcare",
+        "_app_name": "My Airtel",
+        "_developer": "Airtel Africa",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Airtel Zambie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "MTN Zambie",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.mtnzm.mymtn",
+        "_app_name": "MyMTN Zambia",
+        "_developer": "MTN ZAMBIA",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence MTN Zambie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Econet Zimbabwe",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.gaia.cx",
+        "_app_name": "My Econet",
+        "_developer": "Econet Zimbabwe",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Econet Zimbabwe"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "NetOne",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "zw.co.onemoney.agt",
+        "_app_name": "OneMoney Agent",
+        "_developer": "NetOne OneMoney",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence NetOne Zimbabwe"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "MTN eSwatini",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.mymtnnextgen",
+        "_app_name": "MyMTN Eswatini",
+        "_developer": "MTN eSwatini",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence MTN eSwatini"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Eswatini Mobile",
+    "found": {
+      "appstore": null,
+      "playstore": null,
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Eswatini Mobile eSwatini"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Telecel Zimbabwe",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.teliTravel",
+        "_app_name": "Telitravel: Global eSIM Data",
+        "_developer": "TELECEL GLOBAL LIMITED",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Telecel Zimbabwe"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Orange Égypte",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "My Orange Egypt",
+        "_developer": "Orange Egypt",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Orange Égypte"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Vodafone Égypte",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "com.emeint.android.myservices",
+        "_app_name": "Ana Vodafone",
+        "_developer": "Vodafone Egypt͏",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Vodafone Égypte"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Ethio Telecom",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": null,
+        "_app_name": "My Ethiotel",
+        "_developer": "Ethio telecom SC",
+        "_confidence": "neutral"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Ethio Telecom Éthiopie"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "EriTel",
+    "found": {
+      "appstore": null,
+      "playstore": null,
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence EriTel Érythrée"
+      }
+    }
+  },
+  {
+    "subsidiary_name": "Safaricom Éthiopie",
+    "found": {
+      "appstore": null,
+      "playstore": {
+        "package_id": "et.safaricom.mpesa.lifestyle",
+        "_app_name": "M-PESA Safaricom Ethiopia",
+        "_developer": "Safaricom M-PESA Mobile Financial Services PLC",
+        "_confidence": "match"
+      },
+      "trustpilot": null,
+      "google_maps": {
+        "query": "Agence Safaricom Éthiopie"
+      }
+    }
+  }
+]

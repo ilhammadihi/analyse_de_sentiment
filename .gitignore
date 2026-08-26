@@ -37,12 +37,23 @@ env/
 
 # Project specific
 data/logs/*.log
-data/state/_tp_state.json
+data/state/*.json
+run_output*.log
 .pytest_cache/
+.mypy_cache/
 .coverage
 htmlcov/
 
 # Secrets
-.env.local
-.env.*.local
+# TOUTE variante de .env est exclue, et l'exemple seul est réadmis.
+# Lister les variantes une par une ne tient pas : « .env.avant_llm » n'était
+# couvert par aucune des règles précédentes et un `git add -A` l'aurait
+# commité — avec les clés dedans.
+.env*
+!.env.example
 secrets/
+
+# Archives et sauvegardes : lourdes, et elles contiennent des dumps de base.
+backups/
+*.tar.gz
+*.dump

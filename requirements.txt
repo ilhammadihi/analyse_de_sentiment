@@ -1,34 +1,35 @@
 # Core
-python-dotenv>=0.19.0
-pydantic>=2.0.0
-pydantic-settings>=2.0.0
+python-dotenv>=1.0.0
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
 
-# Database
+# Base de données
 psycopg2-binary>=2.9.0
-sqlalchemy>=1.4.0
 
-# Scraping
+# Collecte
 playwright>=1.40.0
 requests>=2.31.0
 google-play-scraper>=1.2.0
 feedparser>=6.0.0
 beautifulsoup4>=4.11.0
+# Lecture des jeux de données ANRT (XLSX) — voir reviews/collectors/anrt_maroc.py
+openpyxl>=3.1.0
+# Lecture du tableau de bord ARCEP Bénin (PDF) — voir reviews/collectors/arcep_benin.py
+pdfplumber>=0.11.0
 
-# Scheduling
+# Planification
 APScheduler>=3.10.0
+# Base de fuseaux IANA : requise par APScheduler (absente des images Linux
+# slim et de Windows) — sans elle, ZoneInfo("Africa/Casablanca") échoue.
+tzdata>=2024.1
 
-# Monitoring
-prometheus-client>=0.16.0
+# API
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
 
 # Logging
 python-json-logger>=2.0.0
 
-# Testing
+# Tests / dev
 pytest>=7.3.0
 pytest-cov>=4.1.0
-pytest-asyncio>=0.21.0
-
-# Dev
-black>=23.0.0
-flake8>=6.0.0
-mypy>=1.0.0
