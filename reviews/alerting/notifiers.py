@@ -244,7 +244,9 @@ class TelegramNotifier(Notifier):
             logger.warning("Envoi Telegram échoué : %s", e)
             return False
 
-    def send_text(self, corps_html: str) -> bool:
+    def send_text(
+        self, corps_html: str, reply_markup: Optional[dict] = None
+    ) -> bool:
         """Envoie un message libre, hors du circuit des alertes.
 
         NI LE FILTRE DE TYPE NI LE SEUIL DE GRAVITÉ NE S'APPLIQUENT, et c'est
@@ -257,16 +259,25 @@ class TelegramNotifier(Notifier):
         L'appelant est responsable de l'échappement de ce qu'il compose : les
         parties variables doivent passer par `_echapper`, jamais la structure
         HTML elle-même, sinon les balises s'afficheraient en clair.
+
+        `reply_markup` — un clavier Telegram (`{"inline_keyboard": [[...]]}`),
+        typiquement produit par `CampaignAgent._transmettre` pour les boutons
+        Valider/Rejeter. Optionnel et laissé générique (un dict, pas un type
+        dédié) : ce module ne connaît rien des campagnes, seulement de
+        Telegram.
         """
+        payload: dict = {
+            "chat_id": self.cfg.telegram_chat_id,
+            "text": corps_html,
+            "parse_mode": "HTML",
+            "disable_web_page_preview": True,
+        }
+        if reply_markup:
+            payload["reply_markup"] = reply_markup
         try:
             resp = requests.post(
                 f"https://api.telegram.org/bot{self.cfg.telegram_bot_token}/sendMessage",
-                json={
-                    "chat_id": self.cfg.telegram_chat_id,
-                    "text": corps_html,
-                    "parse_mode": "HTML",
-                    "disable_web_page_preview": True,
-                },
+                json=payload,
                 timeout=10,
             )
             if resp.status_code >= 400:

@@ -791,10 +791,27 @@ def _update(uid, texte, chat_id=-100, user_id=42, prive=False):
     }
 
 
+def _update_callback(uid, data, chat_id=-100, user_id=42, message_id=55):
+    return {
+        "update_id": uid,
+        "callback_query": {
+            "id": f"cb{uid}",
+            "data": data,
+            "from": {"id": user_id, "username": "encadrant"},
+            "message": {
+                "message_id": message_id,
+                "chat": {"id": chat_id, "type": "supergroup"},
+            },
+        },
+    }
+
+
 class _Canal:
     def __init__(self, *salves):
         self.salves = list(salves)
         self.envois = []
+        self.reponses_callback = []
+        self.claviers_retires = []
         self.utilisable = True
 
     def mises_a_jour(self, offset):
@@ -805,6 +822,14 @@ class _Canal:
 
     def envoyer(self, chat_id, texte):
         self.envois.append((chat_id, texte))
+        return True
+
+    def repondre_callback(self, callback_query_id, texte="", alerte=False):
+        self.reponses_callback.append((callback_query_id, texte, alerte))
+        return True
+
+    def retirer_clavier(self, chat_id, message_id):
+        self.claviers_retires.append((chat_id, message_id))
         return True
 
 
@@ -942,6 +967,131 @@ def test_le_numero_tolere_ce_qu_on_recopie_depuis_la_liste():
     assert _numero("#12") == 12
     assert _numero("12.") == 12
     assert _numero("douze") is None
+
+
+# ---------------------------------------------------------------------------
+# Boutons Valider/Rejeter — même décision que la commande texte, autre porte
+# ---------------------------------------------------------------------------
+
+
+def test_un_clic_valider_decide_accuse_retire_le_clavier_et_confirme():
+    campagne = _CampagneFactice()
+    canal = _Canal([_update_callback(1, "valider:42")])
+    journal = _Journal()
+    boucle = _boucle(canal, campagne=campagne, journal=journal)
+
+    assert boucle.tour() == 1
+    assert campagne.campagnes.decisions == [(42, "approved", "encadrant")]
+    assert canal.claviers_retires == [(-100, 55)]
+    assert "validée" in canal.envois[0][1]
+    assert canal.reponses_callback[0][0] == "cb1"
+    assert canal.reponses_callback[0][2] is False   # pas d'alerte sur un succès
+    (ecrit,) = journal.ecrits
+    assert ecrit["payload"]["via"] == "bouton"
+    assert ecrit["payload"]["commande"] == "valider"
+
+
+def test_un_clic_rejeter_decide_rejected_et_non_approved():
+    campagne = _CampagneFactice()
+    canal = _Canal([_update_callback(1, "rejeter:42")])
+    boucle = _boucle(canal, campagne=campagne)
+
+    boucle.tour()
+    assert campagne.campagnes.decisions == [(42, "rejected", "encadrant")]
+    assert "écartée" in canal.envois[0][1]
+
+
+def test_le_texte_de_confirmation_est_identique_bouton_ou_commande():
+    """UN SEUL POINT DE VÉRITÉ (`_texte_decision`) : la phrase qui confirme une
+    décision ne doit jamais dépendre du moyen utilisé pour décider."""
+    campagne_texte = _CampagneFactice()
+    canal_texte = _Canal([_update(1, "/valider 42")])
+    _boucle(canal_texte, campagne=campagne_texte).tour()
+
+    campagne_bouton = _CampagneFactice()
+    canal_bouton = _Canal([_update_callback(1, "valider:42")])
+    _boucle(canal_bouton, campagne=campagne_bouton).tour()
+
+    assert canal_texte.envois[0][1] == canal_bouton.envois[0][1]
+
+
+def test_un_clic_sur_une_decision_deja_prise_alerte_sans_rien_ecraser():
+    campagne = _CampagneFactice()
+    campagne.campagnes.decider = lambda *a, **kw: False
+    canal = _Canal([_update_callback(1, "valider:42")])
+    boucle = _boucle(canal, campagne=campagne)
+
+    boucle.tour()
+    assert canal.envois == []                # aucune confirmation envoyée
+    assert canal.claviers_retires == []       # le clavier reste en place
+    _, texte, alerte = canal.reponses_callback[0]
+    assert "déjà décidée" in texte
+    assert alerte is True
+
+
+def test_un_clic_hors_conversation_autorisee_reste_silencieux_mais_accuse():
+    """Même principe que pour un message non autorisé : pas de décision, pas
+    de réponse informative — seulement l'accusé technique qu'exige Telegram."""
+    campagne = _CampagneFactice()
+    canal = _Canal([_update_callback(1, "valider:42", chat_id=999)])
+    boucle = _boucle(canal, campagne=campagne)
+
+    boucle.tour()
+    assert campagne.campagnes.decisions == []
+    assert canal.envois == []
+    assert canal.reponses_callback == [("cb1", "", False)]
+
+
+def test_un_clic_sans_assistant_de_campagne_alerte_au_lieu_de_planter():
+    canal = _Canal([_update_callback(1, "valider:42")])
+    boucle = _boucle(canal, campagne=None)
+
+    boucle.tour()
+    _, texte, alerte = canal.reponses_callback[0]
+    assert "non configuré" in texte
+    assert alerte is True
+
+
+def test_un_bouton_illisible_alerte_sans_lever():
+    campagne = _CampagneFactice()
+    canal = _Canal([_update_callback(1, "autrechose:abc")])
+    boucle = _boucle(canal, campagne=campagne)
+
+    boucle.tour()
+    assert campagne.campagnes.decisions == []
+    _, texte, alerte = canal.reponses_callback[0]
+    assert alerte is True
+
+
+def test_la_campagne_proposee_porte_un_clavier_valider_rejeter():
+    """Les boutons accompagnent la proposition envoyée au groupe, en plus des
+    commandes texte — jamais à leur place (voir `_transmettre`)."""
+    from reviews.config import get_settings
+    from reviews.storage.db import get_database
+
+    class _NotifierFactice:
+        def __init__(self):
+            self.envois = []
+
+        def send_text(self, corps_html, reply_markup=None):
+            self.envois.append((corps_html, reply_markup))
+            return True
+
+    agent = CampaignAgent(
+        db=object(), settings=get_settings(), notifier=_NotifierFactice(),
+    )
+    campagne = Campagne(
+        cible=_cible(), segment=SEGMENTS["detracteurs"],
+        objectif=OBJECTIFS["retention"], canal=CANAUX["reponse_avis"],
+        taille_segment=150, accroche="A", message="M", campaign_id=42,
+    )
+    agent._transmettre(campagne)
+
+    (corps, markup) = agent.notifier.envois[0]
+    assert "/valider 42" in corps            # repli texte conservé
+    boutons = markup["inline_keyboard"][0]
+    assert boutons[0]["callback_data"] == "valider:42"
+    assert boutons[1]["callback_data"] == "rejeter:42"
 
 
 # ---------------------------------------------------------------------------

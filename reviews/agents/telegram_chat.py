@@ -93,9 +93,10 @@ class MessageEntrant:
         """Extrait un message d'une mise à jour, ou None si ce n'en est pas une.
 
         Telegram appelle « update » beaucoup de choses : messages édités,
-        réactions, membres qui rejoignent, boutons pressés. Tout ce qui n'est
-        pas un message texte est ignoré ici — silencieusement, parce que ce
-        n'est pas une anomalie mais le fonctionnement normal d'un groupe.
+        réactions, membres qui rejoignent, boutons pressés (voir
+        `CallbackEntrant`, traité séparément). Tout ce qui n'est ni un message
+        texte ni un clic de bouton est ignoré ici — silencieusement, parce que
+        ce n'est pas une anomalie mais le fonctionnement normal d'un groupe.
         """
         message = update.get("message") or update.get("channel_post")
         if not isinstance(message, dict):
@@ -118,6 +119,59 @@ class MessageEntrant:
             ),
             texte=texte,
             prive=chat.get("type") == "private",
+        )
+
+
+@dataclass(frozen=True)
+class CallbackEntrant:
+    """Un bouton pressé sous une proposition de campagne (Valider/Rejeter).
+
+    SÉPARÉ DE `MessageEntrant`, jamais fondu dedans : un clic n'a pas de texte
+    à faire analyser par `analyser()`, ne coûte jamais un appel de modèle, et
+    porte une obligation que `MessageEntrant` n'a pas — Telegram exige un
+    accusé (`answerCallbackQuery`) sous peine de laisser le bouton affiché en
+    chargement côté client, même quand le clic a bien été traité.
+    """
+
+    update_id: int
+    callback_query_id: str
+    chat_id: int
+    message_id: int
+    user_id: int
+    auteur: str
+    data: str
+
+    @classmethod
+    def depuis(cls, update: dict) -> Optional["CallbackEntrant"]:
+        cq = update.get("callback_query")
+        if not isinstance(cq, dict):
+            return None
+        message = cq.get("message") or {}
+        chat = message.get("chat") or {}
+        auteur_brut = cq.get("from") or {}
+        # Un clic sur un message trop ancien peut arriver SANS `message`
+        # (limite documentée de l'API Telegram) : sans chat_id ni message_id,
+        # ni répondre dans la conversation ni retirer les boutons n'est
+        # possible — la mise à jour est inexploitable, pas une anomalie à
+        # signaler.
+        if (
+            cq.get("id") is None
+            or chat.get("id") is None
+            or message.get("message_id") is None
+        ):
+            return None
+        return cls(
+            update_id=int(update.get("update_id", 0)),
+            callback_query_id=str(cq["id"]),
+            chat_id=int(chat["id"]),
+            message_id=int(message["message_id"]),
+            user_id=int(auteur_brut.get("id") or 0),
+            auteur=(
+                auteur_brut.get("username")
+                or auteur_brut.get("first_name")
+                or "inconnu"
+            ),
+            data=str(cq.get("data") or ""),
         )
 
 
@@ -278,9 +332,12 @@ class CanalTelegram:
         params: dict[str, Any] = {
             "timeout": self.poll_timeout,
             # Économie de bande passante ET de surprises : on ne demande que
-            # les messages. Sans ce filtre, chaque réaction emoji d'un membre du
-            # groupe produirait une mise à jour à traiter puis à jeter.
-            "allowed_updates": ["message"],
+            # les messages et les clics de bouton. Sans ce filtre, chaque
+            # réaction emoji d'un membre du groupe produirait une mise à jour
+            # à traiter puis à jeter. `callback_query` a été ajouté avec les
+            # boutons Valider/Rejeter (voir `CallbackEntrant`) : sans lui, un
+            # clic n'atteindrait jamais cette boucle.
+            "allowed_updates": ["message", "callback_query"],
         }
         if offset is not None:
             params["offset"] = offset
@@ -388,6 +445,65 @@ class CanalTelegram:
             logger.warning("Réponse Telegram non envoyée : %s", exc)
             return False
 
+    def repondre_callback(
+        self, callback_query_id: str, texte: str = "", alerte: bool = False
+    ) -> bool:
+        """Accuse réception d'un clic de bouton. TOUJOURS APPELÉ, quoi qu'il
+        arrive après — voir `BoucleConversation._traiter_callback`.
+
+        Sans cet appel, le client Telegram affiche le bouton en chargement
+        jusqu'à expiration (quelques secondes), même quand le clic a bien été
+        traité côté serveur : le pire signal possible à donner à quelqu'un qui
+        vient de valider une campagne.
+
+        `alerte=True` ouvre une boîte de dialogue plutôt qu'un simple toast —
+        réservé aux clics qui n'ont PAS produit l'effet attendu (déjà
+        décidée, campagne introuvable, assistant absent) : c'est le seul cas
+        où l'absence de conséquence visible mérite d'interrompre le lecteur.
+        """
+        try:
+            resp = self._session.post(
+                self._url("answerCallbackQuery"),
+                json={
+                    "callback_query_id": callback_query_id,
+                    # 200 caractères : limite documentée de l'API pour ce champ.
+                    "text": texte[:200],
+                    "show_alert": alerte,
+                },
+                timeout=10,
+            )
+            return resp.status_code < 400
+        except requests.RequestException as exc:
+            logger.warning("Accusé de clic non envoyé : %s", exc)
+            return False
+
+    def retirer_clavier(self, chat_id: int, message_id: int) -> bool:
+        """Retire les boutons d'un message de proposition déjà décidé.
+
+        SANS TOUCHER AU TEXTE (`editMessageReplyMarkup`, jamais
+        `editMessageText`) : reconstruire ici le texte d'origine dupliquerait
+        exactement la mise en forme déjà écrite par
+        `CampaignAgent._transmettre`, et les deux finiraient un jour par
+        diverger. Ne pas retirer les boutons resterait inoffensif — `decider()`
+        est idempotent — mais un second clic répondrait « déjà décidée » à
+        quelqu'un qui vient de le faire lui-même, ce qui se lit comme une
+        panne plutôt que comme la confirmation qu'elle est déjà réglée.
+        """
+        try:
+            resp = self._session.post(
+                self._url("editMessageReplyMarkup"),
+                json={
+                    "chat_id": chat_id,
+                    "message_id": message_id,
+                    "reply_markup": {"inline_keyboard": []},
+                },
+                timeout=10,
+            )
+            return resp.status_code < 400
+        except requests.RequestException as exc:
+            logger.warning("Clavier non retiré : %s", exc)
+            return False
+
 
 # ---------------------------------------------------------------------------
 # Boucle
@@ -451,11 +567,15 @@ class BoucleConversation:
         traites = 0
         for update in updates:
             message = MessageEntrant.depuis(update)
-            if message is None:
+            if message is not None:
+                reponse = self._traiter(message)
+                if reponse is not None:
+                    self.canal.envoyer(message.chat_id, reponse)
+                    traites += 1
                 continue
-            reponse = self._traiter(message)
-            if reponse is not None:
-                self.canal.envoyer(message.chat_id, reponse)
+            callback = CallbackEntrant.depuis(update)
+            if callback is not None:
+                self._traiter_callback(callback)
                 traites += 1
         return traites
 
@@ -504,6 +624,102 @@ class BoucleConversation:
         self._journaliser(message, reponse)
         logger.info("Réponse à %s : %s", message.auteur, reponse.resume())
         return reponse.texte
+
+    # ---------------------------------------------------- Boutons de campagne
+
+    def _traiter_callback(self, callback: CallbackEntrant) -> None:
+        """Un bouton « Valider »/« Rejeter » pressé sous une proposition.
+
+        RÉPOND TOUJOURS AU CLIC (voir `CanalTelegram.repondre_callback`),
+        contrairement à `_traiter` où une absence de réponse est normale : un
+        message sans réponse est silencieux, un clic sans accusé reste affiché
+        en chargement chez qui a cliqué.
+        """
+        if not self._autorise(callback.chat_id):
+            # MÊME SILENCE QUE POUR UN MESSAGE NON AUTORISÉ (voir `_traiter`) :
+            # on accuse le clic pour ne pas laisser le client en chargement,
+            # sans rien décider ni rien dire de plus à un inconnu.
+            self.canal.repondre_callback(callback.callback_query_id)
+            return
+
+        if self.campagne is None:
+            self.canal.repondre_callback(
+                callback.callback_query_id,
+                "Assistant de campagne non configuré.", alerte=True,
+            )
+            return
+
+        commande, _, argument = callback.data.partition(":")
+        numero = _numero(argument)
+        if commande not in ("valider", "rejeter") or numero is None:
+            logger.warning("Bouton illisible : %r", callback.data)
+            self.canal.repondre_callback(
+                callback.callback_query_id, "Bouton illisible.", alerte=True,
+            )
+            return
+
+        statut = "approved" if commande == "valider" else "rejected"
+        try:
+            decidee = self.campagne.campagnes.decider(
+                numero, statut, callback.auteur
+            )
+        except Exception:  # noqa: BLE001
+            logger.exception("Décision par bouton en échec : %s", callback.data)
+            self.canal.repondre_callback(
+                callback.callback_query_id, "Échec de mon côté.", alerte=True,
+            )
+            return
+
+        if not decidee:
+            # MÊME RÈGLE QUE LA COMMANDE TEXTE (voir `_executer_campagne`) :
+            # `decider()` ne rejoue jamais une décision déjà prise — deux
+            # personnes cliquant à quelques secondes d'intervalle
+            # n'écrasent pas leur décision l'une l'autre.
+            self.canal.repondre_callback(
+                callback.callback_query_id,
+                f"Proposition n°{numero} déjà décidée ou introuvable.",
+                alerte=True,
+            )
+            return
+
+        self.canal.repondre_callback(
+            callback.callback_query_id,
+            "Validée." if statut == "approved" else "Rejetée.",
+        )
+        # LES BOUTONS SONT RETIRÉS APRÈS LA DÉCISION, LE TEXTE NON MODIFIÉ —
+        # voir `CanalTelegram.retirer_clavier`. La confirmation, elle, part en
+        # message séparé : c'est le même texte que la commande /valider ou
+        # /rejeter aurait renvoyé (`_texte_decision`), pour ne jamais dire
+        # deux choses différentes selon le moyen utilisé pour décider.
+        self.canal.retirer_clavier(callback.chat_id, callback.message_id)
+        self.canal.envoyer(callback.chat_id, _texte_decision(commande, numero))
+        self._journaliser_callback(callback, commande, numero)
+
+    def _journaliser_callback(
+        self, callback: CallbackEntrant, commande: str, numero: int
+    ) -> None:
+        """Même table, même agent que `_journaliser_commande` : un clic est une
+        autre façon de taper la même commande, pas une action différente."""
+        if self.journal is None:
+            return
+        self.journal.record(
+            agent=AGENT,
+            entity_level="commande",
+            entity_key=str(callback.user_id),
+            entity_label=callback.auteur,
+            score=0.0,
+            text=f"campagne n°{numero} -> {commande} (bouton)",
+            payload={
+                "utilisateur": str(callback.user_id),
+                "auteur": callback.auteur,
+                "chat_id": callback.chat_id,
+                "agent_appele": "campaign",
+                "commande": commande,
+                "argument": str(numero),
+                "via": "bouton",
+            },
+            delivered=True,
+        )
 
     # -------------------------------------------------------------- Campagnes
 
@@ -570,16 +786,7 @@ class BoucleConversation:
             self._journaliser_commande(
                 message, consigne, f"campagne n°{numero} -> {statut}"
             )
-            verbe = "validée" if statut == "approved" else "écartée"
-            return (
-                f"Proposition n°{numero} {verbe}. "
-                + (
-                    f"Le bilan sera disponible dès demain : /rapport {numero}."
-                    if statut == "approved"
-                    else "Elle ne sera pas reproposée pour cette entité avant "
-                    "deux semaines."
-                )
-            )
+            return _texte_decision(commande, numero)
 
         if commande in ("rapport", "fiche", "contenus"):
             numero = _numero(argument)
@@ -737,6 +944,20 @@ class BoucleConversation:
             },
             delivered=True,
         )
+
+
+def _texte_decision(commande: str, numero: int) -> str:
+    """Confirmation d'une décision réussie — PARTAGÉE entre la commande texte
+    (`/valider`, `/rejeter`) et le bouton (`_traiter_callback`), pour que les
+    deux moyens de décider ne disent jamais deux choses différentes.
+    """
+    verbe = "validée" if commande == "valider" else "écartée"
+    suite = (
+        f"Le bilan sera disponible dès demain : /rapport {numero}."
+        if commande == "valider"
+        else "Elle ne sera pas reproposée pour cette entité avant deux semaines."
+    )
+    return f"Proposition n°{numero} {verbe}. {suite}"
 
 
 def _numero(argument: str) -> Optional[int]:

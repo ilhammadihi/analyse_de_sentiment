@@ -1276,7 +1276,28 @@ class CampaignAgent:
             "<i>Rien n'est envoyé à un client tant que la proposition n'est pas "
             "validée.</i>"
         )
-        return self.notifier.send_text("\n".join(lignes))
+
+        # BOUTONS EN PLUS DES COMMANDES TEXTE, JAMAIS À LEUR PLACE. Les deux
+        # mènent à la même décision (voir `BoucleConversation._traiter_callback`
+        # et `_texte_decision`, un seul point de vérité pour la confirmation) :
+        # le bouton est plus rapide depuis un téléphone, la commande reste le
+        # seul moyen sur un client Telegram qui ne rend pas les claviers en
+        # ligne. `callback_data` porte le couple (commande, numéro) exactement
+        # comme le texte, pour que le clic et la commande empruntent le même
+        # chemin dans `BoucleConversation`.
+        markup = (
+            {
+                "inline_keyboard": [[
+                    {"text": "✅ Valider",
+                     "callback_data": f"valider:{campagne.campaign_id}"},
+                    {"text": "❌ Rejeter",
+                     "callback_data": f"rejeter:{campagne.campaign_id}"},
+                ]]
+            }
+            if campagne.campaign_id
+            else None
+        )
+        return self.notifier.send_text("\n".join(lignes), reply_markup=markup)
 
     # ----------------------------------------------------- Fiche de campagne
 
