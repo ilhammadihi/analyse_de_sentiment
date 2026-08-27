@@ -7,7 +7,7 @@
 services:
   postgres:
     image: postgres:15-alpine
-    container_name: reviews_postgres
+    container_name: sentiment-postgres
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${DB_USER:-telecom_user}
@@ -20,7 +20,11 @@ services:
       # « 5432:5432 » nu la publie sur toutes les interfaces — sur un serveur
       # de test partagé, c'est une base exposée au réseau. Le port reste
       # joignable depuis la machine hôte pour psql et les sauvegardes.
-      - "127.0.0.1:5432:5432"
+      #
+      # Port hôte paramétrable (DB_HOST_PORT) : sur un serveur mutualisé, 5432
+      # est presque toujours déjà pris par un autre projet — le port interne
+      # du conteneur (5432) ne change jamais, seul le mapping hôte varie.
+      - "127.0.0.1:${DB_HOST_PORT:-5432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       # Schéma appliqué automatiquement à la création de la base
@@ -34,18 +38,22 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    networks: [reviews_net]
+    networks: [sentiment_net]
 
   api:
     build: .
-    container_name: reviews_api
+    container_name: sentiment-api
     restart: unless-stopped
     command: ["python", "-m", "reviews", "serve"]
     env_file: .env
     environment:
       DB_HOST: postgres
     ports:
-      - "8000:8000"
+      # Lié à la boucle locale : sur le serveur de test, c'est un reverse
+      # proxy nginx (pas ce port) qui reçoit le trafic public. Port hôte
+      # paramétrable (API_HOST_PORT) pour la même raison que Postgres
+      # ci-dessus.
+      - "127.0.0.1:${API_HOST_PORT:-8000}:8000"
     depends_on:
       postgres:
         condition: service_healthy
@@ -55,11 +63,11 @@ services:
       timeout: 10s
       retries: 3
       start_period: 20s
-    networks: [reviews_net]
+    networks: [sentiment_net]
 
   worker:
     build: .
-    container_name: reviews_worker
+    container_name: sentiment-worker
     restart: unless-stopped
     command: ["python", "-m", "reviews", "schedule"]
     env_file: .env
@@ -71,12 +79,12 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    networks: [reviews_net]
+    networks: [sentiment_net]
 
 volumes:
   postgres_data:
   review_state:
 
 networks:
-  reviews_net:
+  sentiment_net:
     driver: bridge
