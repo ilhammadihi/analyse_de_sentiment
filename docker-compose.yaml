@@ -108,3 +108,13 @@ volumes:
 networks:
   sentiment_net:
     driver: bridge
+    driver_opts:
+      # MTU forcé sur NOTRE réseau uniquement, indépendant de la config
+      # globale du démon Docker (/etc/docker/daemon.json, partagée par tous
+      # les projets du serveur). Mesuré le 27/08/2026 sur digiwise-4 : le
+      # vrai MTU du chemin réseau est entre 1428 et 1500 (`ping -M do -s
+      # <taille>` échoue à 1472, réussit à 1400) — 1500 (le défaut) fait
+      # perdre silencieusement les grosses réponses HTTPS ("Read timed out",
+      # symptôme classique d'un trou de fragmentation/PMTU). 1400 est une
+      # valeur sûre, confortablement sous la vraie limite.
+      com.docker.network.driver.mtu: "1400"
