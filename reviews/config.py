@@ -60,19 +60,17 @@ class ScrapingConfig(BaseSettings):
 class TrustpilotConfig(BaseSettings):
     model_config = _ENV
 
-    #: DÉSACTIVÉ PAR DÉFAUT, contrairement aux quatre autres collecteurs.
+    #: RÉACTIVÉ le 2026-08-27, après avoir été désactivé par défaut pendant un
+    #: temps (seuls 4 domaines Moov Africa étaient configurés, dont 3 sans
+    #: fiche Trustpilot et le 4e vide — voir l'historique git pour ce
+    #: raisonnement).
     #:
-    #: Mesuré : 50 exécutions, 0 avis inséré. Le collecteur fonctionne — il
-    #: navigue, distingue un 404 d'une panne et le journalise correctement —
-    #: mais 3 des 4 domaines configurés n'ont aucune fiche Trustpilot et le
-    #: quatrième a une fiche vide. La plateforme ne couvre pas les opérateurs
-    #: télécoms africains suivis ici.
-    #:
-    #: Le défaut est à False et non à True parce qu'un déploiement neuf sans
-    #: `.env` ne doit pas réactiver un collecteur connu comme sans cible : il
-    #: produirait 43 alertes « scraper_zero » par semaine et ferait passer une
-    #: absence de fiche pour une panne.
-    enabled: bool = Field(default=False, validation_alias="ENABLE_TRUSTPILOT")
+    #: Un balayage des 131 filiales (recherche Trustpilot par opérateur, voir
+    #: `reviews/collectors/trustpilot.py`) a trouvé 19 fiches réelles avec du
+    #: contenu, ~2 800 avis au total. `BusinessUnitNotFound` (404) continue de
+    #: distinguer proprement « pas de fiche » d'une panne pour les domaines
+    #: sans contenu, donc pas de risque de fausses alertes « scraper_zero ».
+    enabled: bool = Field(default=True, validation_alias="ENABLE_TRUSTPILOT")
     cache_path: str = Field(default="data/state/tp_state.json", validation_alias="TRUSTPILOT_CACHE_PATH")
     max_pages: int = Field(default=10, validation_alias="TRUSTPILOT_MAX_PAGES")
 

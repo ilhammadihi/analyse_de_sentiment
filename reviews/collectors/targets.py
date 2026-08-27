@@ -365,9 +365,20 @@ def press_matchers() -> list[dict]:
 
 
 def trustpilot_companies() -> list[dict]:
-    """[{domain, name}] — forme attendue par TrustpilotScraper."""
+    """[{domain, name, country_filter}] — forme attendue par TrustpilotScraper.
+
+    `country_filter` (ISO2, optionnel) n'existe que pour les fiches PARTAGÉES
+    entre plusieurs pays (ex. mtn.com, le site groupe MTN) : les avis y sont
+    mélangés entre filiales — un lecteur en Ouganda, un autre au Nigeria — et
+    doivent être filtrés sur `consumer.countryCode` avant d'être rattachés à
+    CETTE filiale précise. Absent pour les domaines propres à un seul pays.
+    """
     return [
-        {"domain": cfg["domain"], "name": sub["subsidiary_name"]}
+        {
+            "domain": cfg["domain"],
+            "name": sub["subsidiary_name"],
+            "country_filter": cfg.get("country_filter"),
+        }
         for sub, cfg in _targets_for("trustpilot")
         if cfg.get("domain")
     ]

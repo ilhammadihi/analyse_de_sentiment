@@ -45,7 +45,12 @@
         "google_maps": {
           "query": "Agence Cell C Afrique du Sud"
         },
-        "trustpilot": null,
+        "trustpilot": {
+          "domain": "cellc.co.za",
+          "_verified_business": "Cell C",
+          "_verified_on": "2026-08-27",
+          "_verified_reviews": 252
+        },
         "rss": {
           "search_term": "Cell C Afrique du Sud"
         },
@@ -155,7 +160,13 @@
         "google_maps": {
           "query": "Agence MTN Afrique du Sud"
         },
-        "trustpilot": null,
+        "trustpilot": {
+          "domain": "mtn.com",
+          "_verified_business": "MTN",
+          "_verified_on": "2026-08-27",
+          "_verified_reviews": 277,
+          "country_filter": "ZA"
+        },
         "rss": {
           "search_term": "MTN South Africa"
         },
@@ -258,7 +269,12 @@
         "google_maps": {
           "query": "Agence Telkom Afrique du Sud"
         },
-        "trustpilot": null,
+        "trustpilot": {
+          "domain": "telkom.co.za",
+          "_verified_business": "Telkom",
+          "_verified_on": "2026-08-27",
+          "_verified_reviews": 436
+        },
         "rss": {
           "search_term": "Telkom South Africa"
         },
@@ -342,7 +358,12 @@
         "google_maps": {
           "query": "Agence Vodacom Afrique du Sud"
         },
-        "trustpilot": null,
+        "trustpilot": {
+          "domain": "vodacom.co.za",
+          "_verified_business": "Vodacom",
+          "_verified_on": "2026-08-27",
+          "_verified_reviews": 762
+        },
         "rss": {
           "search_term": "Vodacom South Africa"
         },
@@ -425,7 +446,12 @@
         "google_maps": {
           "query": "Agence Djezzy Algérie"
         },
-        "trustpilot": null,
+        "trustpilot": {
+          "domain": "www.djezzy.dz",
+          "_verified_business": "Djezzy",
+          "_verified_on": "2026-08-27",
+          "_verified_reviews": 11
+        },
         "rss": {
           "search_term": "Djezzy Algérie"
         },
@@ -492,7 +518,12 @@
         "google_maps": {
           "query": "Agence Mobilis Algérie"
         },
-        "trustpilot": null,
+        "trustpilot": {
+          "domain": "mobilis.dz",
+          "_verified_business": "Mobilis",
+          "_verified_on": "2026-08-27",
+          "_verified_reviews": 10
+        },
         "rss": {
           "search_term": "Mobilis Algérie"
         },
@@ -561,7 +592,12 @@
         "google_maps": {
           "query": "Agence Ooredoo Algérie"
         },
-        "trustpilot": null,
+        "trustpilot": {
+          "domain": "ooredoo.dz",
+          "_verified_business": "Ooredoo",
+          "_verified_on": "2026-08-27",
+          "_verified_reviews": 31
+        },
         "rss": {
           "search_term": "Ooredoo Algerie"
         },
@@ -1262,7 +1298,10 @@
           "query": "Agence Moov Africa Cotonou Bénin"
         },
         "trustpilot": {
-          "domain": "www.moov-africa.bj"
+          "domain": "www.moov-africa.bj",
+          "_verified_business": "Moov Africa",
+          "_verified_on": "2026-08-27",
+          "_verified_reviews": 1
         },
         "rss": {
           "search_term": "Moov Africa Benin"
@@ -2078,7 +2117,12 @@
         "google_maps": {
           "query": "Agence Africell Gambie"
         },
-        "trustpilot": null,
+        "trustpilot": {
+          "domain": "www.africell.gm",
+          "_verified_business": "Africell",
+          "_verified_on": "2026-08-27",
+          "_verified_reviews": 1
+        },
         "rss": {
           "search_term": "Africell Gambie"
         },
@@ -2153,7 +2197,12 @@
         "google_maps": {
           "query": "Agence AirtelTigo Ghana"
         },
-        "trustpilot": null,
+        "trustpilot": {
+          "domain": "www.airteltigo.com.gh",
+          "_verified_business": "AirtelTigo",
+          "_verified_on": "2026-08-27",
+          "_verified_reviews": 3
+        },
         "rss": {
           "search_term": "AirtelTigo Ghana"
         },
@@ -2526,7 +2575,12 @@
         "google_maps": {
           "query": "Agence Safaricom Kenya"
         },
-        "trustpilot": null,
+        "trustpilot": {
+          "domain": "safaricom.co.ke",
+          "_verified_business": "Safaricom",
+          "_verified_on": "2026-08-27",
+          "_verified_reviews": 95
+        },
         "rss": {
           "search_term": "Safaricom Kenya"
         },
@@ -3015,7 +3069,12 @@
         "google_maps": {
           "query": "Agence Telma Madagascar"
         },
-        "trustpilot": null,
+        "trustpilot": {
+          "domain": "www.telma.mg",
+          "_verified_business": "Telma",
+          "_verified_on": "2026-08-27",
+          "_verified_reviews": 40
+        },
         "rss": {
           "search_term": "Telma Madagascar"
         },
@@ -3240,7 +3299,12 @@
         "google_maps": {
           "query": "Agence Inwi Maroc"
         },
-        "trustpilot": null,
+        "trustpilot": {
+          "domain": "inwi.ma",
+          "_verified_business": "Inwi",
+          "_verified_on": "2026-08-27",
+          "_verified_reviews": 616
+        },
         "rss": {
           "search_term": "Inwi Maroc"
         },
@@ -3258,7 +3322,12 @@
         "google_maps": {
           "query": "Agence Maroc Telecom Maroc"
         },
-        "trustpilot": null,
+        "trustpilot": {
+          "domain": "iam.ma",
+          "_verified_business": "Maroc Telecom",
+          "_verified_on": "2026-08-27",
+          "_verified_reviews": 449
+        },
         "rss": {
           "search_term": "Maroc Telecom"
         },
@@ -4403,7 +4472,12 @@
         "google_maps": {
           "query": "Agence Airtel Ouganda"
         },
-        "trustpilot": null,
+        "trustpilot": {
+          "domain": "www.airtel.co.ug",
+          "_verified_business": "Airtel",
+          "_verified_on": "2026-08-27",
+          "_verified_reviews": 3
+        },
         "rss": {
           "search_term": "Airtel Uganda"
         },
@@ -5933,7 +6007,12 @@
         "google_maps": {
           "query": "Agence Ooredoo Tunisie"
         },
-        "trustpilot": null,
+        "trustpilot": {
+          "domain": "ooredoo.tn",
+          "_verified_business": "Ooredoo",
+          "_verified_on": "2026-08-27",
+          "_verified_reviews": 38
+        },
         "rss": {
           "search_term": "Ooredoo Tunisie"
         },
@@ -6270,7 +6349,12 @@
         "google_maps": {
           "query": "Agence Econet Zimbabwe"
         },
-        "trustpilot": null,
+        "trustpilot": {
+          "domain": "www.econet.co.zw",
+          "_verified_business": "Econet",
+          "_verified_on": "2026-08-27",
+          "_verified_reviews": 12
+        },
         "rss": {
           "search_term": "Econet Zimbabwe"
         },
@@ -6384,7 +6468,12 @@
         "google_maps": {
           "query": "Agence Eswatini Mobile eSwatini"
         },
-        "trustpilot": null,
+        "trustpilot": {
+          "domain": "eswatinimobile.co.sz",
+          "_verified_business": "Eswatini Mobile",
+          "_verified_on": "2026-08-27",
+          "_verified_reviews": 1
+        },
         "rss": {
           "search_term": "Eswatini Mobile"
         },
@@ -6821,7 +6910,12 @@
         "google_maps": {
           "query": "Agence Safaricom Éthiopie"
         },
-        "trustpilot": null,
+        "trustpilot": {
+          "domain": "safaricom.et",
+          "_verified_business": "Safaricom",
+          "_verified_on": "2026-08-27",
+          "_verified_reviews": 12
+        },
         "rss": {
           "search_term": "Safaricom Ethiopia"
         },

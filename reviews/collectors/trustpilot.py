@@ -44,15 +44,22 @@ class TrustpilotScraper(BaseCollector):
 
     # Domaines à scraper. Le slug Trustpilot est le domaine EXACT enregistré par
     # l'entreprise, préfixe `www.` compris : "moov-africa.bj" renvoie 404 alors
-    # que "www.moov-africa.bj" existe.
-    # État vérifié le 2026-07-21 : seule la fiche Bénin existe (et elle est
-    # vide — "Be the first to review"), les trois autres n'ont aucune fiche
-    # Trustpilot. Ce collecteur ne peut donc rien remonter tant que Moov Africa
-    # n'a pas d'avis sur Trustpilot ; le code ci-dessous le signale
-    # explicitement au lieu de renvoyer 0 avis en silence.
+    # que "www.moov-africa.bj" existe (mais "vodacom.co.za" ou "iam.ma", eux,
+    # n'ont PAS de préfixe — le slug se lit tel quel dans la recherche
+    # Trustpilot, jamais deviné).
     # Fiches à scraper : chargées depuis config/operators.json (targets.py).
     # Un domaine sans fiche Trustpilot est signalé explicitement (voir
     # BusinessUnitNotFound) au lieu de renvoyer 0 avis en silence.
+    #
+    # État vérifié le 2026-08-27 par balayage des 131 filiales (recherche
+    # Trustpilot par nom d'opérateur + filtre pays sur le domaine/la
+    # localisation) : 19 filiales ont une fiche réelle avec du contenu
+    # (~2 800 avis au total — Vodacom Afrique du Sud 762, Inwi Maroc 616,
+    # Maroc Telecom 449, Telkom Afrique du Sud 436, Cell C 252...). Les 3
+    # domaines Moov Africa hors Bénin (BF/CF/ML) restent sans fiche. Ce
+    # balayage n'a testé qu'UNE requête par opérateur : l'absence de fiche
+    # pour les autres filiales n'est PAS prouvée, seulement non trouvée par ce
+    # nom exact — à revérifier si une filiale change de marque commerciale.
     
     def __init__(self):
         retry_config = RetryConfig(
@@ -229,7 +236,9 @@ class TrustpilotScraper(BaseCollector):
                         break
 
             # Parser les avis bruts
-            parsed = self._parse_reviews(reviews_list, company["name"])
+            parsed = self._parse_reviews(
+                reviews_list, company["name"], company.get("country_filter")
+            )
             self.logger.info(f"{len(parsed)} avis parsés pour {company['name']}")
             
             return parsed
@@ -374,15 +383,28 @@ class TrustpilotScraper(BaseCollector):
             "text": review.get("text"),
             "rating": review.get("rating"),
             "author": consumer.get("displayName"),
+            "author_country": consumer.get("countryCode"),
             "created_at": dates.get("publishedDate") or dates.get("experiencedDate"),
             "likes": review.get("likes"),
             "verified": verification.get("isVerified"),
         }
     
-    def _parse_reviews(self, raw_reviews: list, company_name: str) -> list[Review]:
-        """Parse les avis bruts en objets Review."""
+    def _parse_reviews(
+        self,
+        raw_reviews: list,
+        company_name: str,
+        country_filter: Optional[str] = None,
+    ) -> list[Review]:
+        """Parse les avis bruts en objets Review.
+
+        `country_filter` (ISO2) écarte les avis dont le rédacteur n'est pas
+        dans ce pays — nécessaire pour une fiche groupe partagée entre
+        plusieurs filiales (ex. mtn.com), où mélanger sans filtre attribuerait
+        à une filiale des avis rédigés depuis un autre pays.
+        """
         parsed = []
         seen: set[str] = set()
+        skipped_other_country = 0
 
         for rv in raw_reviews:
             try:
@@ -393,6 +415,10 @@ class TrustpilotScraper(BaseCollector):
                 if rv["id"] in seen:
                     continue
                 seen.add(rv["id"])
+
+                if country_filter and rv.get("author_country") != country_filter:
+                    skipped_other_country += 1
+                    continue
 
                 review = Review(
                     id=rv["id"],
@@ -412,5 +438,11 @@ class TrustpilotScraper(BaseCollector):
             except Exception as e:
                 self.logger.warning(f"Erreur parsing avis : {e}")
                 continue
-        
+
+        if skipped_other_country:
+            self.logger.info(
+                "%d avis écartés (pays du rédacteur ≠ %s) sur la fiche groupe %s",
+                skipped_other_country, country_filter, company_name,
+            )
+
         return parsed
