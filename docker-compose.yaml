@@ -6,7 +6,12 @@
 
 services:
   postgres:
-    image: postgres:15-alpine
+    # Version paramétrable : sur un serveur mutualisé où le DNS des
+    # conteneurs peut être capricieux, mieux vaut réutiliser une image
+    # Postgres déjà en cache localement (`docker images`) que forcer un
+    # téléchargement. Nos migrations n'utilisent rien de spécifique à une
+    # version mineure précise.
+    image: postgres:${POSTGRES_VERSION:-15-alpine}
     container_name: sentiment-postgres
     restart: unless-stopped
     environment:
@@ -42,6 +47,11 @@ services:
 
   api:
     build: .
+    # Nom d'image fixe, indépendant du nom du dossier : `docker compose`
+    # dérive sinon le nom d'image du dossier parent (analyse_de_sentiment en
+    # local, sentiment-backend sur le serveur de test) — un `docker save` /
+    # `docker load` entre les deux ne retrouverait pas la même image.
+    image: sentiment-app:latest
     container_name: sentiment-api
     restart: unless-stopped
     command: ["python", "-m", "reviews", "serve"]
@@ -67,6 +77,7 @@ services:
 
   worker:
     build: .
+    image: sentiment-app:latest
     container_name: sentiment-worker
     restart: unless-stopped
     command: ["python", "-m", "reviews", "schedule"]
