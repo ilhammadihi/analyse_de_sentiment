@@ -32,8 +32,17 @@ services:
       - "127.0.0.1:${DB_HOST_PORT:-5432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      # Schéma appliqué automatiquement à la création de la base
-      - ./migrations:/docker-entrypoint-initdb.d:ro
+      # PAS de montage vers /docker-entrypoint-initdb.d : ce mécanisme
+      # exécute tous les .sql en aveugle au premier démarrage, sans rien
+      # enregistrer nulle part, alors que `apply_schema()` (reviews/storage/
+      # db.py) tient déjà sa propre table `schema_migrations` et applique
+      # chaque migration exactement une fois, de façon fiable. Les deux en
+      # même temps sur une base neuve = double exécution : Postgres rejoue la
+      # 009 (renomme place_id -> target_id) sans le noter, puis apply_schema()
+      # la rejoue à son tour croyant que rien n'a encore été appliqué, et
+      # plante sur "column already exists". Découvert au premier déploiement
+      # sur un volume réellement neuf (jamais vu en local, où le volume existe
+      # depuis avant l'ajout de ce montage).
     healthcheck:
       # -d obligatoire : sans base cible, pg_isready se connecte à une base
       # homonyme de l'utilisateur ("telecom_user"), inexistante -> le log se
