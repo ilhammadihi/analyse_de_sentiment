@@ -101,6 +101,35 @@ services:
         condition: service_healthy
     networks: [sentiment_net]
 
+  chat:
+    # Assistant conversationnel Telegram (/q), en écoute longue (long
+    # polling). SÉPARÉ du service `worker` à dessein : ce n'est pas un job
+    # planifié (APScheduler), c'est une boucle qui bloque tant qu'elle tourne
+    # (`reviews chat --listen`), et un seul processus à la fois peut
+    # interroger `getUpdates` pour un même jeton de bot — lui donner son
+    # propre conteneur évite qu'un redémarrage du worker ne l'interrompe, et
+    # inversement.
+    #
+    # Exige TELEGRAM_BOT_TOKEN et TELEGRAM_CHAT_ID (ou CHAT_ALLOWED_CHAT_IDS)
+    # dans .env : sans eux, la commande quitte tout de suite avec un code
+    # d'erreur (config insuffisante), et `restart: unless-stopped` le
+    # relance en boucle courte — inoffensif (chaque tentative échoue en une
+    # fraction de seconde) mais visible dans `docker ps`/`docker logs`. Ne
+    # PAS ajouter ce service tant que Telegram n'est pas vraiment configuré
+    # sur cet environnement.
+    build: .
+    image: sentiment-app:latest
+    container_name: sentiment-chat
+    restart: unless-stopped
+    command: ["python", "-m", "reviews", "chat", "--listen"]
+    env_file: .env
+    environment:
+      DB_HOST: postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks: [sentiment_net]
+
 volumes:
   postgres_data:
   review_state:
